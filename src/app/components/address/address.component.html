@@ -1,0 +1,86 @@
+<div
+  [formGroup]="address"
+  class="ui-grid ui-grid-responsive ui-fluid"
+>
+  <div class="input">
+    <label for="street">Street: </label>
+    <input
+      type="text"
+      pInputText
+      autocomplete="off"
+      #street
+      required
+      pattern="^[a-zA-Z -]{2,15}$"
+      [(ngModel)]="streetValue"
+      formControlName="street"
+    />
+  </div>
+  <div class="input">
+    <label for="city">City: </label>
+    <input
+      type="text"
+      #city
+      pInputText
+      autocomplete="off"
+      required
+      pattern="^[a-zA-Z -]{2,15}$"
+      [(ngModel)]="cityValue"
+      formControlName="city"
+    />
+  </div>
+  <div class="input">
+    <label for="state">State: </label>
+    <input
+      type="text"
+      #state
+      pInputText
+      required
+      pattern="^[a-zA-Z -]{2,15}$"
+      autocomplete="off"
+      [(ngModel)]="stateValue"
+      formControlName="state"
+    />
+  </div>
+  <div class="buttons">
+    <button
+      pButton
+      type="button"
+      label="Back"
+      [routerLink]="['']"
+      routerLinkActive="router-link-active"
+      class="ui-button-info ui-g-12 ui-md-6 ui-lg-3"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Next"
+      class="ui-button-success ui-g-12 ui-md-6 ui-lg-3"
+      [disabled]="address.invalid"
+      [routerLink]="['/phone']"
+      routerLinkActive="router-link-active"
+      (click)="show()"
+    ></button>
+
+    <p-message
+      severity="error"
+      text="Street is not required"
+      *ngIf="
+        address.controls['street'].invalid && address.controls['street'].touched
+      "
+    ></p-message>
+    <p-message
+      severity="error"
+      text="City is not required"
+      *ngIf="
+        address.controls['city'].invalid && address.controls['city'].touched
+      "
+    ></p-message>
+    <p-message
+      severity="error"
+      text="State is not required"
+      *ngIf="
+        address.controls['state'].invalid && address.controls['state'].touched
+      "
+    ></p-message>
+  </div>
+</div>
