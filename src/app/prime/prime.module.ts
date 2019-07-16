@@ -11,6 +11,10 @@ import { EditorModule } from 'primeng/editor';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {DialogModule} from 'primeng/dialog';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+
 @NgModule({
   imports: [
     ToastModule,
@@ -23,7 +27,10 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     EditorModule,
     DataViewModule,
     TableModule,
-    SelectButtonModule
+    SelectButtonModule,
+    DialogModule,
+    ProgressBarModule,
+    OverlayPanelModule
   ],
   exports: [
     ToastModule,
@@ -36,7 +43,10 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     EditorModule,
     DataViewModule,
     TableModule,
-    SelectButtonModule
+    SelectButtonModule,
+    DialogModule,
+    ProgressBarModule,
+    OverlayPanelModule
   ]
 })
 export class PrimeModule {}

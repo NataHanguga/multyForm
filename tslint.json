@@ -25,6 +25,8 @@
       true,
       "rxjs/Rx"
     ],
+    "indent": ["off", "tabs"],
+    "@typescript-eslint/indent": ["error", 2],
     "interface-name": false,
     "max-classes-per-file": false,
     "max-line-length": [
@@ -88,5 +90,10 @@
   },
   "rulesDirectory": [
     "codelyzer"
+  ],
+  "indent": [
+    true,
+    "tabs",
+    2
   ]
 }

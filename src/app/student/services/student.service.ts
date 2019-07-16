@@ -1,105 +1,155 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, FormArray, FormGroup } from '@angular/forms';
-import { Subject } from '../models/subject';
-import { Student } from '../models/student';
-import { deserialize } from 'typescript-json-serializer';
+import { FormBuilder, FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Teacher } from '../models/teacher';
 import { ShowStudent } from '../models/showStudent';
-import { PayArray } from '../models/payArray';
+// import { PayArray } from '../models/payArray';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class StudentService {
-  public student: FormGroup = this.fb.group({
-    fullName: [''],
-    classNumber: [''],
-    type: [''],
-    subject: this.fb.array([this.initialSubject()])
-  });
-  public studentsList: Student[];
-  constructor(private fb: FormBuilder) {}
+	public pay: FormGroup = this.fb.group({
+		pay: [ null, Validators.compose([Validators.required]) ]
+	});
+	public teacherList: Teacher[];
+	public teacherForm: FormGroup = this.fb.group({
+		teacherName: [ '', Validators.compose([Validators.required]) ],
+		students: this.fb.array([ this.initialSubject() ])
+	});
+	constructor(private fb: FormBuilder) {}
 
-  initialSubject(): FormGroup {
-    return this.fb.group({
-      title: [''],
-      teacher: [''],
-      startDate: [''],
-      finishDate: [''],
-      pay: ['']
-    });
-  }
+	initialSubject(): FormGroup {
+		return this.fb.group({
+			fullName: [
+				'',
+			 	Validators.compose([
+					Validators.required,
+					Validators.minLength(2)
+				]) ],
+			classNumber: [
+				'',
+				Validators.compose([
+					Validators.required,
+					Validators.min(1),
+					Validators.max(9)])
+				],
+			studentType: [ '',  Validators.compose([Validators.required]) ],
+			startDate: [ '',  Validators.compose([Validators.required]) ],
+			payArray: this.fb.array([ this.pay ])
+		});
+	}
 
-  addSubject() {
-    const control = this.student.controls.subject as FormArray;
-    control.push(this.initialSubject());
-  }
+	addStudent(): void {
+		const control = this.teacherForm.controls.students as FormArray;
+		control.push(this.initialSubject());
+	}
 
-  removeSubject(i: number) {
-    const control = this.student.controls.subject as FormArray;
-    control.removeAt(i);
-  }
+	removeSubject(i: number): void {
+		const control = this.teacherForm.controls.students as FormArray;
+		control.removeAt(i);
+	}
 
-  saveStudent(data: FormGroup): number {
-    console.log(data.value.subject);
-    const arr: Subject[] = data.value.subject.map((el: Subject) => {
-      return new Subject(el.title, el.teacher, el.startDate, el.finishDate, []);
-    });
-    const student: Student = new Student(
-      data.value.fullName,
-      data.value.classNumber,
-      data.value.type,
-      arr
-    );
-    console.log(student);
+	saveStudent(data: FormGroup): number {
+		console.log(data.value);
+		const arr: ShowStudent[] = data.value.students.map((el: ShowStudent) => {
+			return new ShowStudent(
+				el.fullName,
+				el.classNumber,
+				el.studentType,
+				el.startDate,
+				0
+			);
+		});
+		const teacher: Teacher = new Teacher(data.value.teacherName, arr);
+		console.log(teacher);
 
-    this.studentsList = this.getStudentsFromLocalSrotage();
-    this.studentsList.push(student);
-    this.setStudentToLocalStorage(this.studentsList);
-    return student.subject.length;
-  }
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		this.teacherList.push(teacher);
+		this.setStudentToLocalStorage(this.teacherList);
+		return teacher.student.length;
+	}
 
-  setStudentToLocalStorage(student: Student[]) {
-    localStorage.setItem('studentList', JSON.stringify(student));
-  }
+	setStudentToLocalStorage(student: Teacher[]): void {
+		localStorage.setItem('studentList', JSON.stringify(student));
+	}
 
-  getStudentsFromLocalSrotage(): Student[] | [] {
-    const data = localStorage.getItem('studentList');
-    return data === null ? [] : JSON.parse(data);
-  }
+	getStudentsFromLocalSrotage(): Teacher[] | [] {
+		const data = localStorage.getItem('studentList');
+		return data === null ? [] : JSON.parse(data);
+	}
 
-  groupByTeacher(arr: Teacher[]) {
-    return arr.reduce((newArr, x) => {
-      (newArr[x.teacherName] = newArr[x.teacherName] || []).push(x);
-      return newArr;
-    }, []);
-  }
+	setPayArray(id: number, data: number, name: string): void {
+		console.log(id, data, name);
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		this.teacherList.map((teacher: Teacher) => {
+			teacher.student.forEach((student: ShowStudent, i: number) => {
+        console.log(student.id === id);
+				    if (student.id === id && student.fullName === name) {
+          console.log('finded');
+					     student.payArray += data;
+					     console.log(student);
+				}
+			});
+		});
+		console.log(this.teacherList);
+		this.setStudentToLocalStorage(this.teacherList);
+	}
 
-  refractData() {
-    this.studentsList = this.getStudentsFromLocalSrotage();
-    const studentList: ShowStudent[] = [];
-    this.studentsList.map((student: Student) => {
-      student.subject.map((subj: Subject) => {
-        const stud = new ShowStudent(
-          student.fullName,
-          student.classNumber,
-          student.studentType,
-          subj.teacher,
-          subj.pay
-        );
-        console.log(stud);
-        studentList.push(stud);
-      });
-    });
+	deleteStudent(id: number, teacherName: string): void {
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		this.teacherList.map((teacher: Teacher) => {
+			if (teacher.teacherName === teacherName) {
+				const index = teacher.student.findIndex(
+					(el: ShowStudent) => el.id === id
+				);
+				teacher.student.splice(index, 1);
+			}
+		});
+		this.setStudentToLocalStorage(this.teacherList);
+	}
 
-    console.log(studentList);
+	addNewStudent(teacherName: string, student: ShowStudent): void {
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		this.teacherList.map((teacher: Teacher) => {
+			if (teacher.teacherName === teacherName) {
+				teacher.student.push(student);
+			}
+		});
+		this.setStudentToLocalStorage(this.teacherList);
+	}
 
-    const arr: Teacher[]  = studentList.map((student: ShowStudent) => {
-      return new Teacher(student.teacher, deserialize(student, ShowStudent));
-    });
+	saveEditTeacher(newTeacher: Teacher): void {
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		this.teacherList.map((teacher: Teacher) => {
+			if (teacher.student[0].fullName === newTeacher.student[0].fullName) {
+				teacher.teacherName = newTeacher.teacherName;
+			}
+		});
+		this.setStudentToLocalStorage(this.teacherList);
+	}
 
+	saveEditStudent(editStudent: ShowStudent) {
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		this.teacherList.map((teacher: Teacher) => {
+			teacher.student.forEach((student: ShowStudent) => {
+				if (editStudent.id === student.id) {
+					student.fullName = editStudent.fullName;
+					student.classNumber = editStudent.classNumber;
+					student.studentType = editStudent.studentType;
+					student.startDate = editStudent.startDate;
+				}
+			});
+		});
+		this.setStudentToLocalStorage(this.teacherList);
+	}
 
-
-    console.log(arr, this.groupByTeacher(arr));
-  }
+	deleteTeacher(teacherDel: Teacher): void {
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		const index = this.teacherList.findIndex(
+			(el: Teacher) =>
+			el.teacherName === teacherDel.teacherName
+		);
+		this.teacherList.splice(index, 1);
+		this.setStudentToLocalStorage(this.teacherList);
+	}
 }

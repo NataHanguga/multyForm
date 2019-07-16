@@ -1,35 +1,30 @@
-<p>show-student works!</p>
-<h3 class="first">Basic</h3>
-<p-table [value]="studentList">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Full Name</th>
-      <th>Subjects</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-student>
-    <tr>
-      <td (click)="payNow(student.id)">{{ student.fullName }}</td>
-      <p-table [value]="student.subject">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Title</th>
-            <th>Teacher</th>
-            <th>Start</th>
-            <th>Finish</th>
-            <th>Pay</th>            
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-subject>
-          <tr>
-            <td>{{ subject.title }}</td>
-            <td>{{ subject.teacher }}</td>
-            <td>{{ subject.startDate | date:"d MMM yyyy"}}</td>
-            <td>{{ subject.finishDate | date:"d MMM yyyy"}}</td>
-            <td>{{ subject.pay }}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </tr>
-  </ng-template>
-</p-table>
+<h3 class="first">List</h3>
+<div *ngIf="!teacherList.length">Empty List</div>
+<div *ngIf="teacherList.length" style="max-width: 1170px">
+  <p-table 
+    [value]="teacherList" 
+    class="ui-grid " 
+    [paginator]="true" 
+    [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 140px">Teacher Name</th>
+        <th style="width: 1030px">Students</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-teacher>
+      <tr>
+        <td>
+          <app-teacher-cell 
+            [teacher]="teacher" 
+            (list)="changeList($event)"
+          ></app-teacher-cell>
+        </td>
+        <app-student-row 
+          [teacher]="teacher"
+          (list)="changeList($event)"
+        ></app-student-row>
+     </tr>
+    </ng-template>
+  </p-table>
+</div>

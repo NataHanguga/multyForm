@@ -1,29 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../services/student.service';
-import { Student } from '../../models/student';
+import { Teacher } from '../../models/teacher';
+import { FormGroup } from '@angular/forms';
+import { PayArray } from '../../models/payArray';
+import { SelectItem } from 'primeng/api';
+import { ShowStudent } from '../../models/showStudent';
 
 @Component({
-  selector: 'app-show-students',
-  templateUrl: './show-students.component.html',
-  styleUrls: ['./show-students.component.scss']
+	selector: 'app-show-students',
+	templateUrl: './show-students.component.html',
+	styleUrls: [ './show-students.component.scss' ]
 })
 export class ShowStudentsComponent implements OnInit {
-  public studentList: Student[];
-  constructor(private studentService: StudentService) {}
+	public teacherList: Teacher[];
 
-  ngOnInit() {
-    this.studentList = this.studentService.getStudentsFromLocalSrotage();
-    console.log(this.studentList);
-    this.studentService.refractData();
+	constructor(private studentService: StudentService) {}
+
+	ngOnInit() {
+		this.teacherList = this.studentService.getStudentsFromLocalSrotage();
+		// console.log(this.teacherList);
+	}
+
+  changeSearch(data: string) {
+    // console.log(data, typeof data);
+    // let list: Teacher[] = this.teacherList.map((teacher: Teacher) => {
+    //   return new Teacher(teacher.teacherName, teacher.student.filter((student: ShowStudent) => {
+    //     return student.fullName.toLocaleLowerCase().includes(data);
+    //   }));
+    // });
+
+    // if (!data.length) {
+    //   list = this.teacherList;
+    // }
+
+    // console.log(list);
+    // this.teacherList = list;
+
   }
 
-  payNow(id: number) {
-    console.log(id);
-    const payedStudent = this.studentList.find(
-      (student: Student) => {
-        return student.id === id;
-      }
-    );
-    console.log(payedStudent);
+  changeList(event: Teacher[]) {
+	  console.log(event);
+	  this.teacherList = event;
   }
 }

@@ -9,21 +9,19 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./create-student.component.scss']
 })
 export class CreateStudentComponent implements OnInit {
-  public studentForm: FormGroup = this.studentService.student;
-  // public subjectForm: FormGroup = this.studentService.initialSubject();
+  public teacherForm: FormGroup = this.studentService.teacherForm;
   public  types: SelectItem[] = [
     {label: 'Contract', value: 'contract'},
     {label: 'Beneficiary', value: 'beneficiary'}
   ];
-  public selectType = this.types[0].value;
   constructor(private studentService: StudentService) {}
 
   ngOnInit() {
-    this.studentForm.reset();
+    this.teacherForm.reset();
   }
 
-  addNewSubject(): void {
-    this.studentService.addSubject();
+  addNewStudent(): void {
+    this.studentService.addStudent();
   }
 
   removeSubject(i: number): void {
@@ -31,14 +29,13 @@ export class CreateStudentComponent implements OnInit {
   }
 
   save(data: FormGroup) {
-    data.controls.type.setValue(this.selectType);
-    console.log(data);
+    console.log(data.value.students);
     let length = this.studentService.saveStudent(data);
     while (length !== 0) {
-      (this.studentForm.controls.subject as FormArray).removeAt(length);
+      (this.teacherForm.controls.students as FormArray).removeAt(length);
       length--;
     }
-    this.studentForm.reset();
+    this.teacherForm.reset();
 
   }
 

@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-multi-form',
-  templateUrl: './multi-form.component.html',
-  styleUrls: ['./multi-form.component.scss']
+  templateUrl: './multi-form.component.html'
+  // styleUrls: ['./multi-form.component.scss']
 })
 export class MultiFormComponent implements OnInit {
 

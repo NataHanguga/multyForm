@@ -1,0 +1,8 @@
+<td 
+    *ngFor="let item of arr; let i = index;" 
+    [ngStyle]=
+        "{'background-color':item === 50 
+            ? '#00C851' : (item === 0 ? '#cfd8dc' : '#ffbb33')}">
+    {{item}}
+</td>
+        
