@@ -1,0 +1,30 @@
+<h3 class="first">List</h3>
+<div *ngIf="!teacherList.length">Empty List</div>
+<div *ngIf="teacherList.length" style="max-width: 1170px">
+  <p-table 
+    [value]="teacherList" 
+    class="ui-grid " 
+    [paginator]="true" 
+    [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 140px">Teacher Name</th>
+        <th style="width: 1030px">Students</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-teacher>
+      <tr>
+        <td>
+          <app-teacher-cell 
+            [teacher]="teacher" 
+            (list)="changeList($event)"
+          ></app-teacher-cell>
+        </td>
+        <app-student-row 
+          [teacher]="teacher"
+          (list)="changeList($event)"
+        ></app-student-row>
+     </tr>
+    </ng-template>
+  </p-table>
+</div>

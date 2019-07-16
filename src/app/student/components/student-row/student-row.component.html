@@ -1,0 +1,130 @@
+<p-table [value]="teacher.student">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 60px">Pay</th>
+            <th style="width: 180px">Full Name</th>
+            <th style="width: 60px">Class</th>
+            <th style="width: 90px">PayType</th>
+            <th style="width: 60px">Cashe</th>
+            <th style="width: 400px; max-width: 410px; min-width: 410px;">
+                <table>
+                <tr>
+                    <th class="month" 
+                        *ngFor="let month of monthArr" 
+                        style="width: 40px;">
+                        {{month}}
+                    </th>
+                    <th style="padding: 0; width: 40px;" class="other">Other</th>
+                </tr>
+            </table>
+            </th>
+            <th style="width: 180px;">Edit/Delete</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student>
+        <tr>
+            <td>
+                <span *ngIf="student.studentType === 'contract'">
+                    <p-button 
+                        styleClass="ui-button-success" 
+                        (click)="payNow(student, teacher.teacherName)">
+                       
+                    </p-button>
+                </span>
+            </td>
+            <td>{{student.fullName}}</td>
+            <td>{{ student.classNumber }}</td>
+            <td>{{ student.studentType }}</td>
+            <td *ngIf="student.studentType === 'contract'">
+                {{ student.payArray }}
+            </td>
+            <td *ngIf="student.studentType === 'beneficiary'">-</td>
+                <app-progress-table  
+                    style="height: 30px; width: 100%"
+                    [pay]="student.payArray"
+                    [type]="student.studentType"
+                    [startDate]="student.startDate"
+                ></app-progress-table>
+            <td >
+                <p-button 
+                    label="Delete" 
+                    styleClass="ui-button-danger" 
+                    (click)="deleteStudent(student.id, teacher.teacherName)"
+                ></p-button>
+                <p-button 
+                    label="Edit" 
+                    (click)="editStudent(teacher, student)"
+                    styleClass="ui-button-warning"
+                ></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<!-- pay money by student -->
+
+<p-dialog header="Pay by {{studentItem?.fullName}}" [(visible)]="display">
+    <div class="ui-grid-row ui-grid-col" >
+        <div class="ui-grid-col-6">Student Pay:</div>
+        <input 
+            type="number" 
+            class="ui-grid-col-6" 
+            id="pay" #pay 
+            min="1"
+            max="450"
+            pInputText
+            autocomplete="off" 
+            required />
+        <p-button class="ui-grid-col-6" label="Pay" (click)="save(pay.value)" ></p-button>
+    </div>
+</p-dialog>
+
+<!-- pay money by student -->
+
+<p-dialog header="Edit student {{studentItem?.fullName}}" [(visible)]="displayEdit">
+        <div>
+                <div class="ui-grid-row-12">
+                  <div class="ui-grid-col-6">Student Full Name:</div>
+                  <input 
+                    type="text" 
+                    name="fullName" 
+                    class="ui-grid-col-6" 
+                    id="fullName"
+                   [(ngModel)]="fullName"
+                    minlength="2"
+                    pInputText 
+                    autocomplete="off" 
+                    required />
+                </div>
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-6">Student Class Name:</div>
+                  <input 
+                    type="number" 
+                    name="classNumber" 
+                    id="classNumber"
+                    class="ui-grid-col-6" 
+                    [(ngModel)]="classNumber" 
+                    pInputText
+                    min="1"
+                    max="9"
+                    autocomplete="off" 
+                    required />
+                </div>
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-6">Start study date:</div>
+                  <input 
+                    type="date" 
+                    name="startDate" 
+                    id="startDate" 
+                    class="ui-grid-col-6"
+                   [(ngModel)]="date"
+                    pInputText 
+                    autocomplete="off" 
+                    required />
+                </div>
+                  <div class="ui-grid-row">
+                    <button (click)="cancel()">Cancel</button>
+                    <button (click)="saveEditStudent()" >Edit</button>
+                  </div>
+              </div>
+</p-dialog>
