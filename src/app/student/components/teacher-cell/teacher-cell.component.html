@@ -13,7 +13,7 @@
     <button pButton 
         label="Delete teacher"
         class="ui-button-text ui-button-danger ui-button"  
-        (click)="deleteTeacher(teacher.teacherName)"
+        (click)="deleteTeacher(teacher)"
     ></button>
 </td>
 
@@ -33,7 +33,7 @@
       </div>
       <div class="ui-grid-row">
           <button (click)="display = false;">Cancel</button>
-          <button (click)="saveEditTeacherName(student.value)">Save</button>
+          <button (click)="saveEditTeacherName()">Save</button>
         </div>
 </p-dialog>
 

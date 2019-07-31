@@ -41,11 +41,10 @@
     </div>
     <div formArrayName="students">
       <div
-        *ngFor="let student of teacherForm.controls.students.controls; let i = index">
+        *ngFor="let student of teacherForm; let i = index">
         <div class="ui-grid-row">
           <span class="ui-grid-col-2"><b>Student {{ i + 1 }}</b></span>
           <p-button 
-            *ngIf="teacherForm.controls.students.controls.length > 1"
             (click)="removeSubject(i)" 
             class="ui-grid-col-2"
             styleClass="ui-button-danger" 
