@@ -10,11 +10,11 @@ import { MessageModule } from 'primeng/message';
 import { EditorModule } from 'primeng/editor';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {DialogModule} from 'primeng/dialog';
-import {ProgressBarModule} from 'primeng/progressbar';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
-import {AccordionModule} from 'primeng/accordion';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DialogModule } from 'primeng/dialog';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   imports: [

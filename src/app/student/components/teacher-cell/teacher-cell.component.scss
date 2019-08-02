@@ -6,3 +6,21 @@
     width: 115px;
     margin-top: 5px;
 }
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .button-wrapper {
+        button.ui-button {
+            background-color: rgb(206, 198, 206) !important;
+            border: none;
+            color: #000 !important;
+
+            &:hover {
+                background-color: #ece;
+            }
+        }
+    }
+}

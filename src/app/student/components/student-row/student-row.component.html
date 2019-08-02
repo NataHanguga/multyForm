@@ -1,3 +1,16 @@
+<div *ngIf="!studentList.length">loading...</div>
+<p-dataView  *ngIf="studentList.length" [value]="studentList">
+        <p-header>
+                <div class="ui-helper-clearfix"> Students </div>
+            </p-header>
+        <ng-template let-student pTemplate="listItem">
+            <div>
+                {{student.fullName}}
+            </div>
+        </ng-template>
+    </p-dataView>
+    
+<!-- 
 <p-table [value]="teacher.student">
     <ng-template pTemplate="header">
         <tr>
@@ -21,7 +34,7 @@
             <th style="width: 180px;">Edit/Delete</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-student>
+    <ng-template pTemplate="body" let-student *ngIf="teacher.student.length">
         <tr>
             <td>
                 <span *ngIf="student.studentType === 'contract'">
@@ -61,7 +74,6 @@
     </ng-template>
 </p-table>
 
-<!-- pay money by student -->
 
 <p-dialog header="Pay by {{studentItem?.fullName}}" [(visible)]="display">
     <div class="ui-grid-row ui-grid-col" >
@@ -79,7 +91,6 @@
     </div>
 </p-dialog>
 
-<!-- pay money by student -->
 
 <p-dialog header="Edit student {{studentItem?.fullName}}" [(visible)]="displayEdit">
         <div>
@@ -127,4 +138,4 @@
                     <button (click)="saveEditStudent()" >Edit</button>
                   </div>
               </div>
-</p-dialog>
+</p-dialog> -->

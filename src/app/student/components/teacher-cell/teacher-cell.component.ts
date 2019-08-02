@@ -11,8 +11,9 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./teacher-cell.component.scss']
 })
 export class TeacherCellComponent implements OnInit {
-  @Input() teacher: Teacher;
-  @Output() list = new EventEmitter<Teacher[]>();
+  @Input() teachers: Teacher[];
+  @Output() list: EventEmitter<Teacher[]> = new EventEmitter<Teacher[]>();
+  @Output() name: EventEmitter<string> = new EventEmitter<string>();
 
   public teacherList: Teacher[];
   public teacherItem = '';
@@ -78,6 +79,15 @@ show(data) {
 		);
     this.teacherList = this.studentService.getStudentsFromLocalSrotage();
     this.list.emit(this.teacherList);
-	}
+  }
+
+    public showTeacherChildren(teacherName: string) {
+        this.name.emit(teacherName);
+    }
+
+    public changeStudentType(student: ShowStudent, value): void {
+            student.studentType = value === null ?
+            this.types[0].value : value;
+    }
 
 }

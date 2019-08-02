@@ -18,6 +18,7 @@ export class StudentRowComponent implements OnInit {
   public displayEdit = false;
   public teacherItem = '';
   public studentItem: ShowStudent;
+  public studentList: ShowStudent[] = [];
 	public student: FormGroup = this.studentService.initialSubject();
 	public teacherList: Teacher[];
 	public pay: FormGroup = this.studentService.pay;
@@ -34,6 +35,11 @@ export class StudentRowComponent implements OnInit {
 	// 	console.log(teacher, student);
 	// 	this.studentService.saveTeacher(teacher, student);
   // }
+
+  getStudents(name: string) {
+    this.studentList = this.studentService.getStudentsByTeacherName(name);
+    console.log(this.studentList);
+  }
 
   editStudent(teacher: Teacher, student: ShowStudent) {
     console.log(teacher, student);

@@ -1,6 +1,52 @@
-<td class="ui-grid-col">
-     {{ teacher.teacherName }}<br>
-    <button pButton
+<p-dataView [value]="teachers">
+    <p-header>
+        <div class=" wrapper"> 
+            <span>Teachers</span>  
+            <span>
+                <app-create-student></app-create-student>
+            </span>
+
+        </div>
+    </p-header>
+    <ng-template let-teacher pTemplate="listItem">
+        <div class="wrapper">
+            <span (click)="showTeacherChildren(teacher.teacherName)">  {{teacher.teacherName}}   </span>
+            <span class="button-wrapper">
+                <button pButton
+                    class="ui-button-text ui-button" 
+                    icon="pi pi-plus"
+                    (click)="addStudent(teacher.teacherName)"
+                ></button>
+                <button pButton
+                    class="ui-button-text ui-button" 
+                    icon="pi pi-pencil"
+                    (click)="editTeacher(teacher)"
+                ></button>
+                <button pButton 
+                    icon="pi pi-trash"                    
+                    class="ui-button-text ui-button"  
+                    (click)="deleteTeacher(teacher)"
+                ></button>
+            </span>
+        </div>
+    </ng-template>
+</p-dataView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <td class="ui-grid-col"> -->
+<!-- {{ teacher.teacherName }}<br> -->
+<!-- <button pButton
         class="ui-button-text ui-button-success ui-button" 
         label="Add student" 
         (click)="addStudent(teacher.teacherName)"
@@ -14,94 +60,83 @@
         label="Delete teacher"
         class="ui-button-text ui-button-danger ui-button"  
         (click)="deleteTeacher(teacher)"
-    ></button>
-</td>
+    ></button> -->
+<!-- </td> -->
 
 <!-- edit teacherName -->
 
 <p-dialog header="Edit teacher Name" [(visible)]="display">
     <div class="ui-grid-row-12">
         <div class="ui-grid-col-6">Teacher Full Name:</div>
-        <input 
-          type="text" 
-          class="ui-grid-col-6" 
-          [(ngModel)]="teacherItem"
-          minlength="2"
-          pInputText 
-          autocomplete="off" 
-          required />
-      </div>
-      <div class="ui-grid-row">
-          <button (click)="display = false;">Cancel</button>
-          <button (click)="saveEditTeacherName()">Save</button>
-        </div>
+        <input type="text" class="ui-grid-col-6" [(ngModel)]="teacherItem"
+            minlength="2" pInputText autocomplete="off" required />
+    </div>
+    <div class="ui-grid-row">
+        <button (click)="display = false;">Cancel</button>
+        <button (click)="saveEditTeacherName()">Save</button>
+    </div>
 </p-dialog>
 
 <!-- edit teacherName -->
-      
+
 <!-- add sudent by teacher -->
+
 <p-dialog header="Title" [(visible)]="displayAdd">
-  <div [formGroup]="student">
-    <div class="ui-grid-row-12">
-      <div class="ui-grid-col-6">Student Full Name:</div>
-      <input 
-        type="text" 
-        name="fullName" 
-        class="ui-grid-col-6" 
-        id="fullName"
-        formControlName="fullName" 
-        minlength="2"
-        pInputText 
-        autocomplete="off" 
-        required />
+    <div [formGroup]="student">
+        <div class="ui-grid-row-12">
+        <div class="ui-grid-col-6">Student Full Name:</div>
+        <input 
+            type="text" 
+            name="fullName" 
+            class="ui-grid-col-6" 
+            id="fullName"
+            formControlName="fullName" 
+            minlength="2"
+            pInputText 
+            autocomplete="off" 
+            required />
+        </div>
+        <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Student Class Name:</div>
+        <input 
+            type="number" 
+            name="classNumber" 
+            id="classNumber"
+            class="ui-grid-col-6" 
+            formControlName="classNumber" 
+            pInputText
+            min="1"
+            max="9"
+            autocomplete="off" 
+            required />
+        </div>
+        <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Start study date:</div>
+        <input 
+            type="date" 
+            name="startDate" 
+            id="startDate" 
+            class="ui-grid-col-6"
+            formControlName="startDate" 
+            pInputText 
+            autocomplete="off" 
+            required />
+        </div>
+        <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Student Pay Type:</div>
+        <p-selectButton 
+            [options]="types" 
+            class="ui-grid-col-6" 
+            #butt 
+            (click)="changeStudentType(student, butt.value)">
+        </p-selectButton>
+        </div>
+        <div class="ui-grid-row">
+            <button (click)="displayAdd = false; student.reset();">Cancel</button>
+            <button 
+            (click)="saveNewStudent(student.value)" 
+            [disabled]="student.invalid">
+            Save</button>
+        </div>
     </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-6">Student Class Name:</div>
-      <input 
-        type="number" 
-        name="classNumber" 
-        id="classNumber"
-        class="ui-grid-col-6" 
-        formControlName="classNumber" 
-        pInputText
-        min="1"
-        max="9"
-        autocomplete="off" 
-        required />
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-6">Start study date:</div>
-      <input 
-        type="date" 
-        name="startDate" 
-        id="startDate" 
-        class="ui-grid-col-6"
-        formControlName="startDate" 
-        pInputText 
-        autocomplete="off" 
-        required />
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-6">Student Pay Type:</div>
-      <p-selectButton 
-        [options]="types" 
-        class="ui-grid-col-6" 
-        #butt 
-        (click)="
-          butt.value === null ? 
-          student.controls.studentType.setValue(types[0].value) : 
-          student.controls.studentType.setValue(butt.value)">
-      </p-selectButton>
-    </div>
-      <div class="ui-grid-row">
-        <button (click)="displayAdd = false; student.reset();">Cancel</button>
-        <button 
-          (click)="saveNewStudent(student.value)" 
-          [disabled]="
-          student.controls.fullName.invalid &&
-          student.controls.startDate.invalid &&
-          student.controls.studentType.invalid &&
-          student.controls.classNumber.invalid">Save</button>
-      </div>
-  </div>
-</p-dialog>
+</p-dialog> 

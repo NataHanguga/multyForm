@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { Teacher } from '../../models/teacher';
 import { FormGroup } from '@angular/forms';
 import { PayArray } from '../../models/payArray';
 import { SelectItem } from 'primeng/api';
 import { ShowStudent } from '../../models/showStudent';
+import { StudentRowComponent } from '../student-row/student-row.component';
 
 @Component({
 	selector: 'app-show-students',
@@ -12,6 +13,7 @@ import { ShowStudent } from '../../models/showStudent';
 	styleUrls: [ './show-students.component.scss' ]
 })
 export class ShowStudentsComponent implements OnInit {
+  @ViewChild('studentList', {static: false}) studentList: StudentRowComponent;
 	public teacherList: Teacher[];
 
 	constructor(private studentService: StudentService) {}
@@ -20,6 +22,11 @@ export class ShowStudentsComponent implements OnInit {
 		this.teacherList = this.studentService.getStudentsFromLocalSrotage();
 		// console.log(this.teacherList);
 	}
+
+  public getStudents(event: string) {
+    console.log(event);
+    this.studentList.getStudents(event);
+  }
 
   changeSearch(data: string) {
     // console.log(data, typeof data);

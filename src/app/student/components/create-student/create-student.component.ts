@@ -10,6 +10,8 @@ import { SelectItem } from 'primeng/api';
 })
 export class CreateStudentComponent implements OnInit {
   public teacherForm: FormGroup = this.studentService.teacherForm;
+  public students: FormGroup = this.studentService.initialSubject();
+  public display = false;
   public  types: SelectItem[] = [
     {label: 'Contract', value: 'contract'},
     {label: 'Beneficiary', value: 'beneficiary'}
@@ -28,15 +30,15 @@ export class CreateStudentComponent implements OnInit {
     this.studentService.removeSubject(i);
   }
 
-  save(data: FormGroup) {
-    console.log(data.value.students);
-    let length = this.studentService.saveStudent(data);
-    while (length !== 0) {
-      (this.teacherForm.controls.students as FormArray).removeAt(length);
-      length--;
-    }
-    this.teacherForm.reset();
+  public save(data: FormGroup): void {
+    this.studentService.saveStudent(data);
+    this.cancel();
 
+  }
+
+  public cancel(): void {
+    this.display = false;
+    this.teacherForm.reset();
   }
 
 }
