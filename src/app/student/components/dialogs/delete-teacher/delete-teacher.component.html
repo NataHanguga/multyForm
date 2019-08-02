@@ -1,0 +1,21 @@
+<button pButton 
+    icon="pi pi-trash"                    
+    class="ui-button-text ui-button"  
+    (click)="display = true;"
+></button>
+<p-dialog
+    header="Delete teacher" 
+    [(visible)]="display"
+    [modal]="true" 
+    [baseZIndex]="10000"
+>
+    <div>
+        Do you realy want delete this teacher?? 
+    </div>
+
+    <p-footer>
+        <button pButton label="No" iconPos="right" icon="pi pi-times" (click)="cancel()"></button>
+        <button pButton label="Yes" icon="pi pi-check" iconPos="right" (click)="deleteTeacher()"></button>
+    </p-footer>
+
+</p-dialog>

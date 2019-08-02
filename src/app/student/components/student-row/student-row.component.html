@@ -1,14 +1,37 @@
 <div *ngIf="!studentList.length">loading...</div>
 <p-dataView  *ngIf="studentList.length" [value]="studentList">
-        <p-header>
-                <div class="ui-helper-clearfix"> Students </div>
-            </p-header>
-        <ng-template let-student pTemplate="listItem">
-            <div>
-                {{student.fullName}}
-            </div>
-        </ng-template>
-    </p-dataView>
+    <p-header>
+        <div class="ui-helper-clearfix"> Students </div>
+    </p-header>
+    <ng-template let-student pTemplate="listItem">
+        <div class="wrapper">
+            <span>{{student.fullName}}</span>
+            <span class="button-wrapper">
+                <span *ngIf="student.studentType === 'contract'">
+                    <button
+                        pButton
+                        icon="pi pi-money-bill"
+                        class="ui-button ui-button-secondary" 
+                        (click)="payNow(student)">
+                    </button>
+                </span>
+                <button 
+                    pButton
+                    icon="pi pi-pencil"
+                    class="ui-button ui-button-secondary"
+                    (click)="editStudent(student)"
+                    styleClass="ui-button-warning"
+                ></button>
+                <button 
+                    pButton
+                    icon="pi pi-times"
+                    class="ui-button ui-button-secondary"
+                    (click)="deleteStudent(student.id)"
+                ></button>
+            </span>
+        </div>
+    </ng-template>
+</p-dataView>
     
 <!-- 
 <p-table [value]="teacher.student">
@@ -73,22 +96,41 @@
         </tr>
     </ng-template>
 </p-table>
+  -->
 
-
-<p-dialog header="Pay by {{studentItem?.fullName}}" [(visible)]="display">
+<p-dialog 
+    header="Pay by {{studentItem?.fullName}}" 
+    [(visible)]="display"
+    [modal]="true" 
+    [baseZIndex]="10000"
+    [style]="{width: '300px'}"
+    >
     <div class="ui-grid-row ui-grid-col" >
-        <div class="ui-grid-col-6">Student Pay:</div>
+        <div class="ui-grid-col-4">Student Pay:</div>
         <input 
-            type="number" 
-            class="ui-grid-col-6" 
+            type="number"   
+            class="ui-grid-col-8" 
             id="pay" #pay 
             min="1"
             max="450"
             pInputText
             autocomplete="off" 
             required />
-        <p-button class="ui-grid-col-6" label="Pay" (click)="save(pay.value)" ></p-button>
     </div>
+    <p-footer>
+        <button 
+            pButton 
+            label="Cancel" 
+            class=" ui-button-secondary" 
+            (click)="display = false;" 
+        ></button>
+        <button 
+            pButton 
+            label="Pay" 
+            class=" ui-button-secondary" 
+            (click)="saveStudentPay(pay.value)" 
+        ></button>
+    </p-footer>
 </p-dialog>
 
 
@@ -138,4 +180,4 @@
                     <button (click)="saveEditStudent()" >Edit</button>
                   </div>
               </div>
-</p-dialog> -->
+</p-dialog> 

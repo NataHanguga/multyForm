@@ -10,8 +10,15 @@
     </p-header>
     <ng-template let-teacher pTemplate="listItem">
         <div class="wrapper">
-            <span (click)="showTeacherChildren(teacher.teacherName)">  {{teacher.teacherName}}   </span>
+            <span (click)="showTeacherChildren(teacher.teacherName)">
+                {{teacher.teacherName}}
+            </span>
             <span class="button-wrapper">
+                <button pButton
+                    class="ui-button-text ui-button" 
+                    icon="pi pi-eye"
+                    (click)="showTeacherChildren(teacher.teacherName)"
+                ></button>
                 <button pButton
                     class="ui-button-text ui-button" 
                     icon="pi pi-plus"
@@ -22,73 +29,55 @@
                     icon="pi pi-pencil"
                     (click)="editTeacher(teacher)"
                 ></button>
-                <button pButton 
-                    icon="pi pi-trash"                    
-                    class="ui-button-text ui-button"  
-                    (click)="deleteTeacher(teacher)"
-                ></button>
+                <app-dialog-delete-teacher 
+                    [display]="displayRemove"
+                    (list)="deleteTeacher($event)">
+                </app-dialog-delete-teacher>
             </span>
         </div>
     </ng-template>
 </p-dataView>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <td class="ui-grid-col"> -->
-<!-- {{ teacher.teacherName }}<br> -->
-<!-- <button pButton
-        class="ui-button-text ui-button-success ui-button" 
-        label="Add student" 
-        (click)="addStudent(teacher.teacherName)"
-    ></button>
-    <button pButton
-        class="ui-button-text ui-button-warning ui-button" 
-        label="Edit teacher" 
-        (click)="editTeacher(teacher)"
-    ></button>
-    <button pButton 
-        label="Delete teacher"
-        class="ui-button-text ui-button-danger ui-button"  
-        (click)="deleteTeacher(teacher)"
-    ></button> -->
-<!-- </td> -->
-
 <!-- edit teacherName -->
 
-<p-dialog header="Edit teacher Name" [(visible)]="display">
+<p-dialog 
+    header="Edit teacher Name" 
+    [(visible)]="display"  
+    [modal]="true" 
+    [baseZIndex]="10000"
+    [style]="{width: '450px'}">
     <div class="ui-grid-row-12">
-        <div class="ui-grid-col-6">Teacher Full Name:</div>
-        <input type="text" class="ui-grid-col-6" [(ngModel)]="teacherItem"
-            minlength="2" pInputText autocomplete="off" required />
+        <div class="ui-grid-col-4">Teacher Full Name:</div>
+        <input 
+            type="text" 
+            class="ui-grid-col-8" 
+            [(ngModel)]="teacherItem"
+            minlength="2" 
+            pInputText 
+            autocomplete="off" 
+            required />
     </div>
-    <div class="ui-grid-row">
-        <button (click)="display = false;">Cancel</button>
-        <button (click)="saveEditTeacherName()">Save</button>
-    </div>
+    <p-footer>
+        <button pButton label="Cancel" (click)="display = false;" class="ui-button-secondary"></button>
+        <button pButton label="Save" (click)="saveEditTeacherName()" class="ui-button-secondary"></button>
+    </p-footer>
 </p-dialog>
-
 <!-- edit teacherName -->
 
 <!-- add sudent by teacher -->
-
-<p-dialog header="Title" [(visible)]="displayAdd">
+<p-dialog 
+    header="Add New Student" 
+    [(visible)]="displayAdd"
+    [modal]="true" 
+    [baseZIndex]="10000"
+    [style]="{width: '450px'}">
     <div [formGroup]="student">
         <div class="ui-grid-row-12">
-        <div class="ui-grid-col-6">Student Full Name:</div>
+        <div class="ui-grid-col-4">Student Full Name:</div>
         <input 
             type="text" 
             name="fullName" 
-            class="ui-grid-col-6" 
+            class="ui-grid-col-8" 
             id="fullName"
             formControlName="fullName" 
             minlength="2"
@@ -97,12 +86,12 @@
             required />
         </div>
         <div class="ui-grid-row">
-        <div class="ui-grid-col-6">Student Class Name:</div>
+        <div class="ui-grid-col-4">Student Class Name:</div>
         <input 
             type="number" 
             name="classNumber" 
             id="classNumber"
-            class="ui-grid-col-6" 
+            class="ui-grid-col-8" 
             formControlName="classNumber" 
             pInputText
             min="1"
@@ -111,32 +100,40 @@
             required />
         </div>
         <div class="ui-grid-row">
-        <div class="ui-grid-col-6">Start study date:</div>
+        <div class="ui-grid-col-4">Start study date:</div>
         <input 
             type="date" 
             name="startDate" 
             id="startDate" 
-            class="ui-grid-col-6"
+            class="ui-grid-col-8"
             formControlName="startDate" 
             pInputText 
             autocomplete="off" 
             required />
         </div>
         <div class="ui-grid-row">
-        <div class="ui-grid-col-6">Student Pay Type:</div>
+        <div class="ui-grid-col-4">Student Pay Type:</div>
         <p-selectButton 
             [options]="types" 
-            class="ui-grid-col-6" 
+            class="ui-grid-col-8" 
             #butt 
-            (click)="changeStudentType(student, butt.value)">
+            (click)="changeStudentType(butt.value)">
         </p-selectButton>
         </div>
-        <div class="ui-grid-row">
-            <button (click)="displayAdd = false; student.reset();">Cancel</button>
+        <p-footer>
             <button 
-            (click)="saveNewStudent(student.value)" 
-            [disabled]="student.invalid">
-            Save</button>
-        </div>
+                pButton 
+                label="Cancel" 
+                class="ui-button-secondary" 
+                (click)="displayAdd = false; student.reset();"
+            ></button>
+            <button 
+                pButton 
+                label="Save" 
+                class="ui-button-secondary" 
+                (click)="saveNewStudent(student.value)"
+            ></button>
+        </p-footer>
     </div>
 </p-dialog> 
+<!-- add sudent by teacher -->

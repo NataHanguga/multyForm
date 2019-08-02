@@ -1,0 +1,19 @@
+button.ui-button {
+    background-color: rgb(206, 198, 206) !important;
+    border: none;
+    color: #000 !important;
+
+    &:hover, &:focus {
+        background-color: rgba(223, 37, 37, 0.938);
+        color: #fff;
+    }
+}
+
+.ui-button-text {
+    font-size: 12px;
+}
+
+.ui-button{
+    width: 115px;
+    margin-top: 5px;
+}

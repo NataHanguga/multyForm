@@ -13,9 +13,10 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { TeacherCellComponent } from './components/teacher-cell/teacher-cell.component';
 import { StudentRowComponent } from './components/student-row/student-row.component';
 import { ProgressTableComponent } from './components/progress-table/progress-table.component';
+import { DeleteTeacherComponent } from './components/dialogs/delete-teacher/delete-teacher.component';
 
 @NgModule({
-  declarations: [CreateStudentComponent, StudentComponent, ShowStudentsComponent, FilterDirective, FilterPipe, TeacherCellComponent, StudentRowComponent, ProgressTableComponent],
+  declarations: [CreateStudentComponent, StudentComponent, ShowStudentsComponent, FilterDirective, FilterPipe, TeacherCellComponent, StudentRowComponent, ProgressTableComponent, DeleteTeacherComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

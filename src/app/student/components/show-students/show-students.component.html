@@ -24,6 +24,7 @@
         <app-student-row 
           #studentList
           class="ui-g-4"
+          (editStudents)="getStudents($event)"
           (list)="changeList($event)"
         ></app-student-row>
      <!-- </tr>

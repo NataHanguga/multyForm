@@ -6,87 +6,97 @@ import { ShowStudent } from '../../models/showStudent';
 import { SelectItem } from 'primeng/api';
 
 @Component({
-  selector: 'app-teacher-cell',
-  templateUrl: './teacher-cell.component.html',
-  styleUrls: ['./teacher-cell.component.scss']
+    selector: 'app-teacher-cell',
+    templateUrl: './teacher-cell.component.html',
+    styleUrls: ['./teacher-cell.component.scss']
 })
 export class TeacherCellComponent implements OnInit {
-  @Input() teachers: Teacher[];
-  @Output() list: EventEmitter<Teacher[]> = new EventEmitter<Teacher[]>();
-  @Output() name: EventEmitter<string> = new EventEmitter<string>();
+    @Input() teachers: Teacher[];
+    @Output() list: EventEmitter<Teacher[]> = new EventEmitter<Teacher[]>();
+    @Output() name: EventEmitter<string> = new EventEmitter<string>();
 
-  public teacherList: Teacher[];
-  public teacherItem = '';
-	public student: FormGroup = this.studentService.initialSubject();
-  public displayAdd = false;
-  public display = false;
-  public editTeacherItem: Teacher;
-  public types: SelectItem[] = [
-		{ label: 'Contract', value: 'contract' },
-		{ label: 'Beneficiary', value: 'beneficiary' }
-  ];
-  constructor(private studentService: StudentService) { }
+    public teacherList: Teacher[];
+    public teacherItem = '';
+    public student: FormGroup = this.studentService.initialSubject();
+    public displayAdd = false;
+    public display = false;
+    public displayRemove = false;
+    public editTeacherItem: Teacher;
+    private selectedStudentType = '';
+    public types: SelectItem[] = [
+        { label: 'Contract', value: 'contract' },
+        { label: 'Beneficiary', value: 'beneficiary' }
+    ];
+    constructor(private studentService: StudentService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  deleteTeacher(teacher: Teacher) {
-	  this.studentService.deleteTeacher(teacher);
-   this.teacherList = this.studentService.getStudentsFromLocalSrotage();
-   this.list.emit(this.teacherList);
-  }
-show(data) {
-  console.log(data);
-}
-  	addStudent(teacher: string) {
-		this.displayAdd = true;
-		this.teacherItem = teacher;
-  }
+    public deleteTeacher(teacher: Teacher) {
+        this.studentService.deleteTeacher(teacher);
+        this.teacherList = this.studentService.getStudentsFromLocalSrotage();
+        this.list.emit(this.teacherList);
+    }
 
-  editTeacher(teacherEdit: Teacher) {
-    this.display = true;
-    this.editTeacherItem = teacherEdit;
-    this.teacherItem = teacherEdit.teacherName;
-    console.log(teacherEdit, this.teacherItem, this.editTeacher);
+    show(data) {
+        console.log(data);
+    }
+    addStudent(teacher: string) {
+        this.displayAdd = true;
+        this.teacherItem = teacher;
+    }
 
-  }
+    editTeacher(teacherEdit: Teacher) {
+        this.display = true;
+        this.editTeacherItem = teacherEdit;
+        this.teacherItem = teacherEdit.teacherName;
+        console.log(teacherEdit, this.teacherItem, this.editTeacher);
 
-  saveEditTeacherName() {
-    console.log(this.teacherItem);
-    const newTeacher = new Teacher(this.teacherItem, this.editTeacherItem.student);
-    this.studentService.saveEditTeacher(newTeacher);
-    this.teacherList = this.studentService.getStudentsFromLocalSrotage();
-    this.list.emit(this.teacherList);
-    this.display = false;
-  }
+    }
 
-  // cancel(data) {
-	// 	data = false;
-  //   this.student.reset();
-	// }
+    saveEditTeacherName() {
+        console.log(this.teacherItem);
+        const newTeacher = new Teacher(this.teacherItem, this.editTeacherItem.student);
+        this.studentService.saveEditTeacher(newTeacher);
+        this.teacherList = this.studentService.getStudentsFromLocalSrotage();
+        this.list.emit(this.teacherList);
+        this.display = false;
+    }
 
-  saveNewStudent(data: ShowStudent) {
-		  this.displayAdd = false;
-		  this.studentService.addNewStudent(
-			this.teacherItem,
-			new ShowStudent(
-				data.fullName,
-				data.classNumber,
-				data.studentType,
-				data.startDate,
-				0
-			)
-		);
-    this.teacherList = this.studentService.getStudentsFromLocalSrotage();
-    this.list.emit(this.teacherList);
-  }
+    // cancel(data) {
+    // 	data = false;
+    //   this.student.reset();
+    // }
+
+    saveNewStudent(data: ShowStudent) {
+        console.log(data, new ShowStudent(
+            data.fullName,
+            data.classNumber,
+            this.selectedStudentType,
+            data.startDate,
+            0
+        ));
+        this.displayAdd = false;
+        this.studentService.addNewStudent(
+            this.teacherItem,
+            new ShowStudent(
+                data.fullName,
+                data.classNumber,
+                this.selectedStudentType,
+                data.startDate,
+                0
+            )
+        );
+        this.teacherList = this.studentService.getStudentsFromLocalSrotage();
+        this.list.emit(this.teacherList);
+    }
 
     public showTeacherChildren(teacherName: string) {
         this.name.emit(teacherName);
     }
 
-    public changeStudentType(student: ShowStudent, value): void {
-            student.studentType = value === null ?
+    public changeStudentType(value): void {
+        this.selectedStudentType = (value === null) ?
             this.types[0].value : value;
     }
 

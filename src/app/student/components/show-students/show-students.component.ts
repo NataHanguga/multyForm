@@ -13,40 +13,40 @@ import { StudentRowComponent } from '../student-row/student-row.component';
 	styleUrls: [ './show-students.component.scss' ]
 })
 export class ShowStudentsComponent implements OnInit {
-  @ViewChild('studentList', {static: false}) studentList: StudentRowComponent;
-	public teacherList: Teacher[];
+    @ViewChild('studentList', {static: false}) studentList: StudentRowComponent;
+        public teacherList: Teacher[];
 
-	constructor(private studentService: StudentService) {}
+        constructor(private studentService: StudentService) {}
 
-	ngOnInit() {
-		this.teacherList = this.studentService.getStudentsFromLocalSrotage();
-		// console.log(this.teacherList);
-	}
+    ngOnInit() {
+        this.teacherList = this.studentService.getStudentsFromLocalSrotage();
+        // console.log(this.teacherList);
+    }
 
-  public getStudents(event: string) {
-    console.log(event);
-    this.studentList.getStudents(event);
-  }
+    changeSearch(data: string) {
+        // console.log(data, typeof data);
+        // let list: Teacher[] = this.teacherList.map((teacher: Teacher) => {
+        //   return new Teacher(teacher.teacherName, teacher.student.filter((student: ShowStudent) => {
+        //     return student.fullName.toLocaleLowerCase().includes(data);
+        //   }));
+        // });
 
-  changeSearch(data: string) {
-    // console.log(data, typeof data);
-    // let list: Teacher[] = this.teacherList.map((teacher: Teacher) => {
-    //   return new Teacher(teacher.teacherName, teacher.student.filter((student: ShowStudent) => {
-    //     return student.fullName.toLocaleLowerCase().includes(data);
-    //   }));
-    // });
+        // if (!data.length) {
+        //   list = this.teacherList;
+        // }
 
-    // if (!data.length) {
-    //   list = this.teacherList;
-    // }
+        // console.log(list);
+        // this.teacherList = list;
 
-    // console.log(list);
-    // this.teacherList = list;
+    }
 
-  }
+    public changeList(event: Teacher[]): void {
+        console.log(event);
+        this.teacherList = event;
+    }
 
-  changeList(event: Teacher[]) {
-	  console.log(event);
-	  this.teacherList = event;
-  }
+    public getStudents(event: string): void {
+        console.log(event);
+        this.studentList.getStudents(event);
+    }
 }
