@@ -134,8 +134,7 @@
         <div class="ui-grid-row">
             <button (click)="displayAdd = false; student.reset();">Cancel</button>
             <button 
-            (click)="saveNewStudent(student.value)" 
-            [disabled]="student.invalid">
+            (click)="saveNewStudent(student.value)">
             Save</button>
         </div>
     </div>
