@@ -1,0 +1,40 @@
+
+  .ui-dialog.ui-widget-content {
+    background-color: red;
+}
+
+button.ui-button.but {
+    background-color: rgba(206, 198, 206, 0) !important;
+    border: none;
+    color: #000 !important;
+}
+
+.wrapper {
+    display: flex;
+    width: 300px;
+    height: 120px;
+    flex-direction: column;
+
+    .row {
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+       #float-input {
+           height: 25px;
+       }
+        div.col {
+            width: 40%;
+        }
+        input.col {
+            width: 60%;
+        }
+
+        button {
+            width: 50%;
+
+            &.ui-button-secondary {
+
+            }
+        }
+    }
+}

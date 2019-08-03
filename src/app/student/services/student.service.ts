@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Teacher } from '../models/teacher';
 import { ShowStudent } from '../models/showStudent';
-// import { PayArray } from '../models/payArray';
 
 @Injectable({
 	providedIn: 'root'
@@ -151,5 +150,17 @@ export class StudentService {
 		);
 		this.teacherList.splice(index, 1);
 		this.setStudentToLocalStorage(this.teacherList);
+	}
+
+	public getStudentsByTeacherName(name: string): ShowStudent[] {
+		let students: ShowStudent[];
+		this.teacherList = this.getStudentsFromLocalSrotage();
+		this.teacherList.forEach((teacher: Teacher) => {
+			if (teacher.teacherName === name) {
+				students = (teacher.student);
+			}
+		});
+
+		return students;
 	}
 }

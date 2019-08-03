@@ -1,7 +1,6 @@
-<h3 class="first">List</h3>
-<div *ngIf="!teacherList.length">Empty List</div>
-<div *ngIf="teacherList.length" style="max-width: 1170px">
-  <p-table 
+<!-- <div *ngIf="!teacherList.length">Empty List</div> -->
+<div class="ui-g-12">
+  <!-- <p-table 
     [value]="teacherList" 
     class="ui-grid " 
     [paginator]="true" 
@@ -13,22 +12,21 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-teacher>
-        <!-- <p-accordion> -->
       <tr>
-          <!-- <p-accordionTab header="{{teacher.teacherName}}"> -->
-        <td>
+         <td> -->
           <app-teacher-cell 
-            [teacher]="teacher" 
+          class="ui-g-4"
+            [teachers]="teacherList" 
             (list)="changeList($event)"
+            (name)="getStudents($event)"
           ></app-teacher-cell>
-        </td>
+       <!-- </td> -->
         <app-student-row 
-          [teacher]="teacher"
+          #studentList
+          class="ui-g-4"
           (list)="changeList($event)"
         ></app-student-row>
-      <!-- </p-accordionTab> -->
-     </tr>
-    <!-- </p-accordion> -->
+     <!-- </tr>
     </ng-template>
-  </p-table>
+  </p-table> -->
 </div>
