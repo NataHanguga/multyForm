@@ -1,14 +1,13 @@
-<div *ngIf="!studentList.length">loading...</div>
+<!-- <div *ngIf="!studentList.length">loading...</div> -->
 <p-dataView  *ngIf="studentList.length" [value]="studentList">
     <p-header>
         <div class="ui-helper-clearfix"> Students </div>
     </p-header>
     <ng-template let-student pTemplate="listItem">
         <div class="wrapper">
-            <span>
+            <span class="data-wrapper">
                 <span>{{student.fullName}}</span>
-                <app-progress-table></app-progress-table>
-                
+                <app-progress-table [student]="student"></app-progress-table>
             </span>
             <span class="button-wrapper">
                 <span *ngIf="student.studentType === 'contract'">
@@ -28,7 +27,7 @@
                 ></button>
                 <button 
                     pButton
-                    icon="pi pi-times"
+                    icon="pi pi-trash"
                     class="ui-button ui-button-secondary"
                     (click)="deleteStudent(student.id)"
                 ></button>
