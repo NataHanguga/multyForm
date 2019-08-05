@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ShowStudent } from '../../models/showStudent';
 
 @Component({
   selector: 'app-progress-table',
@@ -6,9 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./progress-table.component.scss']
 })
 export class ProgressTableComponent implements OnInit {
-@Input() pay: number;
-@Input() type: string;
-@Input() startDate: Date;
+@Input() student: ShowStudent;
 
   public arr: Array<number> = [];
   private readonly PAY = 50;
@@ -20,27 +19,27 @@ export class ProgressTableComponent implements OnInit {
   }
 
   creatreArray() {
-    const date = new Date(this.startDate).getMonth();
-    console.log(date, this.startDate);
+    const date = new Date(this.student.startDate).getMonth();
+    console.log(date, this.student.startDate);
     if (date >= 5 && date <= 8) {
       for (let i = 0; i < 8; i++) {
-        if (this.type === 'contract') {
-          if (this.pay >= this.PAY) {
+        if (this.student.studentType === 'contract') {
+          if (this.student.payArray >= this.PAY) {
             this.arr.push(this.PAY);
-            this.pay -= this.PAY;
-          } else if (this.pay < this.PAY) {
-            this.arr.push(this.pay);
-            this.pay = 0;
-          } else if (this.pay === 0) {
+            this.student.payArray -= this.PAY;
+          } else if (this.student.payArray < this.PAY) {
+            this.arr.push(this.student.payArray);
+            this.student.payArray = 0;
+          } else if (this.student.payArray === 0) {
             this.arr.push(0);
           }
         } else {
           this.arr.push(50);
         }
       }
-      if (this.pay > 0 ) {
-        console.log(this.pay);
-        this.arr.push(this.pay);
+      if (this.student.payArray > 0 ) {
+        console.log(this.student.payArray);
+        this.arr.push(this.student.payArray);
       } else {
         this.arr.push(0);
       }

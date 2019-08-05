@@ -5,7 +5,11 @@
     </p-header>
     <ng-template let-student pTemplate="listItem">
         <div class="wrapper">
-            <span>{{student.fullName}}</span>
+            <span>
+                <span>{{student.fullName}}</span>
+                <app-progress-table></app-progress-table>
+                
+            </span>
             <span class="button-wrapper">
                 <span *ngIf="student.studentType === 'contract'">
                     <button

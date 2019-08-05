@@ -1,33 +1,14 @@
-<!-- <div *ngIf="!teacherList.length">Empty List</div> -->
 <div class="ui-g-12">
-  <!-- <p-table 
-    [value]="teacherList" 
-    class="ui-grid " 
-    [paginator]="true" 
-    [rows]="10">
-    <ng-template pTemplate="header">
-      <tr>
-        <th style="width: 140px">Teacher Name</th>
-        <th style="width: 1030px">Students</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-teacher>
-      <tr>
-         <td> -->
           <app-teacher-cell 
           class="ui-g-4"
             [teachers]="teacherList" 
             (list)="changeList($event)"
             (name)="getStudents($event)"
           ></app-teacher-cell>
-       <!-- </td> -->
         <app-student-row 
           #studentList
           class="ui-g-4"
           (editStudents)="getStudents($event)"
           (list)="changeList($event)"
         ></app-student-row>
-     <!-- </tr>
-    </ng-template>
-  </p-table> -->
 </div>
