@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { FormGroup, FormArray } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
-
+import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-create-student',
   templateUrl: './create-student.component.html',
   styleUrls: ['./create-student.component.scss']
 })
 export class CreateStudentComponent implements OnInit {
+  @Output() created: EventEmitter<any> = new EventEmitter<any>();
   public teacherForm: FormGroup = this.studentService.teacherForm;
   public students: FormGroup = this.studentService.initialSubject();
   public display = false;
@@ -22,19 +23,11 @@ export class CreateStudentComponent implements OnInit {
     this.teacherForm.reset();
   }
 
-  addNewStudent(): void {
-    this.studentService.addStudent();
-  }
+    public save(data: FormGroup): void {
+        this.created.emit(data.value.name);
+        this.cancel();
 
-  removeSubject(i: number): void {
-    this.studentService.removeSubject(i);
-  }
-
-  public save(data: FormGroup): void {
-    this.studentService.saveStudent(data);
-    this.cancel();
-
-  }
+    }
 
   public cancel(): void {
     this.display = false;

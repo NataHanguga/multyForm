@@ -1,14 +1,16 @@
-<div class="ui-g-12">
+<div class="wrapper">
           <app-teacher-cell 
-          class="ui-g-4"
+          class="teachers"
             [teachers]="teacherList" 
             (list)="changeList($event)"
+            (created)="getTeacherList($event)"
             (name)="getStudents($event)"
           ></app-teacher-cell>
         <app-student-row 
           #studentList
-          class="ui-g-6"
+          class="students"
           (editStudents)="getStudents($event)"
           (list)="changeList($event)"
         ></app-student-row>
+        
 </div>

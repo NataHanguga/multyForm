@@ -8,7 +8,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class DeleteTeacherComponent {
     @Input() display: boolean;
     @Output() list: EventEmitter<boolean> = new EventEmitter<boolean>();
-    // @Output() displayChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor() { }
 

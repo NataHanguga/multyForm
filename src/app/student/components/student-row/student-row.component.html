@@ -1,15 +1,37 @@
-<!-- <div *ngIf="!studentList.length">loading...</div> -->
-<p-dataView  *ngIf="studentList.length" [value]="studentList">
+<p-dataView  *ngIf="studentList" [value]="studentList">
     <p-header>
-        <div class="ui-helper-clearfix"> Students </div>
+        <div class="ui-helper-clearfix">
+            <span class="ui-g-2">Students</span>
+            <table class="ui-g-6">
+                <tr class="header">
+                    <!-- <th *ngFor="let month of monthArr">{{month}}</th> -->
+                </tr>
+            </table> 
+        </div>
+
     </p-header>
+    
     <ng-template let-student pTemplate="listItem">
         <div class="wrapper">
-            <span class="data-wrapper">
-                <span>{{student.fullName}}</span>
-                <app-progress-table [student]="student"></app-progress-table>
+            <span class="data-wrapper ui-g-9">
+                <span class="student-name ui-g-3">{{student.fullName}}</span>
+                <table class="ui-g-9 ">
+                    <tr class="item">
+                            <td
+                                *ngFor="let item of student.progress; let i = index;" 
+                                [ngClass]="{
+                                    'green': item === 50,
+                                    'yellow': 50 > item && item > 0,
+                                    'grey': item === 0,
+                                    'blue': item === null || student.studentType !== 'contract'
+                                }">
+                                {{item}}
+                                <span *ngIf="item === null">-</span>
+                            </td>
+                    </tr>
+                </table>
             </span>
-            <span class="button-wrapper">
+            <span class="button-wrapper ui-g-3">
                 <span *ngIf="student.studentType === 'contract'">
                     <button
                         pButton
@@ -66,7 +88,7 @@
                 <span *ngIf="student.studentType === 'contract'">
                     <p-button 
                         styleClass="ui-button-success" 
-                        (click)="payNow(student, teacher.teacherName)">
+                        (click)="payNow(student, teacher.name)">
                        
                     </p-button>
                 </span>
@@ -88,7 +110,7 @@
                 <p-button 
                     label="Delete" 
                     styleClass="ui-button-danger" 
-                    (click)="deleteStudent(student.id, teacher.teacherName)"
+                    (click)="deleteStudent(student.id, teacher.name)"
                 ></p-button>
                 <p-button 
                     label="Edit" 

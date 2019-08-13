@@ -14,7 +14,7 @@ export class FilterPipe implements PipeTransform {
     search = search.toLocaleLowerCase();
 
     const data = items.forEach((teacher: Teacher) => {
-      return teacher.student.filter((student: ShowStudent) =>  {
+      return teacher.students.filter((student: ShowStudent) =>  {
         return student.fullName.toLocaleLowerCase().includes(search);
       });
     });
@@ -22,7 +22,7 @@ export class FilterPipe implements PipeTransform {
     return data;
   }
   // return this.teacherList.map((teacher: Teacher) => {
-  //   return new Teacher(teacher.teacherName, teacher.student.filter((student: ShowStudent) => {
+  //   return new Teacher(teacher.name, teacher.student.filter((student: ShowStudent) => {
   //     return student.fullName.toLocaleLowerCase().includes(data);
   //     // item.title.indexOf(this.state.search) !== -1
   //   }));

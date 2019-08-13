@@ -1,11 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { StudentService } from '../../services/student.service';
 import { Teacher } from '../../models/teacher';
-import { FormGroup } from '@angular/forms';
-import { PayArray } from '../../models/payArray';
-import { SelectItem } from 'primeng/api';
-import { ShowStudent } from '../../models/showStudent';
 import { StudentRowComponent } from '../student-row/student-row.component';
+import { HttpService } from '../../services/http.service';
 
 @Component({
 	selector: 'app-show-students',
@@ -16,33 +12,23 @@ export class ShowStudentsComponent implements OnInit {
     @ViewChild('studentList', {static: false}) studentList: StudentRowComponent;
         public teacherList: Teacher[];
 
-        constructor(private studentService: StudentService) {}
+        constructor(private httpService: HttpService) {}
 
     ngOnInit() {
-        this.teacherList = this.studentService.getStudentsFromLocalSrotage();
-        // console.log(this.teacherList);
+        this.getTeacherList(true);
     }
 
-    changeSearch(data: string) {
-        // console.log(data, typeof data);
-        // let list: Teacher[] = this.teacherList.map((teacher: Teacher) => {
-        //   return new Teacher(teacher.teacherName, teacher.student.filter((student: ShowStudent) => {
-        //     return student.fullName.toLocaleLowerCase().includes(data);
-        //   }));
-        // });
-
-        // if (!data.length) {
-        //   list = this.teacherList;
-        // }
-
-        // console.log(list);
-        // this.teacherList = list;
-
+    public getTeacherList(event) {
+        this.httpService.getTeachers().subscribe((data: Teacher[]) => {
+            this.teacherList = data;
+            console.log(data);
+        });
     }
 
-    public changeList(event: Teacher[]): void {
-        console.log(event);
+    public changeList(event: any): void {
         this.teacherList = event;
+        console.log(event);
+        // this.getTeacherList(event);
     }
 
     public getStudents(event: string): void {

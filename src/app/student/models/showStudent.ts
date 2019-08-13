@@ -3,7 +3,8 @@ import { JsonProperty, Serializable } from 'typescript-json-serializer';
 
 @Serializable()
 export class ShowStudent {
-  public id: number;
+  public _id: number;
+
   constructor(
     @JsonProperty()
     public fullName: string,
@@ -14,8 +15,11 @@ export class ShowStudent {
     @JsonProperty()
     public startDate: Date,
     @JsonProperty()
-    public payArray: number
-  ) {
-    this.id =  Math.floor(Math.random() * (Date.now() - 5) + 5);
-  }
+    public payArray: number,
+    @JsonProperty()
+    public progress?: number[],
+    @JsonProperty()
+    public payed?: boolean
+
+  ) { }
 }

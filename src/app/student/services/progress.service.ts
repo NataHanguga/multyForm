@@ -27,7 +27,6 @@ export class ProgressService {
           arr.push(0);
         }
       }
-      console.log(arr);
       return arr;
   }
 
@@ -39,7 +38,7 @@ export class ProgressService {
     arr = this.generateArray(arrLength, student);
 
     for (let i = 0; i < noPayedMonth; i++) {
-      arr.unshift(0);
+      arr.unshift(null);
     }
 
     return arr;
@@ -47,7 +46,6 @@ export class ProgressService {
 
   public progressBar(student: ShowStudent): Array<number> {
     const startMonth =  new Date(student.startDate).getMonth();
-    console.log(student, startMonth);
 
     let arr: Array<number> = new Array();
     switch (startMonth) {
@@ -60,52 +58,35 @@ export class ProgressService {
       }
       case 9: {
         arr = this.customArray(student, 1);
-        console.log(arr);
         break;
       }
       case 10: {
         arr = this.customArray(student, 2);
-        console.log(arr);
         break;
       }
       case 11: {
         arr = this.customArray(student, 3);
-        console.log(arr);
         break;
       }
       case 0:
       case 1: {
         arr = this.customArray(student, 4);
-        console.log(arr);
         break;
       }
       case 2: {
         arr = this.customArray(student, 5);
-        console.log(arr);
         break;
       }
       case 3: {
         arr = this.customArray(student, 6);
-        console.log(arr);
         break;
       }
       case 4: {
         arr = this.customArray(student, 7);
-        console.log(arr);
         break;
       }
 
     }
     return arr;
-/*
-  9: oct
-  10: nov
-  11: dec
-  1: feb
-  2: march
-  3: apr
-  4: may
-  */
-
   }
 }

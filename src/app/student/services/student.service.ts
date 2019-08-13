@@ -12,7 +12,7 @@ export class StudentService {
 	});
 	public teacherList: Teacher[];
 	public teacherForm: FormGroup = this.fb.group({
-		teacherName: [ '', Validators.compose([Validators.required]) ],
+		name: [ '', Validators.compose([Validators.required]) ],
 		students: this.fb.array([ this.initialSubject() ])
 	});
 	constructor(private fb: FormBuilder) {}
@@ -38,16 +38,6 @@ export class StudentService {
 		});
 	}
 
-	addStudent(): void {
-		const control = this.teacherForm.controls.students as FormArray;
-		control.push(this.initialSubject());
-	}
-
-	removeSubject(i: number): void {
-		const control = this.teacherForm.controls.students as FormArray;
-		control.removeAt(i);
-	}
-
 	saveStudent(data: FormGroup): number {
 		console.log(data.value);
 		const arr: ShowStudent[] = data.value.students.map((el: ShowStudent) => {
@@ -59,13 +49,13 @@ export class StudentService {
 				0
 			);
 		});
-		const teacher: Teacher = new Teacher(data.value.teacherName, arr);
+		const teacher: Teacher = new Teacher(data.value.name, arr);
 		console.log(teacher);
 
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.push(teacher);
 		this.setStudentToLocalStorage(this.teacherList);
-		return teacher.student.length;
+		return teacher.students.length;
 	}
 
 	setStudentToLocalStorage(student: Teacher[]): void {
@@ -81,9 +71,9 @@ export class StudentService {
 		console.log(id, data, name);
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
-			teacher.student.forEach((student: ShowStudent, i: number) => {
-        console.log(student.id === id);
-				    if (student.id === id && student.fullName === name) {
+			teacher.students.forEach((student: ShowStudent, i: number) => {
+        console.log(student._id === id);
+				    if (student._id === id && student.fullName === name) {
           console.log('finded');
 					     student.payArray += data;
 					     console.log(student);
@@ -94,24 +84,24 @@ export class StudentService {
 		this.setStudentToLocalStorage(this.teacherList);
 	}
 
-	deleteStudent(id: number, teacherName: string): void {
+	deleteStudent(id: number, name: string): void {
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
-			if (teacher.teacherName === teacherName) {
-				const index = teacher.student.findIndex(
-					(el: ShowStudent) => el.id === id
+			if (teacher.name === name) {
+				const index = teacher.students.findIndex(
+					(el: ShowStudent) => el._id === id
 				);
-				teacher.student.splice(index, 1);
+				teacher.students.splice(index, 1);
 			}
 		});
 		this.setStudentToLocalStorage(this.teacherList);
 	}
 
-	addNewStudent(teacherName: string, student: ShowStudent): void {
+	addNewStudent(name: string, student: ShowStudent): void {
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
-			if (teacher.teacherName === teacherName) {
-				teacher.student.push(student);
+			if (teacher.name === name) {
+				teacher.students.push(student);
 			}
 		});
 		this.setStudentToLocalStorage(this.teacherList);
@@ -120,8 +110,8 @@ export class StudentService {
 	saveEditTeacher(newTeacher: Teacher): void {
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
-			if (teacher.student[0].fullName === newTeacher.student[0].fullName) {
-				teacher.teacherName = newTeacher.teacherName;
+			if (teacher.students[0].fullName === newTeacher.students[0].fullName) {
+				teacher.name = newTeacher.name;
 			}
 		});
 		this.setStudentToLocalStorage(this.teacherList);
@@ -130,8 +120,8 @@ export class StudentService {
 	saveEditStudent(editStudent: ShowStudent) {
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
-			teacher.student.forEach((student: ShowStudent) => {
-				if (editStudent.id === student.id) {
+			teacher.students.forEach((student: ShowStudent) => {
+				if (editStudent._id === student._id) {
 					student.fullName = editStudent.fullName;
 					student.classNumber = editStudent.classNumber;
 					student.studentType = editStudent.studentType;
@@ -146,18 +136,18 @@ export class StudentService {
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		const index = this.teacherList.findIndex(
 			(el: Teacher) =>
-			el.teacherName === teacherDel.teacherName
+			el.name === teacherDel.name
 		);
 		this.teacherList.splice(index, 1);
 		this.setStudentToLocalStorage(this.teacherList);
 	}
 
-	public getStudentsByTeacherName(name: string): ShowStudent[] {
+	public getStudentsByname(name: string): ShowStudent[] {
 		let students: ShowStudent[];
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.forEach((teacher: Teacher) => {
-			if (teacher.teacherName === name) {
-				students = (teacher.student);
+			if (teacher.name === name) {
+				students = (teacher.students);
 			}
 		});
 

@@ -4,6 +4,8 @@ import { StudentService } from '../../services/student.service';
 import { FormGroup } from '@angular/forms';
 import { ShowStudent } from '../../models/showStudent';
 import { SelectItem } from 'primeng/api';
+import { HttpService } from '../../services/http.service';
+import { Student } from '../../models/student';
 
 @Component({
     selector: 'app-teacher-cell',
@@ -14,6 +16,7 @@ export class TeacherCellComponent implements OnInit {
     @Input() teachers: Teacher[];
     @Output() list: EventEmitter<Teacher[]> = new EventEmitter<Teacher[]>();
     @Output() name: EventEmitter<string> = new EventEmitter<string>();
+    @Output() created = new EventEmitter();
 
     public teacherList: Teacher[];
     public teacherItem = '';
@@ -27,46 +30,49 @@ export class TeacherCellComponent implements OnInit {
         { label: 'Contract', value: 'contract' },
         { label: 'Beneficiary', value: 'beneficiary' }
     ];
-    constructor(private studentService: StudentService) { }
+    public payed = [0, 0];
+    constructor(private studentService: StudentService, private httpService: HttpService) { }
 
     ngOnInit() {
     }
 
-    public deleteTeacher(teacher: Teacher) {
-        this.studentService.deleteTeacher(teacher);
-        this.teacherList = this.studentService.getStudentsFromLocalSrotage();
-        this.list.emit(this.teacherList);
-    }
+    // public getPayed(teacher: Teacher) {
+    //     if (teacher.students.length) {
+    //         teacher.students.forEach((student: ShowStudent) => {
+    //             (student.payed) ? this.payed[0]++ : this.payed[0]++;
+    //         });
+    //         console.log(222)
+    //     }
 
-    show(data) {
-        console.log(data);
-    }
-    addStudent(teacher: string) {
-        this.displayAdd = true;
-        this.teacherItem = teacher;
+    //     return this.payed;
+    // }
+    public deleteTeacher(event, id: string) {
+        this.httpService.deleteTeacher(id).subscribe((data: Teacher[]) => {
+            this.created.emit();
+        });
     }
 
     editTeacher(teacherEdit: Teacher) {
         this.display = true;
         this.editTeacherItem = teacherEdit;
-        this.teacherItem = teacherEdit.teacherName;
-        console.log(teacherEdit, this.teacherItem, this.editTeacher);
-
+        this.teacherItem = teacherEdit.name; // editeble teacher name
     }
 
-    saveEditTeacherName() {
+    saveEditName(): void {
         console.log(this.teacherItem);
-        const newTeacher = new Teacher(this.teacherItem, this.editTeacherItem.student);
-        this.studentService.saveEditTeacher(newTeacher);
-        this.teacherList = this.studentService.getStudentsFromLocalSrotage();
-        this.list.emit(this.teacherList);
-        this.display = false;
+        this.httpService.editTeacherName(this.editTeacherItem._id, this.teacherItem).subscribe((data: any) => {
+            this.created.emit();
+            this.display = false;
+        });
     }
 
-    // cancel(data) {
-    // 	data = false;
-    //   this.student.reset();
-    // }
+    saveNewTeacher(event: string) {
+        this.httpService.createTeacher(event).subscribe((data: Teacher[]) => {
+            console.log(data);
+            this.teacherList = data;
+            this.created.emit(this.teacherList);
+        });
+    }
 
     saveNewStudent(data: ShowStudent) {
         console.log(data, new ShowStudent(
@@ -91,8 +97,8 @@ export class TeacherCellComponent implements OnInit {
         this.list.emit(this.teacherList);
     }
 
-    public showTeacherChildren(teacherName: string) {
-        this.name.emit(teacherName);
+    public showTeacherChildren(name: string) {
+        this.name.emit(name);
     }
 
     public changeStudentType(value): void {

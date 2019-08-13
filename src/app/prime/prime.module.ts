@@ -15,7 +15,8 @@ import { DialogModule } from 'primeng/dialog';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AccordionModule } from 'primeng/accordion';
-
+import { DropdownModule } from 'primeng/dropdown';
+import {TieredMenuModule} from 'primeng/tieredmenu';
 @NgModule({
   imports: [
     ToastModule,
@@ -32,7 +33,9 @@ import { AccordionModule } from 'primeng/accordion';
     DialogModule,
     ProgressBarModule,
     OverlayPanelModule,
-    AccordionModule
+    AccordionModule,
+    DropdownModule,
+    TieredMenuModule
   ],
   exports: [
     ToastModule,
@@ -49,7 +52,9 @@ import { AccordionModule } from 'primeng/accordion';
     DialogModule,
     ProgressBarModule,
     OverlayPanelModule,
-    AccordionModule
+    AccordionModule,
+    DropdownModule,
+    TieredMenuModule
   ]
 })
 export class PrimeModule {}

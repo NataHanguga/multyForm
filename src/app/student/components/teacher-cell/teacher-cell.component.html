@@ -1,50 +1,68 @@
-<p-dataView [value]="teachers">
+<p-dataView #teacher [value]="teachers" filterBy="name">
     <p-header>
         <div class=" wrapper"> 
-            <span>Teachers</span>  
+            <span>Teachers</span> 
+            <!-- <span>
+                <input 
+                    type="search" 
+                    pInputText 
+                    placeholder="Search" 
+                    (keyup)="teacher.filter($event.target.value)">
+            </span> -->
             <span>
-                <app-create-student></app-create-student>
+                <app-create-student (created)="saveNewTeacher($event)"></app-create-student>
             </span>
 
         </div>
     </p-header>
     <ng-template let-teacher pTemplate="listItem">
         <div class="wrapper">
-            <span (click)="showTeacherChildren(teacher.teacherName)">
-                {{teacher.teacherName}}
+            <span (click)="showTeacherChildren(teacher._id)">
+                {{teacher.name}}
             </span>
-            <span class="button-wrapper">
+            <span>
+                <span>+{{teacher.payed[0]}}/</span>
+                <span>{{teacher.payed[1]}}-</span>
+            </span>
+            <app-teacher-cell-menu 
+                (showStudents)="showTeacherChildren(teacher._id)"
+            ></app-teacher-cell-menu>
+            <!-- <span class="button-wrapper">
                 <button pButton
                     class="ui-button-text ui-button" 
                     icon="pi pi-eye"
-                    (click)="showTeacherChildren(teacher.teacherName)"
+                    (click)="showTeacherChildren(teacher._id)"
                 ></button>
                 <button pButton
                     class="ui-button-text ui-button" 
                     icon="pi pi-plus"
-                    (click)="addStudent(teacher.teacherName)"
                 ></button>
+                  -->
                 <button pButton
                     class="ui-button-text ui-button" 
                     icon="pi pi-pencil"
                     (click)="editTeacher(teacher)"
                 ></button>
-                <app-dialog-delete-teacher 
+               <!-- <app-dialog-delete-teacher 
                     [display]="displayRemove"
-                    (list)="deleteTeacher($event)">
+                    (list)="deleteTeacher($event, teacher._id)">
                 </app-dialog-delete-teacher>
-            </span>
+            </span> -->
         </div>
     </ng-template>
 </p-dataView>
 
-<!-- edit teacherName -->
+<!-- edit name -->
 
 <p-dialog 
-    header="Edit teacher Name" 
-    [(visible)]="display"  
+    [(visible)]="display" 
+    header="Edit teacher Name"
+    [draggable]="false" 
     [modal]="true" 
     [baseZIndex]="10000"
+    [responsive]="true"
+    [minY]="70"
+    [blockScroll]="true"
     [style]="{width: '450px'}">
     <div class="ui-grid-row-12">
         <div class="ui-grid-col-4">Teacher Full Name:</div>
@@ -59,10 +77,10 @@
     </div>
     <p-footer>
         <button pButton label="Cancel" (click)="display = false;" class="ui-button-secondary"></button>
-        <button pButton label="Save" (click)="saveEditTeacherName()" class="ui-button-secondary"></button>
+        <button pButton label="Save" (click)="saveEditName()" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
-<!-- edit teacherName -->
+<!-- edit name -->
 
 <!-- add sudent by teacher -->
 <p-dialog 

@@ -14,15 +14,29 @@ import { TeacherCellComponent } from './components/teacher-cell/teacher-cell.com
 import { StudentRowComponent } from './components/student-row/student-row.component';
 import { ProgressTableComponent } from './components/progress-table/progress-table.component';
 import { DeleteTeacherComponent } from './components/dialogs/delete-teacher/delete-teacher.component';
-
+import { CurrentMonthDirective } from './directives/currentMonth.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { TeacherCellMenuComponent } from './components/teacher-cell-menu/teacher-cell-menu.component';
 @NgModule({
-  declarations: [CreateStudentComponent, StudentComponent, ShowStudentsComponent, FilterDirective, FilterPipe, TeacherCellComponent, StudentRowComponent, ProgressTableComponent, DeleteTeacherComponent],
+  declarations: [
+    CreateStudentComponent,
+    StudentComponent,
+    ShowStudentsComponent,
+    FilterDirective,
+    CurrentMonthDirective,
+    FilterPipe,
+    TeacherCellComponent,
+    StudentRowComponent,
+    ProgressTableComponent,
+    DeleteTeacherComponent,
+    TeacherCellMenuComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,
     PrimeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class StudentModule { }

@@ -1,0 +1,14 @@
+<p-tieredMenu 
+    #menu 
+    [model]="items" 
+    appendTo="body" 
+    [popup]="true"
+></p-tieredMenu>
+<button 
+    #btn 
+    type="button" 
+    pButton 
+    icon="pi pi-bars" 
+    class="ui-button-secondary" 
+    (click)="menu.toggle($event)"
+></button>
