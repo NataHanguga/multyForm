@@ -1,8 +1,9 @@
 import { Injectable, ɵisDefaultChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Teacher } from '../models/teacher';
 import { map, pluck } from 'rxjs/operators';
+
+import { Teacher } from '../models/teacher';
 import { Student } from '../models/Student';
 @Injectable({
   providedIn: 'root'

@@ -7,20 +7,22 @@ import { TeacherCellComponent } from '../teacher-cell/teacher-cell.component';
 @Component({
 	selector: 'app-show-students',
 	templateUrl: './show-students.component.html',
-	styleUrls: [ './show-students.component.scss' ]
+    styleUrls: [ './show-students.component.scss' ],
+    providers: [HttpService]
 })
 export class StudentsComponent implements OnInit {
     @ViewChild('studentList', {static: false}) studentList: StudentRowComponent;
     @ViewChild('teachers', {static: false}) teachers: TeacherCellComponent;
-        public teacherList: Teacher[];
 
-        constructor(private httpService: HttpService) {}
+    public teacherList: Teacher[];
+
+    constructor(private httpService: HttpService) {}
 
     ngOnInit() {
         this.getTeacherList(true);
     }
 
-    public getTeacherList(event) {
+    public getTeacherList(event): void {
         this.httpService.getTeachers().subscribe((data: Teacher[]) => {
             this.teacherList = data;
         });

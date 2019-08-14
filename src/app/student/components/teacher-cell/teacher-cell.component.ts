@@ -1,12 +1,15 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+import { HttpService } from '../../services/http.service';
+
 import { Teacher } from '../../models/teacher';
 import { Student } from '../../models/Student';
-import { HttpService } from '../../services/http.service';
 
 @Component({
     selector: 'app-teacher-cell',
     templateUrl: './teacher-cell.component.html',
-    styleUrls: ['./teacher-cell.component.scss']
+    styleUrls: ['./teacher-cell.component.scss'],
+    providers: [HttpService]
 })
 export class TeacherCellComponent {
     @Input() teachers: Teacher[];
@@ -17,22 +20,28 @@ export class TeacherCellComponent {
     constructor(private httpService: HttpService) { }
 
     public deleteTeacher(id: string): void {
-        this.httpService.deleteTeacher(id).subscribe((data: Teacher[]) => {
-            this.created.emit();
-        });
+        this.httpService
+            .deleteTeacher(id)
+            .subscribe((data: Teacher[]) => {
+                this.created.emit();
+            });
     }
 
     public saveEditName(id: string, newName: string): void {
-        this.httpService.editTeacherName(id, newName).subscribe((data: any) => {
-            this.created.emit();
-        });
+        this.httpService
+            .editTeacherName(id, newName)
+            .subscribe((data: any) => {
+                this.created.emit();
+            });
     }
 
     public saveNewTeacher(event: string): void {
-        this.httpService.createTeacher(event).subscribe((data: Teacher[]) => {
-            this.teacherList = data;
-            this.created.emit(this.teacherList);
-        });
+        this.httpService
+            .createTeacher(event)
+            .subscribe((data: Teacher[]) => {
+                this.teacherList = data;
+                this.created.emit(this.teacherList);
+            });
     }
 
     public addNewStudent(id: string, student: Student): void {
@@ -44,14 +53,16 @@ export class TeacherCellComponent {
             studentType: student.studentType,
             id: student.id
           };
-        this.httpService.addStudentToTeacher(id, newStudent).subscribe((data: Teacher[]) => {
-            this.created.emit(this.teacherList);
-            this.name.emit(id);
-        });
+        this.httpService
+            .addStudentToTeacher(id, newStudent)
+            .subscribe((data: Teacher[]) => {
+                this.created.emit(this.teacherList);
+                this.name.emit(id);
+            });
     }
 
-    public showTeacherChildren(name: string): void {
-        this.name.emit(name);
+    public showTeacherChildren(id: string): void {
+        this.name.emit(id);
     }
 
 }

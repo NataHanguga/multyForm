@@ -13,6 +13,7 @@ export class TeacherCellMenuComponent implements OnInit {
   @Output() removeTeacher = new EventEmitter();
   @Output() editTeacherName = new EventEmitter<string>();
   @Output() addNewStudent = new EventEmitter<Student>();
+
   public items: MenuItem[];
   public displayRemove = false;
   public displayEdit = false;

@@ -6,7 +6,8 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-student-row',
   templateUrl: './student-row.component.html',
-  styleUrls: ['./student-row.component.scss']
+  styleUrls: ['./student-row.component.scss'],
+  providers: [HttpService]
 })
 export class StudentRowComponent {
     @Input() teacher: Teacher;
@@ -18,24 +19,30 @@ export class StudentRowComponent {
 
     constructor(private httpService: HttpService) { }
 
-    getStudents(name: string) {
+    public getStudents(name: string): void {
         this.name = name;
-        this.httpService.getStudentsByTeacherId(name).subscribe((data: Student[]) => {
-            this.studentList = data;
-        });
+        this.httpService
+            .getStudentsByTeacherId(name)
+            .subscribe((data: Student[]) => {
+                this.studentList = data;
+            });
     }
 
-    editStudent(event) {
-        this.httpService.editStudent(this.name, event).subscribe((data: Student[]) => {
-            this.studentList = data;
-            this.list.emit();
-        });
+    public editStudent(event: Student): void {
+        this.httpService
+            .editStudent(this.name, event)
+            .subscribe((data: Student[]) => {
+                this.studentList = data;
+                this.list.emit();
+            });
     }
 
-    deleteStudent(id: string) {
-        this.httpService.deleteStudent(this.name, id).subscribe((data: Student[]) => {
-            this.studentList = data;
-            this.list.emit();
-        });
+    public deleteStudent(id: string): void {
+        this.httpService
+            .deleteStudent(this.name, id)
+            .subscribe((data: Student[]) => {
+                this.studentList = data;
+                this.list.emit();
+            });
     }
 }
