@@ -1,9 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Teacher } from '../../models/teacher';
-import { StudentService } from '../../services/student.service';
-import { FormGroup } from '@angular/forms';
 import { Student } from '../../models/Student';
-import { SelectItem } from 'primeng/api';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -11,58 +8,49 @@ import { HttpService } from '../../services/http.service';
     templateUrl: './teacher-cell.component.html',
     styleUrls: ['./teacher-cell.component.scss']
 })
-export class TeacherCellComponent implements OnInit {
+export class TeacherCellComponent {
     @Input() teachers: Teacher[];
     @Output() name: EventEmitter<string> = new EventEmitter<string>();
     @Output() created = new EventEmitter();
 
     public teacherList: Teacher[];
-    public teacherItem = '';
-    public student: FormGroup = this.studentService.initialSubject();
-    public displayAdd = false;
-    public display = false;
-    public displayRemove = false;
-    public editTeacherItem: Teacher;
-    private selectedStudentType = '';
-    public types: SelectItem[] = [
-        { label: 'Contract', value: 'contract' },
-        { label: 'Beneficiary', value: 'beneficiary' }
-    ];
-    public payed = [0, 0];
-    constructor(private studentService: StudentService, private httpService: HttpService) { }
+    constructor(private httpService: HttpService) { }
 
-    ngOnInit() {
-    }
-
-    public deleteTeacher(id: string) {
+    public deleteTeacher(id: string): void {
         this.httpService.deleteTeacher(id).subscribe((data: Teacher[]) => {
             this.created.emit();
         });
     }
 
-    saveEditName(id: string, newName: string): void {
+    public saveEditName(id: string, newName: string): void {
         this.httpService.editTeacherName(id, newName).subscribe((data: any) => {
             this.created.emit();
         });
     }
 
-    saveNewTeacher(event: string) {
+    public saveNewTeacher(event: string): void {
         this.httpService.createTeacher(event).subscribe((data: Teacher[]) => {
             this.teacherList = data;
             this.created.emit(this.teacherList);
         });
     }
 
-    addNewStudent(id: string, student: Student) {
-        console.log(id, student);
-        this.httpService.addStudentToTeacher(id, student).subscribe((data: Teacher[]) => {
-            console.log(data);
-            // this.teacherList = data;
+    public addNewStudent(id: string, student: Student): void {
+        const newStudent: Student = {
+            fullName: student.fullName,
+            startDate: student.startDate,
+            pay: 0,
+            classNumber: student.classNumber,
+            studentType: student.studentType,
+            id: student.id
+          };
+        this.httpService.addStudentToTeacher(id, newStudent).subscribe((data: Teacher[]) => {
             this.created.emit(this.teacherList);
+            this.name.emit(id);
         });
     }
 
-    public showTeacherChildren(name: string) {
+    public showTeacherChildren(name: string): void {
         this.name.emit(name);
     }
 

@@ -1,15 +1,15 @@
 <div class="wrapper">
-          <app-teacher-cell 
-          class="teachers"
-            [teachers]="teacherList" 
-            (created)="getTeacherList($event)"
-            (name)="getStudents($event)"
-          ></app-teacher-cell>
-        <app-student-row 
-          #studentList
-          class="students"
-          (editStudents)="getStudents($event)"
-          (list)="getTeacherList($event)"
-        ></app-student-row>
-        
+    <app-teacher-cell 
+        #teachers
+        class="teachers"
+        [teachers]="teacherList" 
+        (created)="getTeacherList($event)"
+        (name)="getStudents($event)"
+    ></app-teacher-cell>
+    <app-student-row 
+        #studentList
+        class="students"
+        (editStudents)="getStudents($event)"
+        (list)="getTeacherList($event)"
+    ></app-student-row> 
 </div>

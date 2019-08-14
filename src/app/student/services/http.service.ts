@@ -26,7 +26,6 @@ export class HttpService {
 
   public editTeacherName(id: string, n: string): Observable<any> {
     const url: string = this.url + 'teachers/' + id;
-    console.log(url, n);
     return this.http.patch(url, {newName: n});
   }
 
@@ -37,14 +36,7 @@ export class HttpService {
 
   public addStudentToTeacher(id: string, student: Student): Observable<any> {
     const url: string = this.url + 'students/' + id;
-    const newStudent = {
-      fullName: student.fullName,
-      startDate: student.startDate,
-      pay: 0,
-      classNumber: student.classNumber,
-      studentType: student.studentType
-    };
-    return this.http.post(url, newStudent).pipe(pluck('studentsArr'));
+    return this.http.post(url, student).pipe(pluck('studentsArr'));
   }
 
   public editStudent(id: string, student: Student): Observable<any> {

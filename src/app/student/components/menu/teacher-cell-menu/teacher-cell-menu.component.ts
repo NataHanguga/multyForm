@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Router } from '@angular/router';
 import { Student } from 'src/app/student/models/Student';
 
 @Component({
@@ -10,7 +9,7 @@ import { Student } from 'src/app/student/models/Student';
 })
 export class TeacherCellMenuComponent implements OnInit {
   @Input() teacherName: string;
-  @Output() Students = new EventEmitter();
+  @Output() students = new EventEmitter();
   @Output() removeTeacher = new EventEmitter();
   @Output() editTeacherName = new EventEmitter<string>();
   @Output() addNewStudent = new EventEmitter<Student>();
@@ -18,14 +17,14 @@ export class TeacherCellMenuComponent implements OnInit {
   public displayRemove = false;
   public displayEdit = false;
   public displayAdd = false;
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     this.items = [
       {
         label: 'Show students',
         command: (): void => {
-          this.Students.emit();
+          this.students.emit();
         }
       },
       {
@@ -52,20 +51,16 @@ export class TeacherCellMenuComponent implements OnInit {
   public deleteTeacher(event) {
     this.displayRemove = false;
     this.removeTeacher.emit();
-    console.log(event);
   }
 
   public editTeacher(event) {
     this.displayEdit = false;
     this.editTeacherName.emit(event);
-    console.log(event);
   }
 
   public addStudent(event) {
     this.displayAdd = false;
     this.addNewStudent.emit(event);
-    console.log(event);
-
   }
 
 }

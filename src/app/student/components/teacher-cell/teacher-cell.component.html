@@ -18,7 +18,7 @@
                 </span>
                 <app-teacher-cell-menu 
                     [teacherName] = "teacher.name"
-                    (Students)="showTeacherChildren(teacher._id)"
+                    (students)="showTeacherChildren(teacher._id)"
                     (removeTeacher)="deleteTeacher(teacher._id)"
                     (editTeacherName)="saveEditName(teacher._id, $event)"
                     (addNewStudent)="addNewStudent(teacher._id, $event)"

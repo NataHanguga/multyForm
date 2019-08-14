@@ -21,22 +21,19 @@ export class StudentRowComponent {
     getStudents(name: string) {
         this.name = name;
         this.httpService.getStudentsByTeacherId(name).subscribe((data: Student[]) => {
-            console.log(data);
             this.studentList = data;
         });
     }
 
     editStudent(event) {
-        console.log(event, this.name, event.id);
         this.httpService.editStudent(this.name, event).subscribe((data: Student[]) => {
-            console.log(data);
             this.studentList = data;
+            this.list.emit();
         });
     }
 
     deleteStudent(id: string) {
         this.httpService.deleteStudent(this.name, id).subscribe((data: Student[]) => {
-            console.log(data);
             this.studentList = data;
             this.list.emit();
         });
