@@ -1,0 +1,74 @@
+
+<p-dialog 
+    [showHeader]="false" 
+    [(visible)]="display"
+    [modal]="true" 
+    [baseZIndex]="10000"
+    [style]="{width: '450px'}">
+    <div>
+        <h3>Edit Student</h3>
+        <div class="ui-grid-row ui-float-label">
+                <input 
+                    id="float-input fullName" 
+                    type="text" 
+                    size="30" 
+                    name="fullName" 
+                    class="ui-grid-col-12"
+                    [(ngModel)]="fullName"
+                    minlength="2"
+                    pInputText 
+                    autocomplete="off" 
+                    required
+                    > 
+                <label class="ui-grid-col-4" for="fullName">Student Full Name</label>
+        </div>
+        <div class="ui-grid-row ui-float-label">
+                <input 
+                    id="float-input classNumber" 
+                    type="number" 
+                    class="ui-grid-col-12"
+                    name="classNumber" 
+                    [(ngModel)]="classNumber"
+                    min="1"
+                    max="9"
+                    autocomplete="off" 
+                    required
+                    pInputText
+                > 
+                <label class="ui-grid-col-4" for="classNumber">Student Class Name</label>
+        </div>
+        <div class="ui-grid-row ui-float-label multy">
+                <span class="ui-float-label">
+                    <p-calendar 
+                        id="startDate" 
+                        [touchUI]="true"
+                        class="ui-grid-col-5"
+                        name="startDate" 
+                        [(ngModel)]="date"
+                        dateFormat="mm/dd/yy"
+                    ></p-calendar>
+                    <label class="ui-grid-col-8" for="startDate ">Start Study Date</label>
+                </span>
+                <span>
+                    <p-selectButton 
+                        [options]="types" 
+                        [(ngModel)]="selectedStudentType">
+                    </p-selectButton>
+                </span>
+            </div>
+        <div class="ui-grid-row">
+            <button 
+                pButton 
+                label="Cancel" 
+                class="ui-button-secondary ui-grid-col-6" 
+                (click)="cancel()"
+            ></button>
+            <button 
+                pButton 
+                label="Edit" 
+                class="ui-button-success ui-grid-col-6" 
+                (click)="saveEditStudent()" 
+            ></button>
+        </div>
+    </div>
+</p-dialog> 

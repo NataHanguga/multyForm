@@ -2,156 +2,31 @@
     <p-header>
         <div class=" wrapper"> 
             <span>Teachers</span> 
-            <!-- <span>
-                <input 
-                    type="search" 
-                    pInputText 
-                    placeholder="Search" 
-                    (keyup)="teacher.filter($event.target.value)">
-            </span> -->
-            <span>
-                <app-create-student (created)="saveNewTeacher($event)"></app-create-student>
-            </span>
-
+            <app-create-student (created)="saveNewTeacher($event)"></app-create-student>
         </div>
     </p-header>
     <ng-template let-teacher pTemplate="listItem">
         <div class="wrapper">
-            <span (click)="showTeacherChildren(teacher._id)">
+            <span (click)="showTeacherChildren(teacher._id)" title="Show students">
                 {{teacher.name}}
             </span>
-            <span>
-                <span>+{{teacher.payed[0]}}/</span>
-                <span>{{teacher.payed[1]}}-</span>
+            <span class="button-wrapper">
+                <span class="payed-wrapper">
+                    <span class="payed-true">{{teacher.payed[0]}}</span>
+                    <span class="payed-false">{{teacher.payed[1]}}</span>
+                    <span class="payed-null">{{teacher.payed[2]}}</span>
+                </span>
+                <app-teacher-cell-menu 
+                    [teacherName] = "teacher.name"
+                    (Students)="showTeacherChildren(teacher._id)"
+                    (removeTeacher)="deleteTeacher(teacher._id)"
+                    (editTeacherName)="saveEditName(teacher._id, $event)"
+                    (addNewStudent)="addNewStudent(teacher._id, $event)"
+                ></app-teacher-cell-menu>
             </span>
-            <app-teacher-cell-menu 
-                (showStudents)="showTeacherChildren(teacher._id)"
-            ></app-teacher-cell-menu>
-            <!-- <span class="button-wrapper">
-                <button pButton
-                    class="ui-button-text ui-button" 
-                    icon="pi pi-eye"
-                    (click)="showTeacherChildren(teacher._id)"
-                ></button>
-                <button pButton
-                    class="ui-button-text ui-button" 
-                    icon="pi pi-plus"
-                ></button>
-                  -->
-                <button pButton
-                    class="ui-button-text ui-button" 
-                    icon="pi pi-pencil"
-                    (click)="editTeacher(teacher)"
-                ></button>
-               <!-- <app-dialog-delete-teacher 
-                    [display]="displayRemove"
-                    (list)="deleteTeacher($event, teacher._id)">
-                </app-dialog-delete-teacher>
-            </span> -->
+            
         </div>
     </ng-template>
 </p-dataView>
 
-<!-- edit name -->
 
-<p-dialog 
-    [(visible)]="display" 
-    header="Edit teacher Name"
-    [draggable]="false" 
-    [modal]="true" 
-    [baseZIndex]="10000"
-    [responsive]="true"
-    [minY]="70"
-    [blockScroll]="true"
-    [style]="{width: '450px'}">
-    <div class="ui-grid-row-12">
-        <div class="ui-grid-col-4">Teacher Full Name:</div>
-        <input 
-            type="text" 
-            class="ui-grid-col-8" 
-            [(ngModel)]="teacherItem"
-            minlength="2" 
-            pInputText 
-            autocomplete="off" 
-            required />
-    </div>
-    <p-footer>
-        <button pButton label="Cancel" (click)="display = false;" class="ui-button-secondary"></button>
-        <button pButton label="Save" (click)="saveEditName()" class="ui-button-secondary"></button>
-    </p-footer>
-</p-dialog>
-<!-- edit name -->
-
-<!-- add sudent by teacher -->
-<p-dialog 
-    header="Add New Student" 
-    [(visible)]="displayAdd"
-    [modal]="true" 
-    [baseZIndex]="10000"
-    [style]="{width: '450px'}">
-    <div [formGroup]="student">
-        <div class="ui-grid-row-12">
-        <div class="ui-grid-col-4">Student Full Name:</div>
-        <input 
-            type="text" 
-            name="fullName" 
-            class="ui-grid-col-8" 
-            id="fullName"
-            formControlName="fullName" 
-            minlength="2"
-            pInputText 
-            autocomplete="off" 
-            required />
-        </div>
-        <div class="ui-grid-row">
-        <div class="ui-grid-col-4">Student Class Name:</div>
-        <input 
-            type="number" 
-            name="classNumber" 
-            id="classNumber"
-            class="ui-grid-col-8" 
-            formControlName="classNumber" 
-            pInputText
-            min="1"
-            max="9"
-            autocomplete="off" 
-            required />
-        </div>
-        <div class="ui-grid-row">
-        <div class="ui-grid-col-4">Start study date:</div>
-        <input 
-            type="date" 
-            name="startDate" 
-            id="startDate" 
-            class="ui-grid-col-8"
-            formControlName="startDate" 
-            pInputText 
-            autocomplete="off" 
-            required />
-        </div>
-        <div class="ui-grid-row">
-        <div class="ui-grid-col-4">Student Pay Type:</div>
-        <p-selectButton 
-            [options]="types" 
-            class="ui-grid-col-8" 
-            #butt 
-            (click)="changeStudentType(butt.value)">
-        </p-selectButton>
-        </div>
-        <p-footer>
-            <button 
-                pButton 
-                label="Cancel" 
-                class="ui-button-secondary" 
-                (click)="displayAdd = false; student.reset();"
-            ></button>
-            <button 
-                pButton 
-                label="Save" 
-                class="ui-button-secondary" 
-                (click)="saveNewStudent(student.value)"
-            ></button>
-        </p-footer>
-    </div>
-</p-dialog> 
-<!-- add sudent by teacher -->

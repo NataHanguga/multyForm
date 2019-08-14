@@ -12,7 +12,7 @@ button.ui-button.but {
 .wrapper {
     display: flex;
     width: 300px;
-    height: 120px;
+    height: 180px;
     flex-direction: column;
 
     .row {
@@ -31,10 +31,6 @@ button.ui-button.but {
 
         button {
             width: 50%;
-
-            &.ui-button-secondary {
-
-            }
         }
     }
 }

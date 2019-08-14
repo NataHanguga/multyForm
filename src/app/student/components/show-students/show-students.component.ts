@@ -8,7 +8,7 @@ import { HttpService } from '../../services/http.service';
 	templateUrl: './show-students.component.html',
 	styleUrls: [ './show-students.component.scss' ]
 })
-export class ShowStudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit {
     @ViewChild('studentList', {static: false}) studentList: StudentRowComponent;
         public teacherList: Teacher[];
 
@@ -21,18 +21,15 @@ export class ShowStudentsComponent implements OnInit {
     public getTeacherList(event) {
         this.httpService.getTeachers().subscribe((data: Teacher[]) => {
             this.teacherList = data;
-            console.log(data);
         });
     }
 
     public changeList(event: any): void {
         this.teacherList = event;
-        console.log(event);
-        // this.getTeacherList(event);
     }
 
     public getStudents(event: string): void {
-        console.log(event);
         this.studentList.getStudents(event);
+        this.studentList.name = event;
     }
 }

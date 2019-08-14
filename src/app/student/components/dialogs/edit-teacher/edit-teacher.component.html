@@ -1,0 +1,41 @@
+<p-dialog 
+    [(visible)]="display" 
+    [showHeader]="false" 
+    [draggable]="false" 
+    [modal]="true" 
+    [baseZIndex]="10000"
+    [responsive]="true"
+    [minY]="70"
+    [blockScroll]="true"
+    [style]="{width: '350px'}">
+    <div>
+        <h3>Edit Teacher Name</h3>
+        <div class="ui-grid-row ui-float-label">
+            <input 
+                id="float-input fullName" 
+                name="fullName" 
+                class="ui-grid-col-12"
+                minlength="2"
+                pInputText 
+                autocomplete="off" 
+                required
+                type="text" 
+                [(ngModel)]="teacherName"
+            > 
+        </div>
+    </div>
+    <p-footer class="ui-grid-row" >
+        <button
+            pButton 
+            label="Cancel" 
+            (click)="cancel()" 
+            class="ui-button-secondary ui-grid-col-6"
+        ></button>
+        <button 
+            pButton 
+            label="Save" 
+            (click)="saveEditName()" 
+            class="ui-button-success ui-grid-col-6"
+        ></button>
+    </p-footer>
+</p-dialog>

@@ -1,0 +1,23 @@
+
+<div>
+    <table>
+        <tr>
+            <th *ngFor="let month of monthArr">{{month}}</th>
+        </tr>
+        <tr class="item">
+            <td
+                *ngFor="let item of student.progress; let i = index;" 
+                [ngClass]="{
+                    'green': item === 50,
+                    'yellow': 50 > item && item > 0,
+                    'grey': item === 0,
+                    'blue': item === null || student.studentType !== 'contract'
+                }">
+                {{item}}
+                <span *ngIf="item === null">-</span>
+            </td>
+        </tr>
+    </table>
+    <div>
+    </div>
+</div>

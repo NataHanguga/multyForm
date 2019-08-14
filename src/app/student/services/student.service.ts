@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Teacher } from '../models/teacher';
-import { ShowStudent } from '../models/showStudent';
+import { Student } from '../models/Student';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class StudentService {
-	public pay: FormGroup = this.fb.group({
-		pay: [ null, Validators.compose([Validators.required]) ]
-	});
 	public teacherList: Teacher[];
 	public teacherForm: FormGroup = this.fb.group({
 		name: [ '', Validators.compose([Validators.required]) ],
@@ -34,14 +31,14 @@ export class StudentService {
 				],
 			studentType: [ '',  Validators.compose([Validators.required]) ],
 			startDate: [ '',  Validators.compose([Validators.required]) ],
-			payArray: this.fb.array([ this.pay ])
+			pay: [0]
 		});
 	}
 
 	saveStudent(data: FormGroup): number {
 		console.log(data.value);
-		const arr: ShowStudent[] = data.value.students.map((el: ShowStudent) => {
-			return new ShowStudent(
+		const arr: Student[] = data.value.students.map((el: Student) => {
+			return new Student(
 				el.fullName,
 				el.classNumber,
 				el.studentType,
@@ -71,11 +68,11 @@ export class StudentService {
 		console.log(id, data, name);
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
-			teacher.students.forEach((student: ShowStudent, i: number) => {
+			teacher.students.forEach((student: Student, i: number) => {
         console.log(student._id === id);
 				    if (student._id === id && student.fullName === name) {
           console.log('finded');
-					     student.payArray += data;
+					     student.pay += data;
 					     console.log(student);
 				}
 			});
@@ -89,7 +86,7 @@ export class StudentService {
 		this.teacherList.map((teacher: Teacher) => {
 			if (teacher.name === name) {
 				const index = teacher.students.findIndex(
-					(el: ShowStudent) => el._id === id
+					(el: Student) => el._id === id
 				);
 				teacher.students.splice(index, 1);
 			}
@@ -97,7 +94,7 @@ export class StudentService {
 		this.setStudentToLocalStorage(this.teacherList);
 	}
 
-	addNewStudent(name: string, student: ShowStudent): void {
+	addNewStudent(name: string, student: Student): void {
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
 			if (teacher.name === name) {
@@ -117,10 +114,10 @@ export class StudentService {
 		this.setStudentToLocalStorage(this.teacherList);
 	}
 
-	saveEditStudent(editStudent: ShowStudent) {
+	saveEditStudent(editStudent: Student) {
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.map((teacher: Teacher) => {
-			teacher.students.forEach((student: ShowStudent) => {
+			teacher.students.forEach((student: Student) => {
 				if (editStudent._id === student._id) {
 					student.fullName = editStudent.fullName;
 					student.classNumber = editStudent.classNumber;
@@ -142,8 +139,8 @@ export class StudentService {
 		this.setStudentToLocalStorage(this.teacherList);
 	}
 
-	public getStudentsByname(name: string): ShowStudent[] {
-		let students: ShowStudent[];
+	public getStudentsByname(name: string): Student[] {
+		let students: Student[];
 		this.teacherList = this.getStudentsFromLocalSrotage();
 		this.teacherList.forEach((teacher: Teacher) => {
 			if (teacher.name === name) {

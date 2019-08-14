@@ -13,6 +13,23 @@
     justify-content: space-between;
 
     .button-wrapper {
+        .payed-wrapper {
+            margin-right: 5px;
+            font-size: 21px;
+            font-weight: 600;
+            .payed-true {
+                margin-right: 5px;
+                color: green;
+            }
+            .payed-false {
+                margin-right: 5px;
+                color: rgb(214, 3, 3);
+            }
+            .payed-null {
+                margin-right: 5px;
+                color: rgb(105, 105, 105);
+            }
+        }
         button.ui-button {
             background-color: rgb(206, 198, 206) !important;
             border: none;

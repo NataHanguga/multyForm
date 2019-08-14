@@ -1,0 +1,31 @@
+<p-tieredMenu 
+    #menu 
+    [model]="items" 
+    appendTo="body" 
+    [popup]="true"
+></p-tieredMenu>
+<i 
+    #btn 
+    class="pi pi-bars"
+    (click)="menu.toggle($event)"
+
+></i>
+
+<app-dialog-delete-teacher 
+    [display]="displayRemove"
+    (closeDialog)="displayRemove = $event"
+    (list)="deleteTeacher($event)">
+</app-dialog-delete-teacher>
+
+<app-edit-teacher
+    [display]="displayEdit"
+    [teacherName]="teacherName"
+    (closeDialog)="displayEdit = $event"
+    (list)="editTeacher($event)"
+></app-edit-teacher>
+
+<app-add-student
+    [display]="displayAdd"
+    (closeDialog)="displayAdd = $event"
+    (list)="addStudent($event)"
+></app-add-student>

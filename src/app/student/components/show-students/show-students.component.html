@@ -2,7 +2,6 @@
           <app-teacher-cell 
           class="teachers"
             [teachers]="teacherList" 
-            (list)="changeList($event)"
             (created)="getTeacherList($event)"
             (name)="getStudents($event)"
           ></app-teacher-cell>
@@ -10,7 +9,7 @@
           #studentList
           class="students"
           (editStudents)="getStudents($event)"
-          (list)="changeList($event)"
+          (list)="getTeacherList($event)"
         ></app-student-row>
         
 </div>

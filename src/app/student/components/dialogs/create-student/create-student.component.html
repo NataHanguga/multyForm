@@ -1,13 +1,8 @@
-<!-- <p-button 
-  icon="pi pi-arrow-left" 
-  class="ui-button-info" 
-  [routerLink]="['/']"
-  routerLinkActive="router-link-active"
-></p-button> -->
 <button type="button" (click)="display = true" pButton icon="pi pi-info-circle" icon="pi pi-plus" class="but"></button>
 
-<p-dialog  [(visible)]="display" [modal]="true" [baseZIndex]="10000" header="Create new user">
+<p-dialog [showHeader]="false"  [(visible)]="display" [modal]="true" [baseZIndex]="10000">
   <div class="wrapper">
+    <h3>Create New Teacher</h3>
     <form [formGroup]="teacherForm">
       <div class="row">
 
@@ -26,14 +21,6 @@
           </span>
       </div>
       <div class="row">
-        <!-- <p-button 
-          icon="pi pi-plus" 
-          id="add-subject" 
-          class="ui-grid-col-2"
-          (click)="addNewStudent()" 
-          styleClass="ui-button-secondary"
-          label="Add student"
-        ></p-button> -->
         <button 
         pButton 
         label="Cancel" 

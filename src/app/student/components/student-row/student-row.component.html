@@ -1,208 +1,39 @@
 <p-dataView  *ngIf="studentList" [value]="studentList">
     <p-header>
-        <div class="ui-helper-clearfix">
-            <span class="ui-g-2">Students</span>
-            <table class="ui-g-6">
-                <tr class="header">
-                    <!-- <th *ngFor="let month of monthArr">{{month}}</th> -->
-                </tr>
-            </table> 
+        <div class="ui-helper-clearfix ui-grid-row">
+            <span class="ui-grid-col-12">Students</span>
+            <span class="ui-grid-col-12">
+                <span class="ui-grid-col-9 submenu">
+                    <span class="ui-grid-col-6">Name</span>
+                    <span class="ui-grid-col-2">Type</span>
+                    <span class="ui-grid-col-2">Payed</span>
+                    <span class="ui-grid-col-2">Class</span>
+                </span>
+                <span class="ui-grid-col-3"></span>
+            </span>
         </div>
-
     </p-header>
     
     <ng-template let-student pTemplate="listItem">
         <div class="wrapper">
-            <span class="data-wrapper ui-g-9">
-                <span class="student-name ui-g-3">{{student.fullName}}</span>
-                <table class="ui-g-9 ">
-                    <tr class="item">
-                            <td
-                                *ngFor="let item of student.progress; let i = index;" 
-                                [ngClass]="{
-                                    'green': item === 50,
-                                    'yellow': 50 > item && item > 0,
-                                    'grey': item === 0,
-                                    'blue': item === null || student.studentType !== 'contract'
-                                }">
-                                {{item}}
-                                <span *ngIf="item === null">-</span>
-                            </td>
-                    </tr>
-                </table>
-            </span>
-            <span class="button-wrapper ui-g-3">
-                <span *ngIf="student.studentType === 'contract'">
-                    <button
-                        pButton
-                        icon="pi pi-money-bill"
-                        class="ui-button ui-button-secondary" 
-                        (click)="payNow(student)">
-                    </button>
+            <span class="data ui-grid-col-9">
+                <span class="ui-grid-col-6">{{student.fullName}}</span>
+                <span class="ui-grid-col-2">{{student.studentType}}</span>
+                <span class="ui-grid-col-2 pay" >
+                    <span *ngIf="student.studentType === 'contract'" (click)="table.show($event)">{{student.pay}}</span>
+                    <span *ngIf="student.studentType !== 'contract'">-/-</span>
+                    <p-overlayPanel #table [dismissable]="true" [showCloseIcon]="true" [appendTo]="'body'">
+                        <app-payed-table [student]="student"></app-payed-table>
+                    </p-overlayPanel>
                 </span>
-                <button 
-                    pButton
-                    icon="pi pi-pencil"
-                    class="ui-button ui-button-secondary"
-                    (click)="editStudent(student)"
-                    styleClass="ui-button-warning"
-                ></button>
-                <button 
-                    pButton
-                    icon="pi pi-trash"
-                    class="ui-button ui-button-secondary"
-                    (click)="deleteStudent(student.id)"
-                ></button>
+                <span class="ui-grid-col-2 pay">{{student.classNumber}}</span>
             </span>
+            <app-student-row-menu
+                class="button-wrapper"
+                [student]="student"
+                (changed)="editStudent($event)"
+                (removed)="deleteStudent($event)"
+            ></app-student-row-menu>
         </div>
     </ng-template>
 </p-dataView>
-    
-<!-- 
-<p-table [value]="teacher.student">
-    <ng-template pTemplate="header">
-        <tr>
-            <th style="width: 60px">Pay</th>
-            <th style="width: 180px">Full Name</th>
-            <th style="width: 60px">Class</th>
-            <th style="width: 90px">PayType</th>
-            <th style="width: 60px">Cashe</th>
-            <th style="width: 400px; max-width: 410px; min-width: 410px;">
-                <table>
-                <tr>
-                    <th class="month" 
-                        *ngFor="let month of monthArr" 
-                        style="width: 40px;">
-                        {{month}}
-                    </th>
-                    <th style="padding: 0; width: 40px;" class="other">Other</th>
-                </tr>
-            </table>
-            </th>
-            <th style="width: 180px;">Edit/Delete</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-student *ngIf="teacher.student.length">
-        <tr>
-            <td>
-                <span *ngIf="student.studentType === 'contract'">
-                    <p-button 
-                        styleClass="ui-button-success" 
-                        (click)="payNow(student, teacher.name)">
-                       
-                    </p-button>
-                </span>
-            </td>
-            <td>{{student.fullName}}</td>
-            <td>{{ student.classNumber }}</td>
-            <td>{{ student.studentType }}</td>
-            <td *ngIf="student.studentType === 'contract'">
-                {{ student.payArray }}
-            </td>
-            <td *ngIf="student.studentType === 'beneficiary'">-</td>
-                <app-progress-table  
-                    style="height: 30px; width: 100%"
-                    [pay]="student.payArray"
-                    [type]="student.studentType"
-                    [startDate]="student.startDate"
-                ></app-progress-table>
-            <td >
-                <p-button 
-                    label="Delete" 
-                    styleClass="ui-button-danger" 
-                    (click)="deleteStudent(student.id, teacher.name)"
-                ></p-button>
-                <p-button 
-                    label="Edit" 
-                    (click)="editStudent(teacher, student)"
-                    styleClass="ui-button-warning"
-                ></p-button>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
-  -->
-
-<p-dialog 
-    header="Pay by {{studentItem?.fullName}}" 
-    [(visible)]="display"
-    [modal]="true" 
-    [baseZIndex]="10000"
-    [style]="{width: '300px'}"
-    >
-    <div class="ui-grid-row ui-grid-col" >
-        <div class="ui-grid-col-4">Student Pay:</div>
-        <input 
-            type="number"   
-            class="ui-grid-col-8" 
-            id="pay" #pay 
-            min="1"
-            max="450"
-            pInputText
-            autocomplete="off" 
-            required />
-    </div>
-    <p-footer>
-        <button 
-            pButton 
-            label="Cancel" 
-            class=" ui-button-secondary" 
-            (click)="display = false;" 
-        ></button>
-        <button 
-            pButton 
-            label="Pay" 
-            class=" ui-button-secondary" 
-            (click)="saveStudentPay(pay.value)" 
-        ></button>
-    </p-footer>
-</p-dialog>
-
-
-<p-dialog header="Edit student {{studentItem?.fullName}}" [(visible)]="displayEdit">
-        <div>
-                <div class="ui-grid-row-12">
-                  <div class="ui-grid-col-6">Student Full Name:</div>
-                  <input 
-                    type="text" 
-                    name="fullName" 
-                    class="ui-grid-col-6" 
-                    id="fullName"
-                   [(ngModel)]="fullName"
-                    minlength="2"
-                    pInputText 
-                    autocomplete="off" 
-                    required />
-                </div>
-                <div class="ui-grid-row">
-                  <div class="ui-grid-col-6">Student Class Name:</div>
-                  <input 
-                    type="number" 
-                    name="classNumber" 
-                    id="classNumber"
-                    class="ui-grid-col-6" 
-                    [(ngModel)]="classNumber" 
-                    pInputText
-                    min="1"
-                    max="9"
-                    autocomplete="off" 
-                    required />
-                </div>
-                <div class="ui-grid-row">
-                  <div class="ui-grid-col-6">Start study date:</div>
-                  <input 
-                    type="date" 
-                    name="startDate" 
-                    id="startDate" 
-                    class="ui-grid-col-6"
-                   [(ngModel)]="date"
-                    pInputText 
-                    autocomplete="off" 
-                    required />
-                </div>
-                  <div class="ui-grid-row">
-                    <button (click)="cancel()">Cancel</button>
-                    <button (click)="saveEditStudent()" >Edit</button>
-                  </div>
-              </div>
-</p-dialog> 

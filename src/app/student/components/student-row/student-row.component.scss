@@ -1,75 +1,19 @@
-.month {
-    width: 40px;
-}
-
-.other {
-    width: 40px;
-    
-}
 .ui-helper-clearfix {
-    .ui-g-2 {
-        padding: 0;
-        margin-right: 40px;
-    }
-    .ui-g-6 {
-        margin-left: -20px;
-    }
-    .header {
-        align-items: bottom;
-        margin-left: -5px;
-    }
+   display: flex;
+   flex-direction: column;
 }
-
+.submenu {
+    color: rgb(110, 110, 110);
+}
 
 .wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     
-    .data-wrapper {
-        display: flex;
-        flex-direction: row;
-        width: 75%;
-        .student-name {
-            display: block;
-            width: 200px;
-            margin-right: 10px;
+    .data {
+        .pay {
+            text-align: center;
         }
     }
-
-    .button-wrapper {
-        display: block;
-        text-align: right;
-        button.ui-button {
-            background-color: rgb(206, 198, 206) !important;
-            border: none;
-            color: #000 !important;
-
-            &:hover {
-                background-color: #ece;
-            }
-        }
-    }
-}
-
-td, th  {
-    text-align: center;
-    width: 40px; 
-    font-size: 15px;
-    color: rgb(0, 0, 0);
-}
-
-.green {
-    background-color: #00C851;
-}
-
-.yellow {
-    background-color: #ffbb33;
-}
-
-.grey {
-    background-color: #cfd8dc;
-}
-.blue {
-    background-color: #81d4fa;
 }

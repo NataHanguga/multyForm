@@ -4,32 +4,35 @@ import { FormsModule } from '@angular/forms';
 import { PrimeModule } from '../prime/prime.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { CreateStudentComponent } from './components/create-student/create-student.component';
+import { CreateStudentComponent } from './components/dialogs/create-student/create-student.component';
 import { StudentRoutingModule } from './student-routing.module';
-import { StudentComponent } from './components/student/student.component';
-import { ShowStudentsComponent } from './components/show-students/show-students.component';
-import { FilterDirective } from './directives/filter.directive';
-import { FilterPipe } from './pipes/filter.pipe';
+import { StudentsComponent } from './components/show-students/show-students.component';
 import { TeacherCellComponent } from './components/teacher-cell/teacher-cell.component';
 import { StudentRowComponent } from './components/student-row/student-row.component';
-import { ProgressTableComponent } from './components/progress-table/progress-table.component';
 import { DeleteTeacherComponent } from './components/dialogs/delete-teacher/delete-teacher.component';
-import { CurrentMonthDirective } from './directives/currentMonth.directive';
 import { HttpClientModule } from '@angular/common/http';
-import { TeacherCellMenuComponent } from './components/teacher-cell-menu/teacher-cell-menu.component';
+import { TeacherCellMenuComponent } from './components/menu/teacher-cell-menu/teacher-cell-menu.component';
+import { EditTeacherComponent } from './components/dialogs/edit-teacher/edit-teacher.component';
+import { AddStudentComponent } from './components/dialogs/add-student/add-student.component';
+import { PayedTableComponent } from './components/dialogs/payed-table/payed-table.component';
+import { StudentRowMenuComponent } from './components/menu/student-row-menu/student-row-menu.component';
+import { EditStudentComponent } from './components/dialogs/edit-student/edit-student.component';
+import { PayStudentComponent } from './components/dialogs/pay-student/pay-student.component';
 @NgModule({
   declarations: [
     CreateStudentComponent,
-    StudentComponent,
-    ShowStudentsComponent,
-    FilterDirective,
-    CurrentMonthDirective,
-    FilterPipe,
+    StudentsComponent,
     TeacherCellComponent,
     StudentRowComponent,
-    ProgressTableComponent,
     DeleteTeacherComponent,
-    TeacherCellMenuComponent],
+    TeacherCellMenuComponent,
+    EditTeacherComponent,
+    AddStudentComponent,
+    PayedTableComponent,
+    StudentRowMenuComponent,
+    EditStudentComponent,
+    PayStudentComponent,
+  ],
   imports: [
     CommonModule,
     StudentRoutingModule,

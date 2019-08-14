@@ -1,0 +1,26 @@
+<p-tieredMenu 
+    #menu 
+    [model]="items" 
+    appendTo="body" 
+    [popup]="true"
+></p-tieredMenu>
+<i 
+    #btn 
+    class="pi pi-bars"
+    (click)="menu.toggle($event)"
+
+></i>
+
+<app-edit-student
+    [display]="displayEdit"
+    [student]="student"
+    (closeDialog)="displayEdit = $event"
+    (list)="editStudent($event)"
+></app-edit-student>
+<!-- <i *ngIf="student.studentType === 'contract'" class="pi pi-dollar" (click)="display = true"></i> -->
+<app-pay-student
+    [student]="student"
+    [display]="displayPay"
+    (closeDialog)="displayPay = false"
+    (list)="editStudent($event)"
+></app-pay-student>

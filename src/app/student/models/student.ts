@@ -1,9 +1,9 @@
-import { Subject } from './subject';
 import { JsonProperty, Serializable } from 'typescript-json-serializer';
 
 @Serializable()
 export class Student {
   public id: number;
+
   constructor(
     @JsonProperty()
     public fullName: string,
@@ -12,8 +12,13 @@ export class Student {
     @JsonProperty()
     public studentType: string,
     @JsonProperty()
-    public subject: Subject[],
-  ) {
-    this.id = Date.now();
-  }
+    public startDate: Date,
+    @JsonProperty()
+    public pay: number,
+    @JsonProperty()
+    public progress?: number[],
+    @JsonProperty()
+    public payed?: boolean
+
+  ) { }
 }

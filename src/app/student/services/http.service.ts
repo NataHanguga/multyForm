@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵisDefaultChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Teacher } from '../models/teacher';
 import { map, pluck } from 'rxjs/operators';
+import { Student } from '../models/Student';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,5 +33,27 @@ export class HttpService {
   public getStudentsByTeacherId(id: string): Observable<any> {
     const url: string = this.url + 'students/' + id;
     return this.http.get(url).pipe(pluck('studentsArr'));
+  }
+
+  public addStudentToTeacher(id: string, student: Student): Observable<any> {
+    const url: string = this.url + 'students/' + id;
+    const newStudent = {
+      fullName: student.fullName,
+      startDate: student.startDate,
+      pay: 0,
+      classNumber: student.classNumber,
+      studentType: student.studentType
+    };
+    return this.http.post(url, newStudent).pipe(pluck('studentsArr'));
+  }
+
+  public editStudent(id: string, student: Student): Observable<any> {
+    const url: string = this.url + 'students/' + id + '/' + student.id;
+    return this.http.patch(url, student).pipe(pluck('studentsArr'));
+  }
+
+  public deleteStudent(id: string, studentId: string): Observable<any> {
+    const url: string = this.url + 'students/' + id + '/' + studentId;
+    return this.http.delete(url).pipe(pluck('studentsArr'));
   }
 }

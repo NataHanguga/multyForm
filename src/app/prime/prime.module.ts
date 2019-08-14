@@ -17,6 +17,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AccordionModule } from 'primeng/accordion';
 import { DropdownModule } from 'primeng/dropdown';
 import {TieredMenuModule} from 'primeng/tieredmenu';
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   imports: [
     ToastModule,
@@ -35,7 +36,8 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
     OverlayPanelModule,
     AccordionModule,
     DropdownModule,
-    TieredMenuModule
+    TieredMenuModule,
+    CalendarModule
   ],
   exports: [
     ToastModule,
@@ -54,7 +56,8 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
     OverlayPanelModule,
     AccordionModule,
     DropdownModule,
-    TieredMenuModule
+    TieredMenuModule,
+    CalendarModule
   ]
 })
 export class PrimeModule {}

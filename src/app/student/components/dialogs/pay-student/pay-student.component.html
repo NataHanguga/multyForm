@@ -1,0 +1,33 @@
+<p-dialog 
+    header="Pay by {{student?.fullName}}" 
+    [(visible)]="display"
+    [baseZIndex]="10000"
+    [style]="{width: '300px'}"
+    >
+    <div class="ui-grid-row ui-grid-col" >
+        <div class="ui-grid-col-4">Student Pay:</div>
+        <input 
+            type="number"   
+            class="ui-grid-col-8" 
+            id="pay" #pay 
+            min="1"
+            max="450"
+            pInputText
+            autocomplete="off" 
+            required />
+    </div>
+    <p-footer>
+        <button 
+            pButton 
+            label="Cancel" 
+            class=" ui-button-secondary" 
+            (click)="cancel();" 
+        ></button>
+        <button 
+            pButton 
+            label="Pay" 
+            class=" ui-button-secondary" 
+            (click)="saveStudentPay(pay.value)" 
+        ></button>
+    </p-footer>
+</p-dialog>
