@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import { MultiFormService } from './services/multi-form.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,7 @@ export class AppComponent implements OnInit {
   title = 'MultyForm';
   items: MenuItem[];
   activeIndex = 0;
-  constructor(private service: MultiFormService) {}
+  constructor() {}
   ngOnInit() {
     this.items = [
       {label: 'Full Name'},

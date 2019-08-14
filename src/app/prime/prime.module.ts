@@ -18,6 +18,10 @@ import { AccordionModule } from 'primeng/accordion';
 import { DropdownModule } from 'primeng/dropdown';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import { CalendarModule } from 'primeng/calendar';
+import {SidebarModule} from 'primeng/sidebar';
+import {ListboxModule} from 'primeng/listbox';
+
+
 @NgModule({
   imports: [
     ToastModule,
@@ -37,7 +41,9 @@ import { CalendarModule } from 'primeng/calendar';
     AccordionModule,
     DropdownModule,
     TieredMenuModule,
-    CalendarModule
+    CalendarModule,
+    SidebarModule,
+    ListboxModule
   ],
   exports: [
     ToastModule,
@@ -57,7 +63,9 @@ import { CalendarModule } from 'primeng/calendar';
     AccordionModule,
     DropdownModule,
     TieredMenuModule,
-    CalendarModule
+    CalendarModule,
+    SidebarModule,
+    ListboxModule
   ]
 })
 export class PrimeModule {}

@@ -5,12 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AddressComponent } from './components/address/address.component';
-import { PhoneComponent } from './components/phone/phone.component';
-import { FullNameComponent } from './components/full-name/full-name.component';
-import { MultiFormComponent } from './components/multi-form/multi-form.component';
-import { ResultComponent } from './components/result/result.component';
-import { EditorComponent } from './components/editor/editor.component';
 import { StudentModule } from './student/student.module';
 import { PrimeModule } from './prime/prime.module';
 import { HeaderComponent } from './layout/header/header.component';
@@ -26,12 +20,6 @@ import { HeaderComponent } from './layout/header/header.component';
   ],
   declarations: [
     AppComponent,
-    AddressComponent,
-    PhoneComponent,
-    FullNameComponent,
-    MultiFormComponent,
-    ResultComponent,
-    EditorComponent,
     HeaderComponent,
   ],
   bootstrap: [AppComponent]
