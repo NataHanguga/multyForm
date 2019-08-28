@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 
 import { Teacher } from '../../models/teacher';
-import { Student } from '../../models/Student';
+import { Student } from '../../models/student';
 
 @Component({
     selector: 'app-teacher-cell',

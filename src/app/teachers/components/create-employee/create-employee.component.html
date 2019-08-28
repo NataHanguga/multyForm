@@ -1,84 +1,131 @@
-
 <div class="form-wrapper">
     <form [formGroup]="employeeForm">
-        <h3>Create new employee</h3>
-        {{employeeForm.value | json}}
-        <div class="ui-float-label">
-            <input 
-                type="text" 
-                pInputText 
-                formControlName="fullName" 
-                id="fullName"
-                class="lg-input"
-                >
-            <label for="fullName">Full Name</label>
-        </div>
+        <h3>Create new employee</h3>                
+        <app-float-input 
+            [class]="'lg-input'"
+            [label]="'Full Name'"
+            [type]="'string'"
+            (value)="setEmployeeValue($event, 'fullName')"
+            >
+        </app-float-input>
         <div>
-            <p-dropdown 
-                [options]="positions" 
-                #position
-                formControlName="position"
-                [style]="{'width':'300px', 'margin': '5px 0'}">
-            </p-dropdown>
+            <app-dropdown
+                [items]="positions"
+                (edit)="setEmployeeValue($event, 'position')"
+            >
+            </app-dropdown>
         </div>
         <div *ngIf="employeeForm.value.position === 'teacher'">
-            <div>
-                <p-dropdown 
-                    [options]="categories" 
-                    #education
-                    formControlName="education"
-                    [style]="{'width':'300px', 'margin': '5px 0'}"
-                    ></p-dropdown>
-            </div>
-            <div>
-                <p-dropdown 
-                    [options]="categories" 
-                    #category
-                    formControlName="category"
-                    (onClick)="setEmployeeValue(category.value, 'category')"
-                    [style]="{'width':'300px', 'margin': '5px 0'}">
-                </p-dropdown>
-            </div>
+            <app-dropdown
+                [items]="educationSelection"
+                (edit)="setEmployeeValue($event, 'education')"
+            >
+            </app-dropdown>
+            <app-dropdown
+                [items]="categories"
+                (edit)="setEmployeeValue($event, 'category')"
+            >
+            </app-dropdown>
             <div class="combo-input">
-                <div  class="ui-float-label">
-                    <input 
-                        type="number" 
-                        #year 
+                <div class="ui-float-label">
+                    <input
+                        type="number"
+                        #year
                         formControlName="year"
-                        pInputText 
+                        pInputText
                         class="sm-input"
-                        min="2010" 
-                        max={{nowYear}} 
-                        (input)="setEmployeeValue(year.value, 'year')">
+                        min="2010"
+                        max="{{ nowYear }}"
+                        (input)="setEmployeeValue(year.value, 'year')"
+                    />
                     <label for="year">Year</label>
                 </div>
-                <div  class="ui-float-label">
-                    <input 
-                        type="number" 
-                        #experience 
+                <div class="ui-float-label">
+                    <input
+                        type="number"
+                        #experience
                         class="sm-input"
-                        pInputText 
-                        formControlName="experience"                    
-                        min="0" 
-                        max="60" 
-                        (input)="setEmployeeValue(experience.value, 'experience')">
-                    <label for="experience">Experience</label>                
+                        pInputText
+                        formControlName="experience"
+                        min="0"
+                        max="60"
+                        (input)="
+                            setEmployeeValue(experience.value, 'experience')
+                        "
+                    />
+                    <label for="experience">Experience</label>
                 </div>
-
+            </div>
+            <div class="combo-input">
+                <app-float-input 
+                    [label]="'Teacher Hours'"
+                    [type]="'number'"
+                    [min]="'0'"
+                    [max]="'40'"
+                    (value)="setEmployeeValue($event, 'teachHours')"
+                    >
+                </app-float-input>
+                <app-float-input 
+                    [label]="'Concert. Hours'"
+                    [type]="'number'"
+                    [min]="'0'"
+                    [max]="'40'"
+                    (value)="setEmployeeValue($event, 'concertHours')"
+                    >
+                </app-float-input>
             </div>
             <div class="checkbox">
-               <app-bool-checkbox [(value)]="isTeachRank"></app-bool-checkbox>
-                <span [ngStyle]="{'color': (isTeachRank ? 'black' : 'gray')}">Teacher runk</span>
+                <app-bool-checkbox
+                    [(value)]="isTeachRank"
+                    [label]="'Teacher Rank'"
+                ></app-bool-checkbox>
+
+                <div *ngIf="isTeachRank === true">
+                    <app-dropdown
+                        [items]="teacherRank"
+                        (edit)="setEmployeeValue($event, 'teachRank')"
+                    >
+                    </app-dropdown>
+                </div>
             </div>
-            <div *ngIf="isTeachRank">
-                <p-dropdown 
-                    [options]="teacherRank" 
-                    #teachRank
-                    formControlName="teachRank"
-                    (onClick)="setEmployeeValue(teachRank.value, 'teachRank')"
-                    [style]="{'width':'300px', 'margin': '5px 0'}">
-                </p-dropdown>
+            <div class="checkbox">
+                <app-bool-checkbox
+                    [(value)]="addingPosition"
+                    [label]="'Additional position'"
+                ></app-bool-checkbox>
+
+                <div *ngIf="addingPosition">
+                    <app-dropdown
+                        [items]="additionalPositions"
+                        (edit)="setEmployeeValue($event, 'additionalPositions')"
+                    >
+                    </app-dropdown>
+                    <div class="combo-input">
+                            <app-float-input 
+                                class="sm-input"
+                                [label]="'Teacher Hours'"
+                                [type]="'number'"
+                                [min]="'0'"
+                                [max]="'40'"
+                                (value)="setEmployeeValue($event, 'addTeachHours')"
+                                >
+                            </app-float-input>
+                            <app-float-input 
+                                class="sm-input"
+                                [label]="'Concert. Hours'"
+                                [type]="'number'"
+                                [min]="'0'"
+                                [max]="'40'"
+                                (value)="setEmployeeValue($event, 'addConcertHours')"
+                                >
+                        </app-float-input>
+                        </div>
+                </div>
             </div>
+        </div>
+        <div class="button-wrapper">
+            <app-cancel-button (edit)="resetForm()"></app-cancel-button>
+            <app-save-button (saved)="submitForm(employeeForm.value)"></app-save-button>
         </div>
     </form>
 </div>

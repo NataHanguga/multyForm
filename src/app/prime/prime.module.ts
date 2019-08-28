@@ -16,13 +16,13 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AccordionModule } from 'primeng/accordion';
 import { DropdownModule } from 'primeng/dropdown';
-import {TieredMenuModule} from 'primeng/tieredmenu';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 import { CalendarModule } from 'primeng/calendar';
-import {SidebarModule} from 'primeng/sidebar';
-import {ListboxModule} from 'primeng/listbox';
-import {PanelMenuModule} from 'primeng/panelmenu';
-import {MegaMenuModule} from 'primeng/megamenu';
-import {CheckboxModule} from 'primeng/checkbox';
+import { SidebarModule } from 'primeng/sidebar';
+import { ListboxModule } from 'primeng/listbox';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { MegaMenuModule } from 'primeng/megamenu';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   imports: [

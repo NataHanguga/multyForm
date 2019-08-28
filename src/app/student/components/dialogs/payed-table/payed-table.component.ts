@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Student } from 'src/app/student/models/Student';
+import { Student } from 'src/app/student/models/student';
 
 @Component({
   selector: 'app-payed-table',

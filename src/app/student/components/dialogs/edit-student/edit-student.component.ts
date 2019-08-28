@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Student } from 'src/app/student/models/Student';
+import { Student } from 'src/app/student/models/student';
 import { SelectItem } from 'primeng/api';
 
 @Component({

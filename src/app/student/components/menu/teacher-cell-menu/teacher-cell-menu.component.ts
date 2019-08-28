@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Student } from 'src/app/student/models/Student';
+import { Student } from 'src/app/student/models/student';
 
 @Component({
   selector: 'app-teacher-cell-menu',

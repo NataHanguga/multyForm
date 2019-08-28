@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Student } from '../../models/Student';
+import { Student } from '../../models/student';
 import { Teacher } from '../../models/teacher';
 import { HttpService } from '../../services/http.service';
 

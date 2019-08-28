@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 
 import { Teacher } from '../models/teacher';
-import { Student } from '../models/Student';
+import { Student } from '../models/student';
 @Injectable({
   providedIn: 'root'
 })

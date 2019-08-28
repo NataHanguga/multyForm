@@ -13,19 +13,19 @@
             width: 300px;
             justify-content: space-between;
 
-            div.ui-float-input {
-
-                input.sm-input  {
+            .ui-float-input {
+                .sm-input  {
                     width: 140px;
                 }
             }
         }
         div.checkbox{
-            display: flex;
             align-items: center;
+            flex-direction: column;
+            margin: 10px 0;
 
-            p {
-                margin-left: 10px;
+            div {
+                margin-top: 10px;
             }
         }
     }
