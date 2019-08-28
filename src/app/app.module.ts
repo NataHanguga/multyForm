@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { StudentModule } from './student/student.module';
 import { PrimeModule } from './prime/prime.module';
 import { HeaderComponent } from './layout/header/header.component';
+import { MenuComponent } from './layout/menu/menu.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -16,11 +17,14 @@ import { HeaderComponent } from './layout/header/header.component';
     AppRoutingModule,
     ReactiveFormsModule,
     StudentModule,
-    PrimeModule
+    PrimeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
     HeaderComponent,
+    MenuComponent,
   ],
   bootstrap: [AppComponent]
 })

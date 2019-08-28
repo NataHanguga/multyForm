@@ -20,7 +20,9 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import { CalendarModule } from 'primeng/calendar';
 import {SidebarModule} from 'primeng/sidebar';
 import {ListboxModule} from 'primeng/listbox';
-
+import {PanelMenuModule} from 'primeng/panelmenu';
+import {MegaMenuModule} from 'primeng/megamenu';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   imports: [
@@ -43,7 +45,10 @@ import {ListboxModule} from 'primeng/listbox';
     TieredMenuModule,
     CalendarModule,
     SidebarModule,
-    ListboxModule
+    ListboxModule,
+    PanelMenuModule,
+    MegaMenuModule,
+    CheckboxModule
   ],
   exports: [
     ToastModule,
@@ -65,7 +70,11 @@ import {ListboxModule} from 'primeng/listbox';
     TieredMenuModule,
     CalendarModule,
     SidebarModule,
-    ListboxModule
+    ListboxModule,
+    PanelMenuModule,
+    MegaMenuModule,
+    CheckboxModule
+
   ]
 })
 export class PrimeModule {}

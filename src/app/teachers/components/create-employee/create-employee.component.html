@@ -1,0 +1,84 @@
+
+<div class="form-wrapper">
+    <form [formGroup]="employeeForm">
+        <h3>Create new employee</h3>
+        {{employeeForm.value | json}}
+        <div class="ui-float-label">
+            <input 
+                type="text" 
+                pInputText 
+                formControlName="fullName" 
+                id="fullName"
+                class="lg-input"
+                >
+            <label for="fullName">Full Name</label>
+        </div>
+        <div>
+            <p-dropdown 
+                [options]="positions" 
+                #position
+                formControlName="position"
+                [style]="{'width':'300px', 'margin': '5px 0'}">
+            </p-dropdown>
+        </div>
+        <div *ngIf="employeeForm.value.position === 'teacher'">
+            <div>
+                <p-dropdown 
+                    [options]="categories" 
+                    #education
+                    formControlName="education"
+                    [style]="{'width':'300px', 'margin': '5px 0'}"
+                    ></p-dropdown>
+            </div>
+            <div>
+                <p-dropdown 
+                    [options]="categories" 
+                    #category
+                    formControlName="category"
+                    (onClick)="setEmployeeValue(category.value, 'category')"
+                    [style]="{'width':'300px', 'margin': '5px 0'}">
+                </p-dropdown>
+            </div>
+            <div class="combo-input">
+                <div  class="ui-float-label">
+                    <input 
+                        type="number" 
+                        #year 
+                        formControlName="year"
+                        pInputText 
+                        class="sm-input"
+                        min="2010" 
+                        max={{nowYear}} 
+                        (input)="setEmployeeValue(year.value, 'year')">
+                    <label for="year">Year</label>
+                </div>
+                <div  class="ui-float-label">
+                    <input 
+                        type="number" 
+                        #experience 
+                        class="sm-input"
+                        pInputText 
+                        formControlName="experience"                    
+                        min="0" 
+                        max="60" 
+                        (input)="setEmployeeValue(experience.value, 'experience')">
+                    <label for="experience">Experience</label>                
+                </div>
+
+            </div>
+            <div class="checkbox">
+               <app-bool-checkbox [(value)]="isTeachRank"></app-bool-checkbox>
+                <span [ngStyle]="{'color': (isTeachRank ? 'black' : 'gray')}">Teacher runk</span>
+            </div>
+            <div *ngIf="isTeachRank">
+                <p-dropdown 
+                    [options]="teacherRank" 
+                    #teachRank
+                    formControlName="teachRank"
+                    (onClick)="setEmployeeValue(teachRank.value, 'teachRank')"
+                    [style]="{'width':'300px', 'margin': '5px 0'}">
+                </p-dropdown>
+            </div>
+        </div>
+    </form>
+</div>

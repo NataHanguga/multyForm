@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: 'student',
     loadChildren: './student/student.module#StudentModule'
+  },
+  {
+    path: 'teachers',
+    loadChildren: './teachers/teachers.module#TeachersModule'
   }
 ];
 

@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public display = false;
-  public items: MenuItem[];
-  constructor(private router: Router) { }
+    // public items: MenuItem[];
+    constructor() { }
 
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Student Pay',
-        command: (click: Event): void => {
-          this.router.navigateByUrl('student');
-          this.display = false;
-        }
-      }
-    ];
-  }
+    ngOnInit() {
+    //     this.items = [
+    //         {
+    //             label: 'Student Pay',
+    //             icon: 'pi pi-money-bill',
+    //             routerLink: '/student'
+    //         },
+    //         {
+    //             label: 'Teachers Tarifs',
+    //             icon: 'pi pi-file-o',
+    //             routerLink: '/teachers'
+    //         }
+    //     ];
+    }
 
 }
