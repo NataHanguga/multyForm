@@ -1,0 +1,25 @@
+<p-dialog 
+    [(visible)]="display" 
+    appendTo="body"
+    [showHeader]="false"
+    [modal]="true"
+    draggable="false"
+    [closable]="true"
+    [style]="{'width':'340px'}"
+    (onHide)="close()">
+        <div class="content-wrapper">
+            <span class="header">
+                <h4>Edit Sudent Tarif Pay</h4>
+                <span class="pi pi-times" (click)="close()"></span>
+            </span>
+            <input 
+                type="number" 
+                pInputText 
+                [(ngModel)]="pay"
+                [style]="{'width': '300px !important'}">
+            <span class="button-wrapper">
+                <app-cancel-button (cancel)="close()"></app-cancel-button>
+                <app-save-button (saved)="edit()"></app-save-button>
+            </span>
+        </div>
+</p-dialog>

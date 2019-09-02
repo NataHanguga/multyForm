@@ -1,0 +1,5 @@
+@mixin input-width($width) {
+    // body .ui-inputtext {
+        width: $width !important;
+    // }
+}

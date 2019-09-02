@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-header',
@@ -7,22 +6,18 @@ import { MenuItem } from 'primeng/api';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    // public items: MenuItem[];
+    @Input() showMenu: boolean = true;
+    @Output() showMenuChange = new EventEmitter<boolean>();
     constructor() { }
 
     ngOnInit() {
-    //     this.items = [
-    //         {
-    //             label: 'Student Pay',
-    //             icon: 'pi pi-money-bill',
-    //             routerLink: '/student'
-    //         },
-    //         {
-    //             label: 'Teachers Tarifs',
-    //             icon: 'pi pi-file-o',
-    //             routerLink: '/teachers'
-    //         }
-    //     ];
+
+    }
+
+    public changeDisplay() {
+        const icon = document.getElementById('icon') as HTMLSpanElement;
+        this.showMenuChange.emit(!this.showMenu);
+        icon.className = !this.showMenu ? 'pi pi-chevron-circle-right' : 'pi pi-chevron-circle-left';
     }
 
 }

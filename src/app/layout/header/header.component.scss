@@ -1,0 +1,13 @@
+.header-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+
+    .pi {
+        font-size: 40px;
+        display: inline-block;
+        color: rgb(21, 120, 133);
+    }
+}

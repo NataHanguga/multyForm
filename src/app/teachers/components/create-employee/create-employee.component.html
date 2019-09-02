@@ -15,7 +15,7 @@
             >
             </app-dropdown>
         </div>
-        <div *ngIf="employeeForm.value.position === 'teacher'">
+        <div *ngIf="employeeForm.value.position === 'teacher'" class="teacher-wrapper">
             <app-dropdown
                 [items]="educationSelection"
                 (edit)="setEmployeeValue($event, 'education')"

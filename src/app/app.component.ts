@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MultyForm';
+  public showMenu: boolean = true;
   constructor() {}
 
 }

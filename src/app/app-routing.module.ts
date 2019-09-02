@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'teachers',
     loadChildren: './teachers/teachers.module#TeachersModule'
+  },
+  {
+    path: 'setting',
+    loadChildren: './setting/setting.module#SettingModule'
   }
 ];
 

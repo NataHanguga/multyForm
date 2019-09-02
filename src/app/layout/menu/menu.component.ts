@@ -20,8 +20,25 @@ export class MenuComponent implements OnInit {
           },
           {
               label: 'Teachers Tarifs',
-              icon: 'pi pi-file-o',
+              icon: 'pi pi-users',
               routerLink: '/teachers'
+          },
+          {
+            label: 'Setting',
+            icon: 'pi pi-cog',
+            // routerLink: '/setting'
+            items: [
+              {
+                label: 'Student pay tarif',
+                icon: 'pi pi-dollar',
+                routerLink: '/setting/pay-constant'
+              },
+              {
+                label: 'Teachers Categories',
+                icon: 'pi pi-list',
+                routerLink: '/setting/teacher-categories'
+              }
+            ]
           }
       ];
   }

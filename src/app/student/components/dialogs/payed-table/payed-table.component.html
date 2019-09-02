@@ -8,8 +8,8 @@
             <td
                 *ngFor="let item of student.progress; let i = index;" 
                 [ngClass]="{
-                    'green': item === 50,
-                    'yellow': 50 > item && item > 0,
+                    'green': item === payConstant,
+                    'yellow': payConstant > item && item > 0,
                     'grey': item === 0,
                     'blue': item === null || student.studentType !== 'contract'
                 }">

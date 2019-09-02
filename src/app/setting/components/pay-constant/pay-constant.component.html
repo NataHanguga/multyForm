@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <h3 class="header">Students Pay Tarif</h3>
+
+    <div class="table">
+        <span>Pay Tarif</span>
+        <span>{{pay}}</span>
+        <span class="icons-bar">
+            <i class="pi pi-pencil" title="Edit" (click)="display = !display"></i>
+        </span>
+    </div>
+</div>
+
+<app-edit-pay-constant [(display)]="display" (edited)="getPay()" [(pay)]="pay"></app-edit-pay-constant>

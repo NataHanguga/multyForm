@@ -22,6 +22,7 @@ input{
 html {
     width: 100%;
     height: 100%;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
     // background-color: rgb(110, 106, 106);
 }
 
@@ -29,7 +30,28 @@ div.error{
     margin: 10px 0;
 }
 
+body .ui-panelmenu .ui-panelmenu-header > a {
+    background-color: #fff;
+}
+
+body .ui-inputtext {
+    width: 300px !important;
+}
+
+body .ui-table .ui-table-thead > tr > th {
+    background-color: rgb(236, 236, 236);
+}
 .pi-bars {
     margin: 5px;
     color: rgb(129, 129, 129);
+}
+
+body .pi {
+    font-size: 25px;
+}
+.header {
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
