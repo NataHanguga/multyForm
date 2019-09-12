@@ -22,6 +22,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
         }
         .ui-inputtext.lg-input {
             width: 300px !important;
+            margin: 15px 0 10px 0;
         }
         `
     ]

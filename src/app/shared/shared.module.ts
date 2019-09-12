@@ -7,6 +7,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { FloatInputComponent } from './components/float-input/float-input.component';
 import { SaveButtonComponent } from './components/save-button/save-button.component';
 import { CancelButtonComponent } from './components/cancel-button/cancel-button.component';
+import { ModalRemoveComponent } from './components/modal-remove/modal-remove.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CancelButtonComponent } from './components/cancel-button/cancel-button.
     DropdownComponent,
     FloatInputComponent,
     SaveButtonComponent,
-    CancelButtonComponent
+    CancelButtonComponent,
+    ModalRemoveComponent
   ],
   imports: [
     CommonModule,

@@ -24,6 +24,10 @@ export class SettingService {
   }
 
   public addTeacherCategories(newGrade: Grade): Observable<Grade[]> {
-    return this.http.patch<Grade[]>(this.url + 'grade', newGrade);
+    return this.http.post<Grade[]>(this.url + 'grade', newGrade);
+  }
+
+  public editTeacherCategory(editGrade: Grade): Observable<Grade[]> {
+    return this.http.patch<Grade[]>(this.url + 'grade/' + editGrade.id, editGrade);
   }
 }

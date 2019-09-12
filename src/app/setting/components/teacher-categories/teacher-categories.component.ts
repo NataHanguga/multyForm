@@ -1,6 +1,7 @@
 import { Grade } from './grade.model';
 import { SettingService } from './../../services/setting.service';
 import { Component, OnInit } from '@angular/core';
+import { Status } from './status.model';
 
 @Component({
     selector: 'app-teacher-categories',
@@ -9,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeacherCategoriesComponent implements OnInit {
     public gradeList: Grade[];
-    public display: boolean;
-    public status: string = '';
+    public display: boolean = false;
+    public status = new Status();
     constructor(private settingService: SettingService) { }
 
     ngOnInit() {
@@ -22,6 +23,16 @@ export class TeacherCategoriesComponent implements OnInit {
             console.log(data);
             this.gradeList = data;
         });
+    }
+
+    public setModalDialogForCreation(status: string): void {
+        this.display = true;
+        this.status.id = status;
+    }
+
+    public setModalDialogForEdition(grade: Grade): void {
+        this.display = true;
+        this.status = new Status(grade.id.toString(), grade);
     }
 
 }

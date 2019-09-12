@@ -1,7 +1,7 @@
 <div class="wrapper">
     <span class="header">
         <h3>Teacher's Categories</h3>
-        <i class="pi pi-plus" (click)="display = true; status = 'new'"></i>
+        <i class="pi pi-plus" (click)="setModalDialogForCreation('new')"></i>
     </span>
     <p-table [value]="gradeList">
             <ng-template pTemplate="header">
@@ -18,7 +18,7 @@
                         <td>{{grade.grade}}</td>
                         <td>{{grade.salary}}</td>
                         <td>
-                            <i class="pi pi-pencil"></i>
+                            <i class="pi pi-pencil" (click)="setModalDialogForEdition(grade)"></i>
                             <i class="pi pi-trash"></i>
                         </td>
                     </tr>
@@ -26,5 +26,11 @@
     </p-table>
 </div>
 
-<app-add-teacher-categories [(display)]="display" [status]="status"></app-add-teacher-categories>
+<app-add-teacher-categories 
+    *ngIf="status && status.id"
+    [status]="status" 
+    [display]="display" 
+    (closeDialog)="display = false" 
+    (updatedList)="gradeList = $event">
+</app-add-teacher-categories>
     

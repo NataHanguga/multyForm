@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PayConstantComponent } from './pay-constant.component';
+import { ModalRemoveComponent } from './modal-remove.component';
 
-describe('PayConstantComponent', () => {
-  let component: PayConstantComponent;
-  let fixture: ComponentFixture<PayConstantComponent>;
+describe('ModalRemoveComponent', () => {
+  let component: ModalRemoveComponent;
+  let fixture: ComponentFixture<ModalRemoveComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PayConstantComponent ]
+      declarations: [ ModalRemoveComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PayConstantComponent);
+    fixture = TestBed.createComponent(ModalRemoveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

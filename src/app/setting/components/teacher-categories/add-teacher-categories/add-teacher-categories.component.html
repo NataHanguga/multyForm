@@ -1,28 +1,20 @@
-<p-dialog 
-    [(visible)]="display" 
-    appendTo="body"
-    [showHeader]="false"
-    [modal]="true"
-    draggable="false"
-    [closable]="true"
+<p-dialog [(visible)]="display" appendTo="body" [showHeader]="false"
+    [modal]="true" draggable="false" [closable]="true"
     [style]="{'width':'340px', 'heigh':'350px'}">
     <div class="content-wrapper">
+        <h4 *ngIf="status.id === 'new'">Create New Category</h4>
+        <h4 *ngIf="status.id !== 'new'">Edit Category</h4>
+        <form [formGroup]="gradeForm">
+            <input type="text" placeholder="Category" pInputText
+                formControlName="category" />
+            <input type="number" placeholder="Grade" pInputText
+                formControlName="grade" />
+            <input type="number" placeholder="Salary" pInputText
+                formControlName="salary" />
+        </form>
         <span class="button-wrapper">
-            <h4>Create New Category</h4>
-            <span>
-                <form [formGroup]="gradeForm">
-                    <app-float-input
-                        [type]="'string'"
-                        [class]="'lg-input'"
-                        [label]="'Category'"
-                        (value)="setValue('category', $event)"
-                        formControlName="category"
-                    ></app-float-input>
-                </form>
-            </span>
             <app-cancel-button (cancel)="close()"></app-cancel-button>
             <app-save-button (saved)="edit()"></app-save-button>
         </span>
     </div>
 </p-dialog>
-    
