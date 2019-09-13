@@ -37,6 +37,11 @@ export class MenuComponent implements OnInit {
                 label: 'Teachers Categories',
                 icon: 'pi pi-list',
                 routerLink: '/setting/teacher-categories'
+              },
+              {
+                label: 'Education',
+                icon: 'fa fa-graduation-cap',
+                routerLink: '/setting/education'
               }
             ]
           }

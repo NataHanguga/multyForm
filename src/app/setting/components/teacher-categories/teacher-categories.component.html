@@ -1,9 +1,9 @@
 <div class="wrapper">
     <span class="header">
         <h3>Teacher's Categories</h3>
-        <i class="pi pi-plus" (click)="setModalDialogForCreation('new')"></i>
+        <i class="pi pi-plus" (click)="setModalDialogForCreation('new')" title="Click for create"></i>
     </span>
-    <p-table [value]="gradeList">
+    <p-table [value]="gradeList" [loading]="loading">
             <ng-template pTemplate="header">
                     <tr>
                         <th style="width:40%">Category</th>
@@ -13,13 +13,13 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-grade>
-                    <tr>
+                    <tr (dblclick)="setModalDialogForEdition(grade)" title="Duble click for edit">
                         <td>{{grade.category}}</td>
                         <td>{{grade.grade}}</td>
                         <td>{{grade.salary}}</td>
                         <td>
                             <i class="pi pi-pencil" (click)="setModalDialogForEdition(grade)"></i>
-                            <i class="pi pi-trash"></i>
+                            <i class="pi pi-trash" (click)="setModalDialogForRemoving(grade)"></i>
                         </td>
                     </tr>
                 </ng-template>
@@ -30,7 +30,14 @@
     *ngIf="status && status.id"
     [status]="status" 
     [display]="display" 
-    (closeDialog)="display = false" 
+    (closeDialog)="display = false; status = null" 
     (updatedList)="gradeList = $event">
 </app-add-teacher-categories>
+<app-modal-remove 
+    [display]="remove" 
+    [message]="removeMessage" 
+    [type]="'category'"
+    (delete)="removeCategory()"
+    (closeDialog)="remove=false">
+</app-modal-remove>
     

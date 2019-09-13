@@ -10,6 +10,8 @@ import { EditPayConstantComponent } from './components/pay-constant/edit-pay-con
 import { PrimeModule } from '../prime/prime.module';
 import { TeacherCategoriesComponent } from './components/teacher-categories/teacher-categories.component';
 import { AddTeacherCategoriesComponent } from './components/teacher-categories/add-teacher-categories/add-teacher-categories.component';
+import { EducationComponent } from './components/education/education.component';
+import { AddEducationComponent } from './components/education/add-education/add-education.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,10 @@ import { AddTeacherCategoriesComponent } from './components/teacher-categories/a
     PayConstantComponent,
     EditPayConstantComponent,
     TeacherCategoriesComponent,
-    AddTeacherCategoriesComponent],
+    AddTeacherCategoriesComponent,
+    EducationComponent,
+    AddEducationComponent
+    ],
   imports: [
     CommonModule,
     SettingRoutingModule,

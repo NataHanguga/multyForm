@@ -16,6 +16,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
         `
             .ui-button {
                 width: 150px !important;
+                margin-left: 2px !important;
             }
         `
     ]

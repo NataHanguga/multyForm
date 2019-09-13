@@ -1,1 +1,25 @@
-<p>modal-remove works!</p>
+<p-dialog 
+    [(visible)]="display" 
+    [showHeader]="false"
+    [resizable]="false"
+    [modal]="true"
+    [positionTop]="100"
+    [style]="{width: '335px'}"
+    (onHide)="close()">
+
+    <div class="message">Do you realy want delete 
+        <span class="message-name">{{message}} </span>
+        {{type}}?
+    </div>
+
+    <div class="btn-wrapper">
+        <app-cancel-button (cancel)="close()"></app-cancel-button>
+        <button 
+            pButton 
+            class="ui-button-danger" 
+            label="Delete" 
+            icon="pi pi-check" 
+            (click)="deleted()">
+        </button>
+    </div>
+</p-dialog>

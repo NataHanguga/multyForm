@@ -1,3 +1,4 @@
+import { Education } from './../components/education/education.model';
 import { Grade } from './../components/teacher-categories/grade.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -29,5 +30,25 @@ export class SettingService {
 
   public editTeacherCategory(editGrade: Grade): Observable<Grade[]> {
     return this.http.patch<Grade[]>(this.url + 'grade/' + editGrade.id, editGrade);
+  }
+
+  public removeTeacherCategory(id: number): Observable<Grade[]> {
+    return this.http.delete<Grade[]>(this.url + 'grade/' + id);
+  }
+
+  public getEducationList(): Observable<Education[]> {
+    return this.http.get<Education[]>(this.url + 'education');
+  }
+
+  public createEducation(label: Education): Observable<Education[]> {
+    return this.http.post<Education[]>(this.url + 'education', label);
+  }
+  
+  public editEducation(edu: Education): Observable<Education[]> {
+    return this.http.patch<Education[]>(this.url + 'education/' + edu.id, edu);
+  }
+
+  public removeEducation(id: number): Observable<Education[]> {
+    return this.http.delete<Education[]>(this.url + 'education/' + id);
   }
 }

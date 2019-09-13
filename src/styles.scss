@@ -38,8 +38,38 @@ body .ui-inputtext {
     width: 300px !important;
 }
 
+body .ui-inputgroup .ui-inputgroup-addon {
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: #fff;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+
+    &:first-child {
+        border-radius: 0;
+    }
+
+    i{
+        margin-right: 5px;
+
+        &.fa {
+            font-size: 17px;
+            padding-top: 15px;
+        }
+
+        &.pi {
+            font-size: 20px;
+            padding-top: 13px;
+        }
+        
+    }
+
+
+}
+
 body .ui-table .ui-table-thead > tr > th {
-    background-color: rgb(236, 236, 236);
+    background-color: rgb(143, 188, 143) !important;
 }
 .pi-bars {
     margin: 5px;
@@ -48,6 +78,7 @@ body .ui-table .ui-table-thead > tr > th {
 
 body .pi {
     font-size: 25px;
+    cursor: pointer;
 }
 .header {
     margin-left: 20px;

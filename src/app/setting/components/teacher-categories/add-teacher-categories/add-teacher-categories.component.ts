@@ -11,7 +11,7 @@ import { Status } from '../status.model';
 })
 export class AddTeacherCategoriesComponent implements OnInit {
     @Input() display = false;
-    @Input() status: Status = new Status();
+    @Input() status: Status<Grade> = new Status<Grade>();
     @Output() closeDialog = new EventEmitter();
     @Output() updatedList = new EventEmitter<Grade[]>();
 
@@ -32,9 +32,9 @@ export class AddTeacherCategoriesComponent implements OnInit {
             });
         } else if (this.status.id !== 'new') {
             this.gradeForm = this.fb.group({
-                category: [this.status.grade.category],
-                grade: [this.status.grade.grade],
-                salary: [this.status.grade.salary],
+                category: [this.status.item.category],
+                grade: [this.status.item.grade],
+                salary: [this.status.item.salary],
             });
         }
     }
@@ -42,7 +42,7 @@ export class AddTeacherCategoriesComponent implements OnInit {
     public close(): void {
         this.display = false;
         this.gradeForm.reset();
-        this.closeDialog.emit(false);
+        this.closeDialog.emit();
     }
 
     public edit(): void {
@@ -50,10 +50,6 @@ export class AddTeacherCategoriesComponent implements OnInit {
             ? this.createGrade(this.gradeForm.value)
             : this.editGrade(this.gradeForm.value);
         this.close();
-    }
-
-    public setValue(key: string, value: string): void {
-        this.gradeForm.get(key).setValue(value);
     }
 
     public createGrade(newGrade: Grade): void {

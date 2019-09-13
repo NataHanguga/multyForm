@@ -28,7 +28,8 @@ import { ModalRemoveComponent } from './components/modal-remove/modal-remove.com
     DropdownComponent,
     FloatInputComponent,
     SaveButtonComponent,
-    CancelButtonComponent
+    CancelButtonComponent,
+    ModalRemoveComponent
 
   ]
 })
