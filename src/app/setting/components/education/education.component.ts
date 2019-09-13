@@ -14,7 +14,7 @@ export class EducationComponent implements OnInit {
     public loading = false;
     public display = false;
     public status = new Status<Education>();
-    constructor(private settingSrvice: SettingService) { }
+    constructor(private settingService: SettingService) { }
 
     ngOnInit() {
         this.getEducation();
@@ -23,7 +23,7 @@ export class EducationComponent implements OnInit {
     private getEducation(): void {
         this.loading = true;
 
-        this.settingSrvice.getEducationList()
+        this.settingService.getEducationList()
             .pipe(
                 finalize(() => (this.loading = false))
             ).subscribe((data: Education[]) => {
@@ -33,33 +33,46 @@ export class EducationComponent implements OnInit {
     }
 
     public setModalDialogForCreation(id: string): void {
-        console.log(id);
         this.status = new Status<Education>(id, null);
         this.display = true;
     }
 
     public setModalDialogForEditing(edu: Education): void {
-        console.log(edu);
         this.status = new Status<Education>(edu.id.toString(), edu);
         this.display = true;
     }
 
     public setList(list: Education[]): void {
-        console.log(list);
         this.educationList = list;
     }
 
-    public dd(event) {
-        console.log(event);
-    }
-
     public removeEducation(id: number): void {
-        this.settingSrvice.removeEducation(id)
+        this.loading = true;
+        this.settingService.removeEducation(id)
             .pipe(
                 finalize(() => (this.loading = false))
             ).subscribe((data: Education[]) => {
-                console.log(data);
-                this.educationList = data;
+                this.setList(data);
+            });
+    }
+
+    public createEducation(edu: Education): void {
+        this.loading = true;
+        this.settingService.createEducation(edu)
+            .pipe(
+                finalize(() => (this.loading = false))
+            ).subscribe((data: Education[]) => {
+                this.setList(data);
+            });
+    }
+
+    public editEducation(edu: Education): void {
+        this.loading = true;
+        this.settingService.editEducation(edu)
+            .pipe(
+                finalize(() => (this.loading = false))
+            ).subscribe((data: Education[]) => {
+                this.setList(data);
             });
     }
 

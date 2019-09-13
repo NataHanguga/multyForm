@@ -13,6 +13,8 @@ export class AddEducationComponent implements OnInit {
     @Input() display: boolean = false;
     @Input() status: Status<Education> = new Status<Education>();
     @Output() closeDialog = new EventEmitter();
+    @Output() create = new EventEmitter<Education>();
+    @Output() edited = new EventEmitter<Education>();
     @Output() updatedList = new EventEmitter<Education[]>();
 
     public form: FormGroup;
@@ -44,28 +46,13 @@ export class AddEducationComponent implements OnInit {
 
     public edit(): void {
         const label = this.form.value.label;
-        console.log(label)
+        console.log(label);
         this.status.id === 'new'
-            ? this.createEducation(label)
-            : this.editEducation(label);
+            ? this.create.emit(new Education(label))
+            : this.edited.emit(new Education(label, +this.status.id));
 
         this.updatedList.emit(this.editedList);
         this.close();
 
-    }
-
-    private createEducation(label: string): void {
-        this.settingService.createEducation(new Education(label)).subscribe((data: Education[]) => {
-            this.editedList.concat(data);
-        });
-    }
-
-    private editEducation(label: string): void {
-        const editedLabel = new Education(label, +this.status.id);
-        this.settingService.editEducation(editedLabel)
-            .subscribe((data: Education[]) => {
-            this.editedList.concat(data);
-            // this.updatedList.emit(data);
-            });
     }
 }

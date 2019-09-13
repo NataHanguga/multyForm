@@ -34,6 +34,7 @@
     *ngIf="status && status.id"    
     [display]="display" 
     [status]="status"
-    (closeDialog)="display = false; status = null" 
-    (updatedList)="dd($event)">
+    (create)="createEducation($event)"
+    (edited)="editEducation($event)"
+    (closeDialog)="display = false; status = null">
 </app-add-education>
