@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Status } from '../../teacher-categories/status.model';
 import { Category } from '../category.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -9,8 +9,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./add-category.component.scss']
 })
 export class AddCategoryComponent {
-
-
   @Input() display = false;
   @Input() set status(st: Status<Category>) {
       this.st = st;

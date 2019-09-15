@@ -30,14 +30,14 @@
 </div>
 
 
-<app-add-rank 
+<app-add-category 
     *ngIf="status && status.id && display"    
     [display]="display" 
     [status]="status"
     (create)="create($event)"
     (edited)="edit($event)"
     (closeDialog)="display = false; status = null">
-</app-add-rank>
+</app-add-category>
 
 <app-modal-remove 
     *ngIf="remove && message"

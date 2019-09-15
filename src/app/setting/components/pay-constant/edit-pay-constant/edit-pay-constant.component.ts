@@ -1,32 +1,43 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SettingService } from 'src/app/setting/services/setting.service';
+import { Status } from '../../teacher-categories/status.model';
+import { Pay } from '../pay.model';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-edit-pay-constant',
-  templateUrl: './edit-pay-constant.component.html',
-  styleUrls: ['./edit-pay-constant.component.scss']
+    selector: 'app-edit-pay-constant',
+    templateUrl: './edit-pay-constant.component.html',
+    styleUrls: ['./edit-pay-constant.component.scss']
 })
-export class EditPayConstantComponent implements OnInit {
-  @Input() display = false;
-  @Input() pay: string;
-  @Output() dispalyChange = new EventEmitter<boolean>();
-  @Output() edited = new EventEmitter();
-  @Output() payChange = new EventEmitter();
-  constructor(private settingService: SettingService) { }
+export class EditPayConstantComponent {
+    @Input() display = false;
+    @Input() set status(st: Status<Pay>) {
+        this.st = st;
+        if (st.id) {
+            this.formInit(st);
+        }
+    }
+    @Output() closeDialog = new EventEmitter();
+    @Output() edited = new EventEmitter<Pay>();
 
-  ngOnInit() {
-  }
+    public form: FormGroup;
+    public st: Status<Pay>;
+    constructor(private fb: FormBuilder) {}
 
-  public close(): void {
-    this.display = false;
-    this.dispalyChange.emit(this.display);
-  }
+    private formInit(status: Status<Pay>) {
+        this.form = this.fb.group({
+            label: [status.item]
+        });
+    }
 
-  public edit(): void {
-    this.settingService.editPayConstant(this.pay).subscribe(data => {
-      this.payChange.emit(this.pay);
-    });
-    this.close();
-  }
+    public close(): void {
+        this.display = false;
+        this.form.reset();
+        this.closeDialog.emit();
+    }
 
+    public edit(): void {
+        this.edited.emit(this.form.value.label);
+        this.close();
+    }
 }

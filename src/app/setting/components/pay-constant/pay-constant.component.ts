@@ -1,5 +1,8 @@
-import { SettingService } from './../../services/setting.service';
 import { Component, OnInit } from '@angular/core';
+import { PayConstantService } from './pay-constant.service';
+import { Status } from '../teacher-categories/status.model';
+import { Pay } from './pay.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-pay-constant',
@@ -7,18 +10,44 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./pay-constant.component.scss']
 })
 export class PayConstantComponent implements OnInit {
-    public pay: string;
-    public display: boolean = false;
-    constructor(private settingService: SettingService) { }
+    public loading = false;
+    public display = false;
+    public message = '';
+    public status = new Status<Pay>();
+    public list: string[] = [];
+    constructor(private service: PayConstantService) {}
 
     ngOnInit() {
-       this.getPay();
+        this.get();
     }
 
-    public getPay(): void {
-        this.settingService.getPayConstant().subscribe(data => {
-            this.pay = data.pay;
-        });
+    public get(): void {
+        this.loading = true;
+        this.service
+            .get()
+            .pipe(finalize(() => (this.loading = false)))
+            .subscribe((data: Pay) => {
+                this.setList(data.pay);
+            });
     }
 
+    public setModalDialogForEditing(item: Pay): void {
+        this.status = new Status<Pay>('123', item);
+        this.display = true;
+    }
+
+    public setList(list: string): void {
+        this.list = [];
+        this.list.push(list);
+    }
+
+    public edit(item: number): void {
+        this.loading = true;
+        this.service
+            .edit(item)
+            .pipe(finalize(() => (this.loading = false)))
+            .subscribe((data: Pay) => {
+                this.setList(data.pay);
+            });
+    }
 }

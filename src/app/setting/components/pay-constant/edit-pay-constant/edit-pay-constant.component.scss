@@ -1,6 +1,32 @@
-@import '../../../../../assets/scss/mixins.scss';
-
-.button-wrapper {
+.content-wrapper {
     display: flex;
-    margin-top: 20px;
+    justify-content: center;
+    flex-direction: column;
+
+    .header {
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+    }
+    form {
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        input {
+            padding: 15px 0 5px 0;
+            width: 310px !important;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid #000 !important;
+        }
+    }
+
+    .button-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
 }
+

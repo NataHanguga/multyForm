@@ -1,1 +1,50 @@
-<p>additional-position works!</p>
+<div class="wrapper">
+    <span class="header">
+        <h3>Additional Position</h3>
+        <i 
+            class="pi pi-plus" 
+            (click)="setModalDialogForCreation('new')"
+            title="Click for create">
+        </i>
+    </span>
+    <p-table 
+        [value]="list" 
+        [loading]="loading" 
+        [style]="{width: '300px'}" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:200px">Label</th>
+                <th style="width:100px">Options</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td title="Dubble click for edit">{{item.label}}</td>
+                <td>
+                    <i class="pi pi-pencil" (click)="setModalDialogForEditing(item)"></i>
+                    <i class="pi pi-trash" (click)="setModalDialogForRemoving(item)"></i>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<app-add-additional-position 
+    *ngIf="status && status.id && display"    
+    [display]="display" 
+    [status]="status"
+    (create)="create($event)"
+    (edited)="edit($event)"
+    (closeDialog)="display = false; status = null">
+</app-add-additional-position>
+
+<app-modal-remove 
+    *ngIf="remove && message"
+    [display]="remove" 
+    [message]="message" 
+    [type]="'category'"
+    (delete)="delete(status.id)"
+    (closeDialog)="remove=false; status=null">
+</app-modal-remove>
+    

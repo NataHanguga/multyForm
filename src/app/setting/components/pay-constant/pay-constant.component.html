@@ -1,4 +1,40 @@
 <div class="wrapper">
+    <span class="header">
+        <h3>Students Pay Tarif</h3>
+    </span>
+    <!-- {{list | json}} -->
+    <p-table 
+        [value]="list" 
+        [loading]="loading" 
+        [style]="{width: '300px'}" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:200px">Label</th>
+                <th style="width:100px">Options</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td title="Dubble click for edit">{{item}}</td>
+                <td>
+                    <i class="pi pi-pencil" (click)="setModalDialogForEditing(item)"></i>
+                    <!-- <i class="pi pi-trash" (click)="setModalDialogForRemoving(item)"></i> -->
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<app-edit-pay-constant 
+    *ngIf="status && status.id && display"    
+    [display]="display" 
+    [status]="status"
+    (edited)="edit($event)"
+    (closeDialog)="display = false; status = null">
+</app-edit-pay-constant>
+    
+<!-- <div class="wrapper">
     <h3 class="header">Students Pay Tarif</h3>
 
     <div class="table">
@@ -10,4 +46,4 @@
     </div>
 </div>
 
-<app-edit-pay-constant [(display)]="display" (edited)="getPay()" [(pay)]="pay"></app-edit-pay-constant>
+<app-edit-pay-constant [(display)]="display" (edited)="getPay()" [(pay)]="pay"></app-edit-pay-constant> -->

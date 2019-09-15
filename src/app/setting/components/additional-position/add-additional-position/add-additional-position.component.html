@@ -1,1 +1,25 @@
-<p>add-additional-position works!</p>
+<p-dialog [(visible)]="display" appendTo="body" [showHeader]="false"
+    [modal]="true" draggable="false" [closable]="true"
+    [style]="{'width':'340px', 'heigh':'350px'}">
+    <div class="content-wrapper">
+        <div class="header">
+            <span *ngIf="st?.id === 'new'">Create New Additional Position</span>
+            <span *ngIf="st.id !== 'new'">Edit Additional Position</span>
+        </div>
+ 
+        <form [formGroup]="form">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-user-graduate"></i></span>
+                <input 
+                    type="text" 
+                    placeholder="Label" 
+                    pInputText
+                    formControlName="label" />
+            </div>
+        </form>
+        <span class="button-wrapper">
+            <app-cancel-button (cancel)="close()"></app-cancel-button>
+            <app-save-button (saved)="edit()"></app-save-button>
+        </span> 
+    </div>
+</p-dialog>
