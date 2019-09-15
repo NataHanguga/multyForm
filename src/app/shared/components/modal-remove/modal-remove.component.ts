@@ -6,12 +6,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./modal-remove.component.scss']
 })
 export class ModalRemoveComponent {
-  @Input() message: string = 'Go away';
-  @Input() type: string = '';
-  @Input() display: boolean = false;
+  @Input() message = 'Go away';
+  @Input() type = '';
+  @Input() display = false;
   @Output() closeDialog = new EventEmitter();
   @Output() delete = new EventEmitter();
-  constructor() { }
+  constructor() { console.log(this.message); }
 
   public close(): void {
     this.display = false;

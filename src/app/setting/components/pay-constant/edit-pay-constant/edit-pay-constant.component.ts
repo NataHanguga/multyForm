@@ -7,7 +7,7 @@ import { SettingService } from 'src/app/setting/services/setting.service';
   styleUrls: ['./edit-pay-constant.component.scss']
 })
 export class EditPayConstantComponent implements OnInit {
-  @Input() display: boolean = false;
+  @Input() display = false;
   @Input() pay: string;
   @Output() dispalyChange = new EventEmitter<boolean>();
   @Output() edited = new EventEmitter();

@@ -34,14 +34,39 @@ export class MenuComponent implements OnInit {
                 routerLink: '/setting/pay-constant'
               },
               {
-                label: 'Teachers Categories',
+                label: 'Teachers Grade',
                 icon: 'pi pi-list',
-                routerLink: '/setting/teacher-categories'
+                routerLink: '/setting/grade'
               },
               {
                 label: 'Education',
                 icon: 'fa fa-graduation-cap',
                 routerLink: '/setting/education'
+              },
+              {
+                label: 'Percent',
+                icon: 'fa fa-percent',
+                routerLink: '/setting/percent'
+              },
+              {
+                label: 'Position',
+                icon: 'fa fa-map-marker',
+                routerLink: '/setting/position'
+              },
+              {
+                label: 'Rank',
+                icon: 'fa fa-map-glasses',
+                routerLink: '/setting/rank'
+              },
+              {
+                label: 'Category',
+                icon: 'fa fa-map-glasses',
+                routerLink: '/setting/category'
+              },
+              {
+                label: 'Additional Position',
+                icon: 'fa fa-map-marker',
+                routerLink: '/setting/add-position'
               }
             ]
           }

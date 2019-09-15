@@ -3,13 +3,13 @@
         <h3>Teacher's Categories</h3>
         <i class="pi pi-plus" (click)="setModalDialogForCreation('new')" title="Click for create"></i>
     </span>
-    <p-table [value]="gradeList" [loading]="loading">
+    <p-table [value]="gradeList" [loading]="loading" [style]="{width: '500px'}">
             <ng-template pTemplate="header">
                     <tr>
                         <th style="width:40%">Category</th>
-                        <th>Grade</th>
-                        <th>Salary</th>
-                        <th>Options</th>
+                        <th style="width:20%">Grade</th>
+                        <th style="width:20%">Salary</th>
+                        <th style="width:20%">Options</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-grade>
@@ -27,13 +27,15 @@
 </div>
 
 <app-add-teacher-categories 
-    *ngIf="status && status.id"
+    *ngIf="status && status.id && display"
     [status]="status" 
     [display]="display" 
-    (closeDialog)="display = false; status = null" 
-    (updatedList)="gradeList = $event">
+    (closeDialog)="display = false; status = null"
+    (create)="createGrade($event)"
+    (edited)="editGrade($event)">
 </app-add-teacher-categories>
 <app-modal-remove 
+    *ngIf="remove"
     [display]="remove" 
     [message]="removeMessage" 
     [type]="'category'"

@@ -10,7 +10,7 @@ import { Status } from '../../teacher-categories/status.model';
     styleUrls: ['./add-education.component.scss']
 })
 export class AddEducationComponent implements OnInit {
-    @Input() display: boolean = false;
+    @Input() display = false;
     @Input() status: Status<Education> = new Status<Education>();
     @Output() closeDialog = new EventEmitter();
     @Output() create = new EventEmitter<Education>();

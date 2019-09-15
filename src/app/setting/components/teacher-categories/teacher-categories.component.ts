@@ -17,7 +17,7 @@ export class TeacherCategoriesComponent implements OnInit {
     public removeMessage: string;
     private editedGrade: Grade;
     public status = new Status<Grade>();
-    constructor(private settingService: SettingService) { }
+    constructor(private settingService: SettingService) {}
 
     ngOnInit(): void {
         this.getGrades();
@@ -25,10 +25,10 @@ export class TeacherCategoriesComponent implements OnInit {
 
     public getGrades(): void {
         this.loading = true;
-        this.settingService.getTeachersCategories()
-            .pipe(
-                finalize(() => (this.loading = false))
-            ).subscribe((data: Grade[]) => {
+        this.settingService
+            .getTeachersCategories()
+            .pipe(finalize(() => (this.loading = false)))
+            .subscribe((data: Grade[]) => {
                 this.gradeList = data;
             });
     }
@@ -51,12 +51,30 @@ export class TeacherCategoriesComponent implements OnInit {
 
     public removeCategory(): void {
         this.loading = true;
-        this.settingService.removeTeacherCategory(this.editedGrade.id)
-            .pipe(
-                finalize(() => (this.loading = false))
-            ).subscribe((data: Grade[]) => {
+        this.settingService
+            .removeTeacherCategory(this.editedGrade.id)
+            .pipe(finalize(() => (this.loading = false)))
+            .subscribe((data: Grade[]) => {
                 this.gradeList = data;
             });
     }
 
+    public createGrade(newGrade: Grade): void {
+        this.settingService
+            .addTeacherCategories(newGrade)
+            .pipe(finalize(() => (this.loading = false)))
+            .subscribe((data: Grade[]) => {
+                this.gradeList = data;
+            });
+    }
+
+    public editGrade(editGrade: Grade): void {
+        editGrade.id = +this.status.id;
+        this.settingService
+            .editTeacherCategory(editGrade)
+            .pipe(finalize(() => (this.loading = false)))
+            .subscribe((data: Grade[]) => {
+                this.gradeList = data;
+            });
+    }
 }

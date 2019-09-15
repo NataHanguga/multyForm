@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    @Input() showMenu: boolean = true;
+    @Input() showMenu = true;
     @Output() showMenuChange = new EventEmitter<boolean>();
     constructor() { }
 
