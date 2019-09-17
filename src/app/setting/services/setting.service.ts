@@ -1,5 +1,5 @@
 import { Education } from './../components/education/education.model';
-import { Grade } from './../components/teacher-categories/grade.model';
+import { Grade } from '../models/grade.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -24,8 +24,8 @@ export class SettingService {
     return this.http.get<Grade[]>(this.url + 'grade');
   }
 
-  public addTeacherCategories(newGrade: Grade): Observable<Grade[]> {
-    return this.http.post<Grade[]>(this.url + 'grade', newGrade);
+  public addTeacherCategories<T>(item: any): Observable<T[]> {
+    return this.http.post<T[]>(this.url + 'grade', item);
   }
 
   public editTeacherCategory(editGrade: Grade): Observable<Grade[]> {

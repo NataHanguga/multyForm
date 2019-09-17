@@ -2,7 +2,7 @@ import { Education } from './../education.model';
 import { SettingService } from 'src/app/setting/services/setting.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Status } from '../../teacher-categories/status.model';
+import { Status } from '../../../models/status.model';
 
 @Component({
     selector: 'app-add-education',

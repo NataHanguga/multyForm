@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SettingService } from 'src/app/setting/services/setting.service';
-import { Status } from '../../teacher-categories/status.model';
+import { Status } from '../../../models/status.model';
 import { Pay } from '../pay.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 

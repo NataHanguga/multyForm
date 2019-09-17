@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Status } from '../teacher-categories/status.model';
+import { Status } from '../../models/status.model';
 import { Category } from './category.model';
 import { CategoryService } from './category.service';
 import { finalize } from 'rxjs/operators';

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Percent } from '../percent.model';
-import { Status } from '../../teacher-categories/status.model';
+import { Status } from '../../../models/status.model';
 
 @Component({
     selector: 'app-add-percent',

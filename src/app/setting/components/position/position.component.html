@@ -1,6 +1,6 @@
 <div class="wrapper">
     <span class="header">
-        <h3>Percents</h3>
+        <h3>Position</h3>
         <i 
             class="pi pi-plus" 
             (click)="setModalDialogForCreation('new')"
@@ -18,13 +18,13 @@
                 <th style="width:100px">Options</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-position>
+        <ng-template pTemplate="body" let-item>
             <tr>
-                <td title="Dubble click for edit">{{position.position}}</td>
-                <td title="Dubble click for edit">{{position.salary}}</td>
+                <td title="Dubble click for edit">{{item.position}}</td>
+                <td title="Dubble click for edit">{{item.salary}}</td>
                 <td>
-                    <i class="pi pi-pencil" (click)="setModalDialogForEditing(position)"></i>
-                    <i class="pi pi-trash" (click)="setModalDialogForRemoving(position)"></i>
+                    <i class="pi pi-pencil" (click)="setModalDialogForEditing(item)"></i>
+                    <i class="pi pi-trash" (click)="setModalDialogForRemoving(item)"></i>
                 </td>
             </tr>
         </ng-template>
@@ -42,7 +42,7 @@
 </app-add-position>
 
 <app-modal-remove 
-    *ngIf="remove && message"
+    *ngIf="remove"
     [display]="remove" 
     [message]="message" 
     [type]="'position'"

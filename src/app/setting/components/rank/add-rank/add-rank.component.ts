@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { Rank } from '../rank.model';
-import { Status } from '../../teacher-categories/status.model';
+import { Rank } from '../../../models/rank.model';
+import { Status } from '../../../models/status.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -30,10 +30,12 @@ export class AddRankComponent {
       if (status.id === 'new') {
           this.form = this.fb.group({
               label: [''],
+              value: [''],
           });
       } else if (status.id !== 'new') {
           this.form = this.fb.group({
               label: [status.item.label],
+              value: [status.item.value],
           });
       }
   }
@@ -47,9 +49,9 @@ export class AddRankComponent {
   public edit(): void {
       const item = this.form.value;
       this.st.id === 'new'
-          ? this.create.emit(new Rank(item.label))
+          ? this.create.emit(new Rank(item.label, item.value))
           : this.edited.emit(
-                new Rank(item.label, +this.st.id)
+                new Rank(item.label, item.value, +this.st.id)
             );
       this.close();
   }

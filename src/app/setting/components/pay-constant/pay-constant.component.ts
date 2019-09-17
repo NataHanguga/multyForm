@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PayConstantService } from './pay-constant.service';
-import { Status } from '../teacher-categories/status.model';
+import { Status } from '../../models/status.model';
 import { Pay } from './pay.model';
 import { finalize } from 'rxjs/operators';
 

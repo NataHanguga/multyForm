@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Status } from '../teacher-categories/status.model';
+import { Status } from '../../models/status.model';
 import { AdditionalPosition } from './additional-position.model';
 import { AdditionalPositionService } from './additional-position.service';
 import { finalize } from 'rxjs/operators';
@@ -43,7 +43,6 @@ export class AdditionalPositionComponent implements OnInit {
     }
 
     private setList(list: AdditionalPosition[]): void {
-        console.log(list);
         this.list = list;
     }
 

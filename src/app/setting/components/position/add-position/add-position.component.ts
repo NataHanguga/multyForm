@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Status } from '../../teacher-categories/status.model';
-import { Position } from '../position.model';
+import { Status } from '../../../models/status.model';
+import { Position } from '../../../models/position.model';
 
 @Component({
     selector: 'app-add-position',

@@ -2,7 +2,7 @@ import { SettingService } from 'src/app/setting/services/setting.service';
 import { Component, OnInit } from '@angular/core';
 import { Education } from './education.model';
 import { finalize } from 'rxjs/operators';
-import { Status } from '../teacher-categories/status.model';
+import { Status } from '../../models/status.model';
 
 @Component({
     selector: 'app-education',
@@ -27,7 +27,6 @@ export class EducationComponent implements OnInit {
             .pipe(
                 finalize(() => (this.loading = false))
             ).subscribe((data: Education[]) => {
-                console.log(data);
                 this.educationList = data;
             });
     }

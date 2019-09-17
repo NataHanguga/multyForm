@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PercentService } from './percent.service';
 import { Percent } from './percent.model';
 import { finalize } from 'rxjs/operators';
-import { Status } from '../teacher-categories/status.model';
+import { Status } from '../../models/status.model';
 
 @Component({
     selector: 'app-percent',

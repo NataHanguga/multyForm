@@ -1,8 +1,8 @@
-import { Grade } from './../grade.model';
+import { Grade } from '../../../models/grade.model';
 import { SettingService } from 'src/app/setting/services/setting.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Status } from '../status.model';
+import { Status } from '../../../models/status.model';
 
 @Component({
     selector: 'app-add-teacher-categories',
