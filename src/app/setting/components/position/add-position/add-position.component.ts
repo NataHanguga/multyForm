@@ -25,7 +25,6 @@ export class AddPositionComponent {
     constructor(private fb: FormBuilder) {}
 
     private formInit(status: Status<Position>) {
-        console.log(status);
         if (status.id === 'new') {
             this.form = this.fb.group({
                 position: [''],

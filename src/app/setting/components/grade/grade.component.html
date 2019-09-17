@@ -26,14 +26,14 @@
     </p-table>
 </div>
 
-<app-add-teacher-categories 
+<app-add-grade 
     *ngIf="status && status.id && display"
     [status]="status" 
     [display]="display" 
     (closeDialog)="display = false; status = null"
     (create)="create($event)"
     (edited)="edit($event)">
-</app-add-teacher-categories>
+</app-add-grade>
 <app-modal-remove 
     *ngIf="remove"
     [display]="remove" 

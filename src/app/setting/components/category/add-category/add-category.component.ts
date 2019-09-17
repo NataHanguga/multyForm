@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Status } from '../../../models/status.model';
-import { Category } from '../category.model';
+import { Category } from '../../../models/category.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({

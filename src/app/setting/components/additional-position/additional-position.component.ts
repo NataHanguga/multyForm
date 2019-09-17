@@ -1,84 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Status } from '../../models/status.model';
-import { AdditionalPosition } from './additional-position.model';
-import { AdditionalPositionService } from './additional-position.service';
-import { finalize } from 'rxjs/operators';
+import { SettingBaseService } from './../../services/setting-base.service';
+import { Component } from '@angular/core';
+import { AdditionalPosition } from '../../models/additional-position.model';
+import { SettingComponent } from '../setting/setting.component';
 
 @Component({
     selector: 'app-additional-position',
     templateUrl: './additional-position.component.html',
     styleUrls: ['./additional-position.component.scss']
 })
-export class AdditionalPositionComponent implements OnInit {
-    public loading = false;
-    public display = false;
-    public remove = false;
-    public message = '';
-    public status = new Status<AdditionalPosition>();
-    public list: AdditionalPosition[] = [];
-    constructor(private service: AdditionalPositionService) {}
 
-    ngOnInit() {
-        this.getPercents();
-    }
-
-    public getPercents(): void {
-        this.loading = true;
-        this.service
-            .get()
-            .pipe(finalize(() => (this.loading = false)))
-            .subscribe((data: AdditionalPosition[]) => {
-                this.setList(data);
-            });
-    }
-
-    public setModalDialogForCreation(id: string): void {
-        this.display = true;
-        this.status = new Status(id);
-    }
-
-    public setModalDialogForEditing(item: AdditionalPosition): void {
-        this.status = new Status<AdditionalPosition>(item.id.toString(), item);
-        this.display = true;
-    }
-
-    private setList(list: AdditionalPosition[]): void {
-        this.list = list;
-    }
-
-    public delete(id: number): void {
-        this.loading = true;
-        this.service
-            .remove(id)
-            .pipe(finalize(() => (this.loading = false)))
-            .subscribe((data: AdditionalPosition[]) => {
-                this.setList(data);
-            });
-    }
-
-    public create(item: AdditionalPosition): void {
-        this.loading = true;
-        this.service
-            .create(item)
-            .pipe(finalize(() => (this.loading = false)))
-            .subscribe((data: AdditionalPosition[]) => {
-                this.setList(data);
-            });
-    }
-
-    public edit(item: AdditionalPosition): void {
-        this.loading = true;
-        this.service
-            .edit(item)
-            .pipe(finalize(() => (this.loading = false)))
-            .subscribe((data: AdditionalPosition[]) => {
-                this.setList(data);
-            });
-    }
-
-    public setModalDialogForRemoving(item: AdditionalPosition): void {
-        this.remove = true;
-        this.message = item.label;
-        this.status = new Status(item.id.toString());
+export class AdditionalPositionComponent extends SettingComponent<AdditionalPosition>  {
+    constructor(service: SettingBaseService<AdditionalPosition>) {
+        super(service);
+        super.path = 'additional-position';
     }
 }

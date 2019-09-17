@@ -33,7 +33,7 @@
 
 
 <app-add-position 
-    *ngIf="status && status.id && display"    
+    *ngIf="status && display"    
     [display]="display" 
     [status]="status"
     (create)="create($event)"
@@ -47,6 +47,6 @@
     [message]="message" 
     [type]="'position'"
     (delete)="delete(status.id)"
-    (closeDialog)="remove=false; status=null">
+    (closeDialog)="remove = false; status = null">
 </app-modal-remove>
     

@@ -1,7 +1,6 @@
-import { Education } from './../education.model';
-import { SettingService } from 'src/app/setting/services/setting.service';
+import { Education } from '../../../models/education.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Status } from '../../../models/status.model';
 
 @Component({
@@ -9,29 +8,30 @@ import { Status } from '../../../models/status.model';
     templateUrl: './add-education.component.html',
     styleUrls: ['./add-education.component.scss']
 })
-export class AddEducationComponent implements OnInit {
+export class AddEducationComponent {
     @Input() display = false;
-    @Input() status: Status<Education> = new Status<Education>();
+    @Input() set status(st: Status<Education>) {
+        this.st = st;
+        if (st.id) {
+            this.formInit(st);
+        }
+    }
     @Output() closeDialog = new EventEmitter();
     @Output() create = new EventEmitter<Education>();
     @Output() edited = new EventEmitter<Education>();
-    @Output() updatedList = new EventEmitter<Education[]>();
 
     public form: FormGroup;
-    private editedList: Education[] = [];
-    constructor(private fb: FormBuilder, private settingService: SettingService) { }
+    public st: Status<Education>;
 
-    ngOnInit() {
-        this.formInit();
-    }
+    constructor(private fb: FormBuilder) { }
 
-    private formInit() {
-        console.log(this.status);
+    private formInit(status: Status<Education>) {
+        console.log(status.id, status.item)
         if (this.status.id === 'new') {
             this.form = this.fb.group({
                 label: ['']
             });
-        } else if (this.status.id !== 'new') {
+        } else {
             this.form = this.fb.group({
                 label: [this.status.item.label]
             });
@@ -51,7 +51,6 @@ export class AddEducationComponent implements OnInit {
             ? this.create.emit(new Education(label))
             : this.edited.emit(new Education(label, +this.status.id));
 
-        this.updatedList.emit(this.editedList);
         this.close();
 
     }

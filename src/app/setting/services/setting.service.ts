@@ -1,4 +1,4 @@
-import { Education } from './../components/education/education.model';
+import { Education } from '../models/education.model';
 import { Grade } from '../models/grade.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

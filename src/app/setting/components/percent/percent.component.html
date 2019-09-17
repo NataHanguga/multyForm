@@ -8,7 +8,7 @@
         </i>
     </span>
     <p-table 
-        [value]="percentList" 
+        [value]="list" 
         [loading]="loading" 
         [style]="{width: '350px'}" >
         <ng-template pTemplate="header">
@@ -18,13 +18,13 @@
                 <th style="width:100px">Options</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-percent>
+        <ng-template pTemplate="body" let-item>
             <tr>
-                <td title="Dubble click for edit">{{percent.label}}</td>
-                <td title="Dubble click for edit">{{percent.value}}</td>
+                <td title="Dubble click for edit">{{item.label}}</td>
+                <td title="Dubble click for edit">{{item.value}}</td>
                 <td>
-                    <i class="pi pi-pencil" (click)="setModalDialogForEditing(percent)"></i>
-                    <i class="pi pi-trash" (click)="setModalDialogForRemoving(percent)"></i>
+                    <i class="pi pi-pencil" (click)="setModalDialogForEditing(item)"></i>
+                    <i class="pi pi-trash" (click)="setModalDialogForRemoving(item)"></i>
                 </td>
             </tr>
         </ng-template>

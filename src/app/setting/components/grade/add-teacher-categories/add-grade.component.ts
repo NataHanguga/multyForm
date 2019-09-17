@@ -1,38 +1,38 @@
 import { Grade } from '../../../models/grade.model';
-import { SettingService } from 'src/app/setting/services/setting.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Status } from '../../../models/status.model';
 
 @Component({
-    selector: 'app-add-teacher-categories',
-    templateUrl: './add-teacher-categories.component.html',
-    styleUrls: ['./add-teacher-categories.component.scss']
+    selector: 'app-add-grade',
+    templateUrl: './add-grade.component.html',
+    styleUrls: ['./add-grade.component.scss']
 })
-export class AddTeacherCategoriesComponent implements OnInit {
+export class AddGradeComponent {
     @Input() display = false;
-    @Input() status: Status<Grade> = new Status<Grade>();
+    @Input() set status(st: Status<Grade>) {
+        this.st = st;
+        if (st.id) {
+            this.formInit(st);
+        }
+    }
     @Output() closeDialog = new EventEmitter();
     @Output() create = new EventEmitter<Grade>();
     @Output() edited = new EventEmitter<Grade>();
-    // @Output() updatedList = new EventEmitter<Grade[]>();
 
     public gradeForm: FormGroup;
+    public st: Status<Grade>;
     constructor(private fb: FormBuilder) { }
 
-    ngOnInit() {
-        this.formInit();
-    }
-
-    private formInit() {
-        console.log(this.status);
-        if (this.status.id === 'new') {
+    private formInit(status: Status<Grade>) {
+        console.log(status);
+        if (status.id === 'new') {
             this.gradeForm = this.fb.group({
                 category: [''],
                 grade: [''],
                 salary: [''],
             });
-        } else if (this.status.id !== 'new') {
+        } else if (status.id !== 'new') {
             this.gradeForm = this.fb.group({
                 category: [this.status.item.category],
                 grade: [this.status.item.grade],
