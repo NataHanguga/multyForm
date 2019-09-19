@@ -1,3 +1,3 @@
 export class Pay {
-    constructor(public pay: string) {}
+    constructor(public pay: number) {}
 }

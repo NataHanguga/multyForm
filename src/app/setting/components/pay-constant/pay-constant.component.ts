@@ -8,8 +8,7 @@ import { SettingComponent } from '../setting/setting.component';
     templateUrl: './pay-constant.component.html',
     styleUrls: ['./pay-constant.component.scss']
 })
-export class PayConstantComponent extends SettingComponent<Pay>  {
-    public list1 = [].push(super.list);
+export class PayConstantComponent extends SettingComponent<Pay> {
     constructor(service: SettingBaseService<Pay>) {
         super(service);
         super.path = 'pay';

@@ -8,6 +8,7 @@ import { SettingBaseService } from './../../services/setting-base.service';
     templateUrl: './rank.component.html',
     styleUrls: ['./rank.component.scss']
 })
+
 export class RankComponent extends SettingComponent<Rank>  {
     constructor(service: SettingBaseService<Rank>) {
         super(service);

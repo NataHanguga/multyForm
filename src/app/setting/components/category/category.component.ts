@@ -9,7 +9,6 @@ import { SettingComponent } from '../setting/setting.component';
   styleUrls: ['./category.component.scss']
 })
 
-
 export class CategoryComponent extends SettingComponent<Category>  {
     constructor(service: SettingBaseService<Category>) {
         super(service);

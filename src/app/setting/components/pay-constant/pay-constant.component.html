@@ -3,7 +3,7 @@
         <h3>Students Pay Tarif</h3>
     </span>
     <p-table 
-        [value]="list1" 
+        [value]="list" 
         [loading]="loading" 
         [style]="{width: '300px'}" >
         <ng-template pTemplate="header">
@@ -13,9 +13,8 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-item>
-            {{item | json}}
             <tr (dblclick)="setModalDialogForEditing(item)">
-                <td title="Dubble click for edit">{{item}}</td>
+                <td title="Dubble click for edit">{{item[0].pay}}</td>
                 <td>
                     <i class="pi pi-pencil" (click)="setModalDialogForEditing(item)"></i>
                 </td>

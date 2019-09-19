@@ -32,11 +32,12 @@ export class AddGradeComponent {
                 grade: [''],
                 salary: [''],
             });
-        } else if (status.id !== 'new') {
+        } else if ((status.id !== 'new') && status.item) {
+            const item: Grade = status.item;
             this.gradeForm = this.fb.group({
-                category: [this.status.item.category],
-                grade: [this.status.item.grade],
-                salary: [this.status.item.salary],
+                category: [item.category],
+                grade: [item.grade],
+                salary: [item.salary],
             });
         }
     }

@@ -38,12 +38,10 @@ export class SettingComponent<T> implements OnInit {
         this.remove = true;
         this.message = item.label;
         this.status = new Status(item.id.toString());
-        console.log(this.status, this.remove)
     }
 
     protected setList(list: T[]): void {
         this.list = list;
-        console.log(list);
     }
 
     protected get(): void {
