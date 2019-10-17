@@ -9,11 +9,16 @@ import { Observable } from 'rxjs';
 })
 export class SettingService {
   private readonly url = 'http://localhost:3000/setting/';
-
-  constructor(private http: HttpClient) { }
+  public payConstant: number;
+  constructor(private http: HttpClient) { this.getPayConstantForStudent()}
 
   public getPayConstant(): Observable<any> {
     return this.http.get(this.url + 'pay');
+  }
+
+  public getPayConstantForStudent(): void {
+    this.getPayConstant().subscribe((data) => this.payConstant = data.pay);
+    // return this.payConstant;
   }
 
   public editPayConstant(newPay: string): Observable<any> {

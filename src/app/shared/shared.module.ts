@@ -1,3 +1,4 @@
+import { SharedService } from './services/shared.service';
 import { FormsModule } from '@angular/forms';
 import { BoolCheckboxComponent } from './components/bool-checkbox/bool-checkbox.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { FloatInputComponent } from './components/float-input/float-input.compon
 import { SaveButtonComponent } from './components/save-button/save-button.component';
 import { CancelButtonComponent } from './components/cancel-button/cancel-button.component';
 import { ModalRemoveComponent } from './components/modal-remove/modal-remove.component';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { ModalRemoveComponent } from './components/modal-remove/modal-remove.com
     SaveButtonComponent,
     CancelButtonComponent,
     ModalRemoveComponent
-
-  ]
+  ],
+  providers: [SharedService, MessageService, ConfirmationService]
 })
 export class SharedModule { }

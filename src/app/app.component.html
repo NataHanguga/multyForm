@@ -3,5 +3,8 @@
     <div class="content-wrapper">
         <app-menu *ngIf="showMenu"></app-menu>
         <router-outlet></router-outlet>
+
+        <p-toast [style]="{marginTop: '80px'}" position="top-right" key="tc">
+        </p-toast>
     </div>
 </div>

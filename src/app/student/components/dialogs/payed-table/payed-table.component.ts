@@ -10,20 +10,19 @@ import { Student } from 'src/app/student/models/student';
 export class PayedTableComponent implements OnInit {
   @Input() student: Student;
   public monthArr = ['Sep', 'Oct', 'Nov', 'Des', 'Feb', 'Mar', 'Apr', 'May', 'Residual'];
-  public payConstant: string;
+  public payConstant: number;
   constructor(private settingService: SettingService) { }
 
   ngOnInit() {
-    this.getConstant();
+    // this.getConstant();
+    this.payConstant = this.settingService.payConstant;
   }
 
-  private getConstant(): void {
-    this.payConstant === undefined
-      ? (this.settingService.getPayConstant().subscribe(data => {
-        this.payConstant = data.pay;
-      }))
-      : null;
-  }
+  // private getConstant(): void {
+  //   this.payConstant === undefined
+  //     ? this.settingService.payConstant
+  //     : null;
+  // }
 
 
 

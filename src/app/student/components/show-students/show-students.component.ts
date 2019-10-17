@@ -1,3 +1,4 @@
+import { SharedService } from './../../../shared/services/shared.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Teacher } from '../../models/teacher';
 import { StudentRowComponent } from '../student-row/student-row.component';
@@ -16,15 +17,19 @@ export class StudentsComponent implements OnInit {
 
     public teacherList: Teacher[];
 
-    constructor(private httpService: HttpService) {}
+    constructor(private httpService: HttpService, private sharedService: SharedService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.getTeacherList(true);
     }
 
     public getTeacherList(event): void {
         this.httpService.getTeachers().subscribe((data: Teacher[]) => {
             this.teacherList = data;
+            this.sharedService.addSuccessMessage('Teachers and students is loaded');
+        },
+        (error) => {
+            this.sharedService.addErrorMessage(error.message);
         });
     }
 

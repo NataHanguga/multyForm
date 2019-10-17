@@ -18,11 +18,11 @@ export class MenuComponent implements OnInit {
               icon: 'pi pi-money-bill',
               routerLink: '/student'
           },
-          {
-              label: 'Teachers Tarifs',
-              icon: 'pi pi-users',
-              routerLink: '/teachers'
-          },
+          // {
+          //     label: 'Teachers Tarifs',
+          //     icon: 'pi pi-users',
+          //     routerLink: '/teachers'
+          // },
           {
             label: 'Setting',
             icon: 'pi pi-cog',
@@ -33,41 +33,41 @@ export class MenuComponent implements OnInit {
                 icon: 'pi pi-dollar',
                 routerLink: '/setting/pay-constant'
               },
-              {
-                label: 'Teachers Grade',
-                icon: 'pi pi-list',
-                routerLink: '/setting/grade'
-              },
-              {
-                label: 'Education',
-                icon: 'fa fa-graduation-cap',
-                routerLink: '/setting/education'
-              },
-              {
-                label: 'Percent',
-                icon: 'fa fa-percent',
-                routerLink: '/setting/percent'
-              },
-              {
-                label: 'Position',
-                icon: 'fa fa-map-marker',
-                routerLink: '/setting/position'
-              },
-              {
-                label: 'Rank',
-                icon: 'fa fa-map-glasses',
-                routerLink: '/setting/rank'
-              },
-              {
-                label: 'Category',
-                icon: 'fa fa-map-glasses',
-                routerLink: '/setting/category'
-              },
-              {
-                label: 'Additional Position',
-                icon: 'fa fa-map-marker',
-                routerLink: '/setting/add-position'
-              }
+              // {
+              //   label: 'Teachers Grade',
+              //   icon: 'pi pi-list',
+              //   routerLink: '/setting/grade'
+              // },
+              // {
+              //   label: 'Education',
+              //   icon: 'fa fa-graduation-cap',
+              //   routerLink: '/setting/education'
+              // },
+              // {
+              //   label: 'Percent',
+              //   icon: 'fa fa-percent',
+              //   routerLink: '/setting/percent'
+              // },
+              // {
+              //   label: 'Position',
+              //   icon: 'fa fa-map-marker',
+              //   routerLink: '/setting/position'
+              // },
+              // {
+              //   label: 'Rank',
+              //   icon: 'fa fa-map-glasses',
+              //   routerLink: '/setting/rank'
+              // },
+              // {
+              //   label: 'Category',
+              //   icon: 'fa fa-map-glasses',
+              //   routerLink: '/setting/category'
+              // },
+              // {
+              //   label: 'Additional Position',
+              //   icon: 'fa fa-map-marker',
+              //   routerLink: '/setting/add-position'
+              // }
             ]
           }
       ];
